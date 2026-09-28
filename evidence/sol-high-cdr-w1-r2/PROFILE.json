@@ -1,0 +1,131 @@
+{
+  "schema_version": "ordinal-process-profile-v1",
+  "episode_id": "sol-high-cdr-w1-r2",
+  "rubric_sha256": "d86dc8d56bf2773afbbb01f9b1f63d325fb7f73297f88792f12ccee029c173db",
+  "review_sha256": "4c3e885a6626a08127ea0f7c1d1085f147344b74aecdde21ff56dcc1c848bc4b",
+  "packet_sha256": {
+    "d00001": "57ddbea09a7e81ff48f18be810190efd2abcb00a574b0a9d70972cf81966fe30",
+    "d00002": "cf0b81e4a21579d6f386c9e9c1bd36155a28a8fd7f298b3905d33e351f6da9cb",
+    "d00003": "8785d15055a503d937fb3cdfc00d583ffdc4f30aed3c5fefd4ea0a4b16cfab2f",
+    "d00004": "5145719eb38e8682f3b5a15be4720beb25ab29440bafcdd1e5d73bb44cb33b0c",
+    "d00005": "18df83c5fd1362d9fed8377f6449e342c9fcc9048a733f7c42d111943c0e72a8",
+    "d00006": "bebedafc5d7ce7df479816707586c81b05bf869377f683ca450d44e332cee7db",
+    "d00007": "4939b0874763b3ae2c66a63bfa79592b6fccf054e2ac9f6c27e916d893cd276a",
+    "d00008": "20c4ddb7bc0ac4465e229b8346e5da183943030075c6a8408f63771c620e2524",
+    "d00009": "8a68a460dae90c386cdafeb27c1c21583e1845aac02d863da25c9b1a6a173cdc",
+    "d00010": "4243868bbfd6258ab66ee0d686b2065d2c7b6b6c86e37785b2e2f7f605a0e0c5",
+    "d00011": "0957acee48b9ae6a849409bb2d0a2f21018a181d9b591f5d9e87455cc3a4ddc0"
+  },
+  "profile": {
+    "D1": {
+      "score": null,
+      "observed_subset_score": 2,
+      "coverage": {
+        "all_decisions": 11,
+        "scored": 6,
+        "no_opportunity": 3,
+        "insufficient_evidence": 2,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 6
+      },
+      "unresolved_critical_issue_ids": [],
+      "recovered_critical_issue_ids": [],
+      "status": "incomplete_evidence"
+    },
+    "D2": {
+      "score": 0,
+      "observed_subset_score": 0,
+      "coverage": {
+        "all_decisions": 11,
+        "scored": 7,
+        "no_opportunity": 4,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 2,
+        "1": 0,
+        "2": 5
+      },
+      "unresolved_critical_issue_ids": [
+        "closed_phase_experiment_D2"
+      ],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    },
+    "D3": {
+      "score": 1,
+      "observed_subset_score": 1,
+      "coverage": {
+        "all_decisions": 11,
+        "scored": 4,
+        "no_opportunity": 7,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 0,
+        "1": 2,
+        "2": 2
+      },
+      "unresolved_critical_issue_ids": [],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    },
+    "D4": {
+      "score": 1,
+      "observed_subset_score": 1,
+      "coverage": {
+        "all_decisions": 11,
+        "scored": 5,
+        "no_opportunity": 6,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 0,
+        "1": 2,
+        "2": 3
+      },
+      "unresolved_critical_issue_ids": [],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    },
+    "D5": {
+      "score": 1,
+      "observed_subset_score": 1,
+      "coverage": {
+        "all_decisions": 11,
+        "scored": 1,
+        "no_opportunity": 10,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 0,
+        "1": 1,
+        "2": 0
+      },
+      "unresolved_critical_issue_ids": [],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    }
+  },
+  "unique_issue_groups": [
+    "closed_phase_experiment",
+    "untested_channel_order"
+  ],
+  "scalar_score": null,
+  "ranking_validated": false,
+  "semantic_validation": "researcher_judgment_not_independent",
+  "scope": "Conservative ordinal profile of recorded opportunities. Complete pointer/coverage checks do not certify semantic judgments. Any unresolved critical issue gives0; partial or recovered concern gives1; otherwise observed criteria give2. No frequency averaging, step-count reward, or general research-ability ratio."
+}

@@ -1,0 +1,286 @@
+{
+  "schema": "conditional-repeat-resource-v1",
+  "groups": {
+    "participant": {
+      "calls": 56,
+      "known_subtotal": {
+        "input_tokens": 1444895,
+        "output_tokens": 40417,
+        "cached_input_tokens": 248064
+      },
+      "total": {
+        "input_tokens": 1444895,
+        "output_tokens": 40417,
+        "cached_input_tokens": 248064
+      },
+      "unknown_usage_calls": [],
+      "missing_field_calls": {
+        "input_tokens": [],
+        "output_tokens": [],
+        "cached_input_tokens": []
+      },
+      "carrier_elapsed_seconds": 1064.641545
+    },
+    "connection_probe": {
+      "calls": 1,
+      "known_subtotal": {
+        "input_tokens": 10564,
+        "output_tokens": 80,
+        "cached_input_tokens": 0
+      },
+      "total": {
+        "input_tokens": 10564,
+        "output_tokens": 80,
+        "cached_input_tokens": 0
+      },
+      "unknown_usage_calls": [],
+      "missing_field_calls": {
+        "input_tokens": [],
+        "output_tokens": [],
+        "cached_input_tokens": []
+      },
+      "carrier_elapsed_seconds": 7.892372
+    }
+  },
+  "sources": [
+    {
+      "path": "episodes/sol-high-cdr-w1-r1/calls/001-decision/call.json",
+      "sha256": "2ec28d96fe58193884b1afd331c32a6661a5329449d7767dcc041676eb1e31ff"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r1/calls/002-decision/call.json",
+      "sha256": "3290a2a3334d6075463d36b37b981bb4a2143cb5ceb52dc90f6d8e01108674f2"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r1/calls/003-decision/call.json",
+      "sha256": "5d8888cef6134e5362d001b9cf224930224e149a26aaaa452f7623c84c420f7f"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r1/calls/004-decision/call.json",
+      "sha256": "20bf17f40e3d0376b2120c49da188ac1c861ad64c784cd0437ef7c2a494b8ada"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r1/calls/005-decision/call.json",
+      "sha256": "cd70918a9e9a6a35da57caa9c688d67ccd9546140443412eb69d90e192aaf265"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r1/calls/006-decision/call.json",
+      "sha256": "9c0aa3c926f60d3829ceb175be5b63fe04c3f8f24738057ae78ca21278188bf1"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/001-decision/call.json",
+      "sha256": "f10ca617cd597b16540bb5f3bc88843ef46afa47422eb881d216a82b112d5084"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/002-decision/call.json",
+      "sha256": "2a1a3b69fa314daf56bf0049ad2b47dcb38e24d9a55e8f53958eb544b7abbbf1"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/003-decision/call.json",
+      "sha256": "b0d8492a6f60d2792662fb7d8f9951031947f05280aeae675241838cd86d2238"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/004-decision/call.json",
+      "sha256": "f8d6dbdceb0c7a818a236ef4a07849c576c694f17434dfcce44d30318746479c"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/005-decision/call.json",
+      "sha256": "81e550db4f6c857def43a1c4f5ecf64cc66dd098df2d880a22b5b4522298f677"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/006-decision/call.json",
+      "sha256": "8cbd1a9d3f898162b46dd0369d7ffa84e9df5bafbf2019f5aa2f2a8d5f11b9d3"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/007-decision/call.json",
+      "sha256": "38669538779954c04c35584fdd93ec5a9dd1a85c51ae3fd2514771c672f628c5"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/008-decision/call.json",
+      "sha256": "3b8720351bd7ebf39eedf555f8550496355c4349a5ae9326858badba01dbce9c"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/009-decision/call.json",
+      "sha256": "0074b39f2c94ba58e69a039491d5bcd928ad14a43045831ed82a7ec26afc2ccf"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/010-decision/call.json",
+      "sha256": "c623a100c3ef1b966ab1e801f270034d467b6bd2d5dd6b6447cd28d867bdae10"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/011-decision/call.json",
+      "sha256": "8a44ff4ee0dbf4da0842f4db0119ab51e94ad2a98019e1ef83333a286ef50d1a"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w1-r2/calls/012-decision/call.json",
+      "sha256": "887e66e99678017246533589617ea56d9cfd6dee647ca825e90f98ed09b65b3f"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/001-decision/call.json",
+      "sha256": "0326d2c959c6527b4bb377588fe72e8c60d9b81f0f8a1e028d614cdae1329307"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/002-decision/call.json",
+      "sha256": "6264d7e096664a80f08ceddc2023a87b047dbd1017dc240eedec7ace63265432"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/003-decision/call.json",
+      "sha256": "28ffa3a1e5f2ab72bcd354e1e3dd6b4f65e805d2396ce4b3c335fac33d42540f"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/004-decision/call.json",
+      "sha256": "478a6af157d3b2f55cdad9e7272166203f2851f0b59e1f30ce158bd76391651d"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/005-decision/call.json",
+      "sha256": "c88297fc2ec35a9ffa0a34d58f6c1a405884e2f3f525ff38574f35d3520d3661"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/006-decision/call.json",
+      "sha256": "d9783c25e0e02096eeee12426c440de38f9a6884945200cb9c19ed864b74f219"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/007-decision/call.json",
+      "sha256": "c1daba239a71491bb489b50d615fa52583d0416fa0acb730664c9b794c52d98f"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/008-decision/call.json",
+      "sha256": "3a846ed3d399335825eaf977bae6a6f1c1567486b4f275f1d1ce66112f8b6032"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/009-decision/call.json",
+      "sha256": "efdc748026c276274a7eef11fe85ef09d19a4bfffd8d2535616851b271f2e61c"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/010-decision/call.json",
+      "sha256": "329ef8752194e71dcae6fa024dc13b7e4c22b8fa79a483651a641487cc926049"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/011-decision/call.json",
+      "sha256": "245bab63fc1042c43a7140dd41efc8a66eaf3a5105e7b225ff28346cbff123b8"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/012-decision/call.json",
+      "sha256": "3d90ee2a4a992c25248cba5fbc4716ecf7766bb78c4ae3845b1ec7816e7bb97d"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/013-decision/call.json",
+      "sha256": "debe6c528cf2e00d6511e666b854759aadb16ef77d69751b8bfb0c450666b653"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r1/calls/014-decision/call.json",
+      "sha256": "542997eb05811a8a956529436a346cb4b65a4d9bbf00e825be312be2fa17fb19"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/001-decision/call.json",
+      "sha256": "9a148e75dc1030e06d08775bc992b575ec49f523618453c2bdb8317a9a56281a"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/002-decision/call.json",
+      "sha256": "46f7362fb6917a5ab7c38843f18a37da46a1808a5f70db9686356d17d907d1e6"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/003-decision/call.json",
+      "sha256": "c2c866980676f37920c72e655ed77737ce6de93ead131cd4a7b76800e55da080"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/004-decision/call.json",
+      "sha256": "2ec1e257b37cc2fff4e5532a8be4afed35b092bf91b389c3bbd31fa313d280c6"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/005-decision/call.json",
+      "sha256": "cba79d72fc4af20c183933dc80e2ea5b28764b8fa2c55c7c87f6f44c74fb8de8"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/006-decision/call.json",
+      "sha256": "b9a34a6899f7f329d6273662bca2b8b90726012206c785433d9961508da029bc"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/007-decision/call.json",
+      "sha256": "f643764dfd3b8738e42f124b1dfd252aa735c1b164756362c27e7cd7e5bee070"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/008-decision/call.json",
+      "sha256": "ae6ea6c0c2912d1d95979faf3b682fa8650f59daba7470ac4f8f01940a83b358"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/009-decision/call.json",
+      "sha256": "4108bf758a81896aec9dc540779a132e8196e0ca9ce7729019433a35fb6de40c"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/010-decision/call.json",
+      "sha256": "f812eea98c9f8bd1ea3c1d30772d6750184af6d802804ca4fc9527a60a8a8a9e"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/011-decision/call.json",
+      "sha256": "2e2bae5ef3fe4d1d66df54619e24bcfb16bc776195aa20e73e3c1d5c18b54d49"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/012-decision/call.json",
+      "sha256": "ab4a49b2cf06fb08ceb4dbe65c4d3d400e59f0484d1c0adea5865124c427d556"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/013-decision/call.json",
+      "sha256": "f0dd3298c129b964619ca5cce2e7d1bd694919e01930ceee22ac2799cfdb92df"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/014-decision/call.json",
+      "sha256": "0a45311f667a95bbed7a48f4f2e7c0c2e03db4216318a0bc95cc7525adc0a9fc"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/015-decision/call.json",
+      "sha256": "6ac326b7d5b49e986e1f0e11841fce2571832da46a1518369a0a892b94fb41c8"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/016-decision/call.json",
+      "sha256": "364ccb6903e0ca2e488227384e9e699c3506411baab72c936508726985af0ce1"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/017-decision/call.json",
+      "sha256": "891f8c5ec590841b360e255e8e0649176665aa7e7ef29ae015d7f509e879b466"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/018-decision/call.json",
+      "sha256": "5a59aba67ce70c15a664984c298bfc67a010579075abf836fdfaf2cca6535410"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/019-decision/call.json",
+      "sha256": "d06119426fc05863874ffcfb94501ad804a89336590375fe6704aed4f9b5e228"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/020-decision/call.json",
+      "sha256": "7f21aebfa8bbcff449c89e9823930181d8c6f71997e4796e55983b787220b4be"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/021-decision/call.json",
+      "sha256": "a6ce782b82cb330f7f8eb36f5200feddc11d7c669fa6c9ad1acf8a755bb0aaa4"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/022-decision/call.json",
+      "sha256": "804baf6241d6386b4f081324d0d45f8f55b7435b1cb1403751e6ad922a488a81"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/023-decision/call.json",
+      "sha256": "2b7345564302ad01fa99939adbb295727de13ae704416efd44d321d59ecf724e"
+    },
+    {
+      "path": "episodes/sol-high-cdr-w2-r2/calls/024-decision/call.json",
+      "sha256": "c2c2ec81e33025bba4df5c9e0a3ac60772529ec087e7fef788b291242c9b7cfa"
+    },
+    {
+      "path": "probe/calls/001-decision/call.json",
+      "sha256": "a79d8abfb63bd85e4f47b176c419de70b4ad8feb6127d3df7c98188e07e979e3"
+    }
+  ],
+  "local_execution": {
+    "actions": 54,
+    "wall_seconds": 0.13201587367802858,
+    "process_cpu_seconds": 0.13158199999999398
+  },
+  "runner_wall_seconds": 1075.2637185419444,
+  "capacity_retries": 0,
+  "retry_wait_observed_seconds": 0.0,
+  "researcher_model_usage": null,
+  "researcher_usage_status": "not_instrumented_not_zero",
+  "scope": "Recorded carrier token/time, local action cost and retry waits; no inferred FLOPs, monetary charge, hidden failed-call use or observed credit savings."
+}

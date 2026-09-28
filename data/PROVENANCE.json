@@ -1,0 +1,315 @@
+{
+  "schema": "portfolio-export-provenance-v1",
+  "date": "2026-09-28",
+  "source_files": [
+    {
+      "path": "outputs/research-conditional-readiness-01/REPEAT-PLAN.json",
+      "sha256": "ca7736a31a671443648fb04521bc4479d5de8dc243eb502569d28630db3b9a99",
+      "bytes": 10443
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/READOUT.json",
+      "sha256": "8b892822b360c00968fc0b5dd45e99c7395536e45a3f7a9cfa15b92ccf32887d",
+      "bytes": 372426
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/PROCESS-EXAMPLES.json",
+      "sha256": "5c94ff066bad2d8b83e2ea13de55dc182a4d2c80199547c4735de42c74bc82bc",
+      "bytes": 3900
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/AUTHORED-LAWS.json",
+      "sha256": "01cae8c31e37debde47e8d286a9b050c83f2f084cedf91a6c422824e2dcc5a2e",
+      "bytes": 7978
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w2-r1/LAB-RECORD.json",
+      "sha256": "2dc8c79fba1f1c2cd1a821c33b129b418cda96241032f946a0bc7f6075487032",
+      "bytes": 401423
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w2-r1/summary.json",
+      "sha256": "731674bb7aaed4ea47ff95e064ecbd8161f76de5163e85ea5a5c78c9de980591",
+      "bytes": 3746
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r1/PACKETS.json",
+      "sha256": "f73b1c1ce1997ec790b3a4a153f10e740c166894e5b715d2b2a126a5dbd8eb1b",
+      "bytes": 1688296
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r1/REVIEW.json",
+      "sha256": "ca191a510cb183f350c6ae18a742c0dee6f5ccfe04d210ddc5375e0346725ccc",
+      "bytes": 78406
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r1/PROFILE.json",
+      "sha256": "372861e141d7a98c2a2d7cc6d1080163452f1743c9f0e7b3753ad315191216e7",
+      "bytes": 4631
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r1/LAB-RECORD.json",
+      "sha256": "9fd38575cab9b765494234f3dc8fbac9e1313190e6bb493292599ab5fb3e2419",
+      "bytes": 340448
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r1/summary.json",
+      "sha256": "73ba67aa2fde21f3f6bb873d821d8ff5509e0cd5fa1172994ecee6b5307576da",
+      "bytes": 1095
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r1/PACKETS.json",
+      "sha256": "cd657444cb34f2d03e95be205f46b3ce379dedbb80f30e95d009202364586b62",
+      "bytes": 358356
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r1/REVIEW.json",
+      "sha256": "08efcfba3baef67cb89fa8d1624abd9f5e3bbf663ad8d0db2c058e687586ab70",
+      "bytes": 29022
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r1/PROFILE.json",
+      "sha256": "f27992145973e636a0d75d505c5b49baacad10e42dd41139f9f11a5b68011862",
+      "bytes": 3811
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r1/calls/006-decision/response.json",
+      "sha256": "d2f1b913dc05155101be7c0fe3aba8453e0a42f980532d17cc61b6dcf5df42d5",
+      "bytes": 141
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r2/LAB-RECORD.json",
+      "sha256": "a8d744569540a5f06578541ead4b786a3f1dca2121a0cae83994190596eed69a",
+      "bytes": 422712
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r2/summary.json",
+      "sha256": "572a32c5dbe6494b3613c1ac2e2e53fdb3acf5aef017f09865bd4a4d28ffe69a",
+      "bytes": 1099
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r2/PACKETS.json",
+      "sha256": "c55f23fa16c15d8a1a1f758dbd8a8140435b58badf3dad2415a3c06737041521",
+      "bytes": 1260186
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r2/REVIEW.json",
+      "sha256": "9172807e3ce3adbc35146d3fcd74c3764616d922e5ebd9fcfff9ad423041b56e",
+      "bytes": 61095
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r2/PROFILE.json",
+      "sha256": "9c31a3a0d97f15e0b06ce396fd00537850e3ac4950b3b924d03aad0432978dfa",
+      "bytes": 4184
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r2/calls/012-decision/response.json",
+      "sha256": "d4f94ef276cf45214c27ec09c55b1ff969f9fcc5e926a0338728a95f73130c50",
+      "bytes": 192
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w2-r2/LAB-RECORD.json",
+      "sha256": "1fe36935f072d7d285c69290724f4e6c6e0cb00b7529ac044015e4d8cd35b48f",
+      "bytes": 1244955
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w2-r2/summary.json",
+      "sha256": "27a99f37041dc0c067a675897791995ec473bdde57bc21c50a7a212f8beda25d",
+      "bytes": 3952
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r2/PACKETS.json",
+      "sha256": "8f7fb6d82c52d7d54d491703f7574e3c755d8bfb0fed64a346d738fc98d16453",
+      "bytes": 7759849
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r2/REVIEW.json",
+      "sha256": "f7666346538e237b485dfcc6e90aa76446750b427f1c7bdaf4b51f48028abbf8",
+      "bytes": 130821
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r2/PROFILE.json",
+      "sha256": "7529536ab41d1be3b6f095972ae5cb3f3331b6aa5bb321227019767f6c802ec3",
+      "bytes": 5297
+    },
+    {
+      "path": "outputs/research-process-scoring-01/scoring.py",
+      "sha256": "8fbed57b0d04a445995227647e1347afaac48b439ed752d76c359185b2498a13",
+      "bytes": 9136
+    },
+    {
+      "path": "outputs/research-process-scoring-01/RUBRIC.json",
+      "sha256": "1addffc348c6acfb9e8e85e567b58b124cb9c8277ec865601c1169f460376acc",
+      "bytes": 5856
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/SENSITIVITY.json",
+      "sha256": "aa8974a78cc3bc72f52fecc388f9f2f19c5f7d2e2ce6d80d7cb1425c7b22c39b",
+      "bytes": 5239
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/analysis/DELIVERY-CHECK.json",
+      "sha256": "a95af479e8937289fcb1cb0945c6ada205cdf85c476bebbba35ff0b0b6dc5db2",
+      "bytes": 3963
+    },
+    {
+      "path": "outputs/research-conditional-repeat-live-01/RESOURCE-REPORT.json",
+      "sha256": "0b555d765f3fc067e24ca3b4545be20ade0047e8320ac14ce9c00055b552588a",
+      "bytes": 11281
+    }
+  ],
+  "exports": [
+    {
+      "path": "evidence/sol-high-cdr-w2-r1/PACKETS.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r1/PACKETS.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "evidence/sol-high-cdr-w2-r1/REVIEW.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r1/REVIEW.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "evidence/sol-high-cdr-w2-r1/PROFILE.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r1/PROFILE.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "evidence/sol-high-cdr-w1-r1/PACKETS.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r1/PACKETS.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "evidence/sol-high-cdr-w1-r1/REVIEW.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r1/REVIEW.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "evidence/sol-high-cdr-w1-r1/PROFILE.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r1/PROFILE.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "evidence/sol-high-cdr-w1-r2/PACKETS.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r2/PACKETS.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "evidence/sol-high-cdr-w1-r2/REVIEW.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r2/REVIEW.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "evidence/sol-high-cdr-w1-r2/PROFILE.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r2/PROFILE.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "evidence/sol-high-cdr-w2-r2/PACKETS.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r2/PACKETS.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "evidence/sol-high-cdr-w2-r2/REVIEW.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r2/REVIEW.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "evidence/sol-high-cdr-w2-r2/PROFILE.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r2/PROFILE.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "data/episodes.json",
+      "source_paths": [
+        "outputs/research-conditional-readiness-01/REPEAT-PLAN.json",
+        "outputs/research-conditional-repeat-live-01/analysis/READOUT.json",
+        "outputs/research-conditional-repeat-live-01/analysis/PROCESS-EXAMPLES.json",
+        "outputs/research-conditional-repeat-live-01/analysis/AUTHORED-LAWS.json",
+        "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w2-r1/LAB-RECORD.json",
+        "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w2-r1/summary.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r1/PACKETS.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r1/REVIEW.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r1/PROFILE.json",
+        "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r1/LAB-RECORD.json",
+        "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r1/summary.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r1/PACKETS.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r1/REVIEW.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r1/PROFILE.json",
+        "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r1/calls/006-decision/response.json",
+        "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r2/LAB-RECORD.json",
+        "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r2/summary.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r2/PACKETS.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r2/REVIEW.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w1-r2/PROFILE.json",
+        "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w1-r2/calls/012-decision/response.json",
+        "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w2-r2/LAB-RECORD.json",
+        "outputs/research-conditional-repeat-live-01/episodes/sol-high-cdr-w2-r2/summary.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r2/PACKETS.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r2/REVIEW.json",
+        "outputs/research-conditional-repeat-live-01/analysis/sol-high-cdr-w2-r2/PROFILE.json"
+      ],
+      "operation": "allowlisted_scientific_fields_and_declared_claim_adapters"
+    },
+    {
+      "path": "src/scoring.py",
+      "source_paths": [
+        "outputs/research-process-scoring-01/scoring.py"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "src/RUBRIC.json",
+      "source_paths": [
+        "outputs/research-process-scoring-01/RUBRIC.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "data/SENSITIVITY.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/SENSITIVITY.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "data/DELIVERY-CHECK.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/analysis/DELIVERY-CHECK.json"
+      ],
+      "operation": "byte_preserved"
+    },
+    {
+      "path": "data/RESOURCE-REPORT.json",
+      "source_paths": [
+        "outputs/research-conditional-repeat-live-01/RESOURCE-REPORT.json"
+      ],
+      "operation": "byte_preserved"
+    }
+  ],
+  "scope": "Original source hashes are author-provided lineage references. Only the listed byte-preserved exports can be independently compared byte-for-byte within this public package. Full carrier logs and original private working directories are not distributed."
+}

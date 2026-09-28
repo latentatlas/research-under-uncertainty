@@ -1,0 +1,145 @@
+{
+  "schema_version": "ordinal-process-profile-v1",
+  "episode_id": "sol-high-cdr-w2-r2",
+  "rubric_sha256": "d86dc8d56bf2773afbbb01f9b1f63d325fb7f73297f88792f12ccee029c173db",
+  "review_sha256": "207650266cde32d0269bbbe991b7e18d164fdfbb6f668b1eb66fc24a372f816a",
+  "packet_sha256": {
+    "d00001": "41cf6bcfef43fddad9e7e2b88d3f142d31d9eef34d2706e0d861d835c21b5fe4",
+    "d00002": "dccde15a963334ae6dfbaf2525d4458bbaae50acaec2e6a019249c67e99db7d1",
+    "d00003": "14c9cae16dd7290f646bcc368c85683641d651acd277f5a9af7e3b2a9c20a7fc",
+    "d00004": "035382a5ceba38abfd59428712b6b809512e312d4094847459dec7b90056bdb2",
+    "d00005": "92cfd425c5988772d3deb04da62fdbfbead9a1dbbe9e96bb549b2cd159088f8f",
+    "d00006": "4d180c087a6ab9ecd14f9d9aeb03551f0a6f25ae1fd676da8454c05ea77c9746",
+    "d00007": "cc8310a8d509b28c7bec8eed689b201151ac6a753efc2d33796c0cf31bc24a4c",
+    "d00008": "8d7fd4420b0f0625fcdbecfc9631634cdecac5c0106a1d4e2179edd7bcaf2673",
+    "d00009": "e08fdd9cff5d3f205ee9f732aff278cc82b3468f7c3a66ceda5e4a9c8a45ba35",
+    "d00010": "7c81a05cce22af66a051dd89d47f9c7144f5cb00eb7b73b64eb847f93eeed258",
+    "d00011": "184c762225c477372426005cf49b39a7036fd47bad0473e6d176a7fb10f06a60",
+    "d00012": "efd711a26eba7bca63edfff5792abbcf4b62a501e6b83f1b15887e756a29998c",
+    "d00013": "50d1a72bbd9b55a139a920a6d40ce1599ad4fb235f4c2eaf97d215d0b4d86ca6",
+    "d00014": "4b76ac1e200bf9c093f334e9bb47d2c4ddceb61d5dc1270595cc64eaa56c5f8f",
+    "d00015": "903e03ca6d14d8c7f5d30f36b8b2ab14f9f4312c839206fa0492fab5c864cd26",
+    "d00016": "fff55f27efcded72505a9b6b71d52567cdf58f3d51e9321f7815295526f64c6c",
+    "d00017": "4a29a65eff7fc3e995f704d81d01bbab80b09dbf0d8474b24602721189b51739",
+    "d00018": "5db02126850c792a2c1c987187a57eb0ac6e4417be25a0b8eff77fe8831e223d",
+    "d00019": "5bf7944a499963141fe0bf2b1301e631ec2bb05b7bd6c09218bbd1e28a4b848c",
+    "d00020": "8dc25bcadeaac93d33eb5a7dc7d1f8be4e9bc742be983617cc7464e2488a85ec",
+    "d00021": "66a7933c0d56d0cbbe298719b54542e26c8c32cabc142812d9bb5587e1e49ee8",
+    "d00022": "c69132209dbf29aec98f44ae3062e71e37a6945a336f82f51803824acdfe431b",
+    "d00023": "5311ca8a0f76f1902e5e0bcde4a74c397f0bf4b4203c5c1279b19a96648a943c",
+    "d00024": "7cfc1b4921426bece1374cf06ac985dc2e14585e339fdd5d3bb0a43b16376546"
+  },
+  "profile": {
+    "D1": {
+      "score": null,
+      "observed_subset_score": 2,
+      "coverage": {
+        "all_decisions": 24,
+        "scored": 12,
+        "no_opportunity": 10,
+        "insufficient_evidence": 2,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 12
+      },
+      "unresolved_critical_issue_ids": [],
+      "recovered_critical_issue_ids": [],
+      "status": "incomplete_evidence"
+    },
+    "D2": {
+      "score": 0,
+      "observed_subset_score": 0,
+      "coverage": {
+        "all_decisions": 24,
+        "scored": 12,
+        "no_opportunity": 12,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 2,
+        "1": 0,
+        "2": 10
+      },
+      "unresolved_critical_issue_ids": [
+        "closed_phase_experiment_D2"
+      ],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    },
+    "D3": {
+      "score": null,
+      "observed_subset_score": 1,
+      "coverage": {
+        "all_decisions": 24,
+        "scored": 13,
+        "no_opportunity": 10,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 1,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 0,
+        "1": 3,
+        "2": 10
+      },
+      "unresolved_critical_issue_ids": [],
+      "recovered_critical_issue_ids": [],
+      "status": "incomplete_evidence"
+    },
+    "D4": {
+      "score": 2,
+      "observed_subset_score": 2,
+      "coverage": {
+        "all_decisions": 24,
+        "scored": 11,
+        "no_opportunity": 13,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 11
+      },
+      "unresolved_critical_issue_ids": [],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    },
+    "D5": {
+      "score": 1,
+      "observed_subset_score": 1,
+      "coverage": {
+        "all_decisions": 24,
+        "scored": 2,
+        "no_opportunity": 22,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 0,
+        "1": 1,
+        "2": 1
+      },
+      "unresolved_critical_issue_ids": [],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    }
+  },
+  "unique_issue_groups": [
+    "closed_phase_experiment",
+    "unresolved_temporal_evidence",
+    "validation_identity"
+  ],
+  "scalar_score": null,
+  "ranking_validated": false,
+  "semantic_validation": "researcher_judgment_not_independent",
+  "scope": "Conservative ordinal profile of recorded opportunities. Complete pointer/coverage checks do not certify semantic judgments. Any unresolved critical issue gives0; partial or recovered concern gives1; otherwise observed criteria give2. No frequency averaging, step-count reward, or general research-ability ratio."
+}

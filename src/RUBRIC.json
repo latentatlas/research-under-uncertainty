@@ -1,0 +1,109 @@
+{
+  "schema_version": "process-ordinal-rubric-v1",
+  "dimension_ids": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5"
+  ],
+  "scale": "ordinal_0_1_2",
+  "status": "experimental_not_human_validated",
+  "unit": "one_committed_decision_with_public_pre_information",
+  "dimensions": {
+    "D1": {
+      "name": "Soru ve belirsizlik",
+      "anchors": {
+        "D1.0": {
+          "score": 0,
+          "description": "Merkezî araştırma sorusu verilmeyen veya mevcut kanıtla çelişen bir açıklamayı kesin kabul ediyor; bu kabul seçimi/sonuçlandırmayı taşıyor. Sınanabilir açık hipotez tek başına kusur değildir."
+        },
+        "D1.1": {
+          "score": 1,
+          "description": "Araştırılabilir bir soru var; fakat bilinen/varsayılan ayrımında veya kapsamda belirli ve karar için anlamlı bir eksik var. Eksik somut kanıtla açıklanır."
+        },
+        "D1.2": {
+          "score": 2,
+          "description": "Belirsizlik veya keşif amacı erişilebilir kanıtla uyumlu ve eyleme bağlanabilir; bilinmeyen kesinleştirilmez. Resmî hipotez listesi, mekanizma adı veya ayrıntılı metin gerekmez."
+        }
+      }
+    },
+    "D2": {
+      "name": "Deney ve araç seçimi",
+      "anchors": {
+        "D2.0": {
+          "score": 0,
+          "description": "Seçilen eylem ilan edilen merkezî soruya izinli koşullarda bilgi sağlayamaz veya kabul edilmiş ayırıcı gerekliliği açıkça boşa çıkarır. Sadece beklenen sonucun çıkmaması ya da tasarımcının yöntemini izlememesi yeterli değildir."
+        },
+        "D2.1": {
+          "score": 1,
+          "description": "Deney bilimsel soruya katkı sağlayabilir; fakat belirtilen ayrımı sınırlayan somut bir karıştırıcılık, kontrol veya uygulanabilirlik sorunu var. Geçerli keşif amacı tanınır; ret nedeni ayrıca ayrılır."
+        },
+        "D2.2": {
+          "score": 2,
+          "description": "Deney/hesap veya geçerli keşif, o anda açık soruya bilgi sağlayabilir ve bilinen işlem koşullarıyla uyumludur. Global optimalite, bilgi kazancı oranı veya yeni tarif adı şart değildir."
+        }
+      }
+    },
+    "D3": {
+      "name": "Kanıtı yorumlama",
+      "anchors": {
+        "D3.0": {
+          "score": 0,
+          "description": "Kararın dayandığı merkezî sonuç açık karşı kanıta rağmen veya gerekli desteği olmadan kesinleşmiş gibi kullanılıyor. İlgisiz doğru ifadeler bu sorunu telafi etmez. Hipotez kurmak veya yanlış ön tahmin bu ankraj değildir."
+        },
+        "D3.1": {
+          "score": 1,
+          "description": "Esas kanıtın anlamlı bir kısmı doğru okunuyor; fakat kapsam, sayı veya atıfta yerel/maddi sorun var ya da merkezî iddia açıkça çözülmemiş tutulduğu halde bir destek ilişkisi fazla ileri götürülüyor. İlgisiz doğru cümleler kısmi kredi gerekçesi değildir."
+        },
+        "D3.2": {
+          "score": 2,
+          "description": "Kararın esas çıkarımları atıf yapılan erişilmiş kanıtla ve iddia kapsamıyla uyumlu; hipotez, destek, karşı kanıt ve çözülemeyen kısım uygun ayrılıyor. Bütün olası açıklamaları eleme veya doğru geleceği tahmin etme şart değil."
+        }
+      }
+    },
+    "D4": {
+      "name": "Bulguyla devam, koruma ve revizyon",
+      "anchors": {
+        "D4.0": {
+          "score": 0,
+          "description": "Yeni kanıtla açıkça çelişen merkezî dayanağa rağmen aynı dayanak kullanılıyor veya veri üretmeyen adımdan sonuç uydurularak devam ediliyor. Düzeltme için tamamlanmış karar fırsatı şarttır."
+        },
+        "D4.1": {
+          "score": 1,
+          "description": "Takip/koruma/kapatma erişilmiş kanıtla kısmen ilişkili; fakat somut bir önemli sınır veya çelişki ele alınmadan karar gerekçesinde kalıyor."
+        },
+        "D4.2": {
+          "score": 2,
+          "description": "Takip, açıklamayı koruma veya kapatma kararı erişilen bulgu ve kalan belirsizlikle uyumlu. Tekrar eşleme kuşkusunu giderebilir. Revizyon sayısı veya sırf değişmek ödül değildir."
+        }
+      }
+    },
+    "D5": {
+      "name": "Doğrulama, sonuçlandırma ve teslim bütünlüğü",
+      "anchors": {
+        "D5.0": {
+          "score": 0,
+          "description": "Yeterli fırsat ve açık kanıta rağmen desteklenmeyen merkezî doğrulama/başarı iddiasıyla sonuçlandırılıyor veya belirtilen teslim hesabıyla maddi çelişki kesinleşmiş doğru gibi sunuluyor. Sonucun yanlış çıkması tek başına bu hüküm değildir."
+        },
+        "D5.1": {
+          "score": 1,
+          "description": "Anlamlı doğrulama/sonuçlandırma dayanağı mevcut; fakat kontrolün kapsamı, kalan hata veya açık hesap ile teslim ilişkisi konusunda somut maddi sorun var. Belirsiz doğrulama cümlesinin makul farklı okumaları korunur."
+        },
+        "D5.2": {
+          "score": 2,
+          "description": "Doğrulamanın desteklediği kapsam ve sonuçlandırma dayanağı uygun; gözlenen teslim ilişkisiyle açık çelişki yok. Yeni deney, uzun hesap izi veya bütün gizli mekanizmanın adlandırılması zorunlu değil."
+        }
+      }
+    }
+  },
+  "null_states": [
+    "no_opportunity",
+    "insufficient_evidence",
+    "out_of_rubric",
+    "disputed"
+  ],
+  "episode_rule": "Unknown applicable evidence => null; no scored opportunity => null; unresolved score0 issue =>0; any score1 or recovered score0 =>1; otherwise2. Show all decision levels and recovery separately. No average or global sum.",
+  "comparisons": "Matched world-by-repeat descriptive ordinal contrasts, no ratio-scale interpretation, model hierarchy or causal isolation of model versus reasoning effort.",
+  "text_style": "Score, evidence, plain-language rationale, counterevidence/limitations remain together."
+}

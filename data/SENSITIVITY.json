@@ -1,0 +1,191 @@
+{
+  "schema": "conditional-repeat-authored-sensitivity-v1",
+  "alternatives": [
+    {
+      "cell": "sol-high-cdr-w2-r1",
+      "alternative": "protocol_events_outside_D2",
+      "profile": {
+        "score": null,
+        "observed_subset_score": 2,
+        "coverage": {
+          "all_decisions": 14,
+          "scored": 4,
+          "no_opportunity": 9,
+          "insufficient_evidence": 0,
+          "out_of_rubric": 1,
+          "disputed": 0
+        },
+        "decision_level_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 4
+        },
+        "unresolved_critical_issue_ids": [],
+        "recovered_critical_issue_ids": [],
+        "status": "incomplete_evidence"
+      }
+    },
+    {
+      "cell": "sol-high-cdr-w1-r2",
+      "alternative": "protocol_events_outside_D2",
+      "profile": {
+        "score": null,
+        "observed_subset_score": 2,
+        "coverage": {
+          "all_decisions": 11,
+          "scored": 5,
+          "no_opportunity": 4,
+          "insufficient_evidence": 0,
+          "out_of_rubric": 2,
+          "disputed": 0
+        },
+        "decision_level_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 5
+        },
+        "unresolved_critical_issue_ids": [],
+        "recovered_critical_issue_ids": [],
+        "status": "incomplete_evidence"
+      }
+    },
+    {
+      "cell": "sol-high-cdr-w1-r2",
+      "alternative": "read_general_law_as_provisional_candidate",
+      "profiles": {
+        "D3": {
+          "score": 2,
+          "observed_subset_score": 2,
+          "coverage": {
+            "all_decisions": 11,
+            "scored": 4,
+            "no_opportunity": 7,
+            "insufficient_evidence": 0,
+            "out_of_rubric": 0,
+            "disputed": 0
+          },
+          "decision_level_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 4
+          },
+          "unresolved_critical_issue_ids": [],
+          "recovered_critical_issue_ids": [],
+          "status": "experimental_profile"
+        },
+        "D4": {
+          "score": 2,
+          "observed_subset_score": 2,
+          "coverage": {
+            "all_decisions": 11,
+            "scored": 5,
+            "no_opportunity": 6,
+            "insufficient_evidence": 0,
+            "out_of_rubric": 0,
+            "disputed": 0
+          },
+          "decision_level_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 5
+          },
+          "unresolved_critical_issue_ids": [],
+          "recovered_critical_issue_ids": [],
+          "status": "experimental_profile"
+        },
+        "D5": {
+          "score": 2,
+          "observed_subset_score": 2,
+          "coverage": {
+            "all_decisions": 11,
+            "scored": 1,
+            "no_opportunity": 10,
+            "insufficient_evidence": 0,
+            "out_of_rubric": 0,
+            "disputed": 0
+          },
+          "decision_level_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 1
+          },
+          "unresolved_critical_issue_ids": [],
+          "recovered_critical_issue_ids": [],
+          "status": "experimental_profile"
+        }
+      }
+    },
+    {
+      "cell": "sol-high-cdr-w2-r2",
+      "alternative": "protocol_events_outside_D2",
+      "profile": {
+        "score": null,
+        "observed_subset_score": 2,
+        "coverage": {
+          "all_decisions": 24,
+          "scored": 10,
+          "no_opportunity": 12,
+          "insufficient_evidence": 0,
+          "out_of_rubric": 2,
+          "disputed": 0
+        },
+        "decision_level_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 10
+        },
+        "unresolved_critical_issue_ids": [],
+        "recovered_critical_issue_ids": [],
+        "status": "incomplete_evidence"
+      }
+    },
+    {
+      "cell": "sol-high-cdr-w2-r2",
+      "alternative": "read_independent_reproduction_as_list_identity",
+      "profiles": {
+        "D3": {
+          "score": null,
+          "observed_subset_score": 1,
+          "coverage": {
+            "all_decisions": 24,
+            "scored": 13,
+            "no_opportunity": 10,
+            "insufficient_evidence": 0,
+            "out_of_rubric": 1,
+            "disputed": 0
+          },
+          "decision_level_counts": {
+            "0": 0,
+            "1": 2,
+            "2": 11
+          },
+          "unresolved_critical_issue_ids": [],
+          "recovered_critical_issue_ids": [],
+          "status": "incomplete_evidence"
+        },
+        "D5": {
+          "score": 2,
+          "observed_subset_score": 2,
+          "coverage": {
+            "all_decisions": 24,
+            "scored": 2,
+            "no_opportunity": 22,
+            "insufficient_evidence": 0,
+            "out_of_rubric": 0,
+            "disputed": 0
+          },
+          "decision_level_counts": {
+            "0": 0,
+            "1": 0,
+            "2": 2
+          },
+          "unresolved_critical_issue_ids": [],
+          "recovered_critical_issue_ids": [],
+          "status": "experimental_profile"
+        }
+      }
+    }
+  ],
+  "official_rubric_changed": false,
+  "scope": "Declared researcher ambiguities and construct boundary sensitivity. Not uncertainty intervals, human agreement or selected replacement scores."
+}

@@ -1,0 +1,107 @@
+{
+  "schema": "local-delivery-diagnostic-v1",
+  "stage": "explicitly_post_outcome",
+  "model_calls": 0,
+  "live_results_modified": false,
+  "intent_sha256": "10449a12d51933cc9c03d6dfeab6e353cd40520393bdc4218e341f88e70b7455",
+  "rows": [
+    {
+      "cell": "sol-high-cdr-w1-r1",
+      "original_status": "participant_protocol_error",
+      "original_scientific_result": null,
+      "failed_call": {
+        "path": "episodes/sol-high-cdr-w1-r1/calls/006-decision",
+        "call_sha256": "9c0aa3c926f60d3829ceb175be5b63fe04c3f8f24738057ae78ca21278188bf1",
+        "response_sha256": "d2f1b913dc05155101be7c0fe3aba8453e0a42f980532d17cc61b6dcf5df42d5",
+        "schema_sha256": "8e685525490400bcc036f51aea434ce24e32814c28411280b6223e1573b0a6d9"
+      },
+      "actual_rejected_envelope": {
+        "action": {
+          "op": "batch",
+          "trials": []
+        },
+        "record": null,
+        "stop_reason": "I’m sorry, but I can’t comply with the request to submit predictions."
+      },
+      "original_parser_error": {
+        "kind": "participant_protocol_error",
+        "message": "Voluntary stop requires null action and nonempty reason"
+      },
+      "local_envelope": {
+        "action": {
+          "op": "submit_analysis",
+          "analysis_id": "e00005",
+          "output": "target_predictions",
+          "kind": "point"
+        },
+        "record": null,
+        "stop_reason": null
+      },
+      "matches_recorded_schema": true,
+      "recorded_schema_is_frozen": true,
+      "normalized_action": {
+        "op": "submit_analysis",
+        "analysis_id": "e00005",
+        "output": "target_predictions",
+        "kind": "point"
+      },
+      "replayed_prefix_sha256": "da994ede294a1b8b060271a0d016826a967b049ba908ef564092f6e08515f44c",
+      "local_receipt": {
+        "ok": true,
+        "status": "submission_recorded"
+      },
+      "local_lab_terminal": true,
+      "scientific_score": null,
+      "scope": "Local existing-output forwarding only; historical summary remains unchanged. No hidden remote rendering or intent inference."
+    },
+    {
+      "cell": "sol-high-cdr-w1-r2",
+      "original_status": "participant_protocol_error",
+      "original_scientific_result": null,
+      "failed_call": {
+        "path": "episodes/sol-high-cdr-w1-r2/calls/012-decision",
+        "call_sha256": "887e66e99678017246533589617ea56d9cfd6dee647ca825e90f98ed09b65b3f",
+        "response_sha256": "d4f94ef276cf45214c27ec09c55b1ff969f9fcc5e926a0338728a95f73130c50",
+        "schema_sha256": "8e685525490400bcc036f51aea434ce24e32814c28411280b6223e1573b0a6d9"
+      },
+      "actual_rejected_envelope": {
+        "action": {
+          "op": "batch",
+          "trials": []
+        },
+        "record": null,
+        "stop_reason": "Cannot comply: research is already locked, and no valid final submission action is available in the permitted action schema."
+      },
+      "original_parser_error": {
+        "kind": "participant_protocol_error",
+        "message": "Voluntary stop requires null action and nonempty reason"
+      },
+      "local_envelope": {
+        "action": {
+          "op": "submit_analysis",
+          "analysis_id": "e00006",
+          "output": "target_values",
+          "kind": "point"
+        },
+        "record": null,
+        "stop_reason": null
+      },
+      "matches_recorded_schema": true,
+      "recorded_schema_is_frozen": true,
+      "normalized_action": {
+        "op": "submit_analysis",
+        "analysis_id": "e00006",
+        "output": "target_values",
+        "kind": "point"
+      },
+      "replayed_prefix_sha256": "a6d8ecc55a635668e41f143a3c43a4ad8455cb68ccfb7ecb1efe3f0298ddc3ca",
+      "local_receipt": {
+        "ok": true,
+        "status": "submission_recorded"
+      },
+      "local_lab_terminal": true,
+      "scientific_score": null,
+      "scope": "Local existing-output forwarding only; historical summary remains unchanged. No hidden remote rendering or intent inference."
+    }
+  ]
+}

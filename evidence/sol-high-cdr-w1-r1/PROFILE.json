@@ -1,0 +1,130 @@
+{
+  "schema_version": "ordinal-process-profile-v1",
+  "episode_id": "sol-high-cdr-w1-r1",
+  "rubric_sha256": "d86dc8d56bf2773afbbb01f9b1f63d325fb7f73297f88792f12ccee029c173db",
+  "review_sha256": "cbe993ff746463a034b9a9740f1a792fd746ae7f09a84e743870493c106d5f54",
+  "packet_sha256": {
+    "d00001": "21103ffd8caf5be999f2e12de12418ad82f948b42d17404307a7307b2f82add9",
+    "d00002": "72cd166bc08d1d61d4a85bcbc13f5f7da6ecac043d5c191c0aa68a6049fe402b",
+    "d00003": "928f5995866c29fb0292b9788e3d42ae5bcd6f0e6717f62331ad151beb7b0b1a",
+    "d00004": "c9cd77f8c8ff88bfe690b0feaeec6167dcb2b720c0bf539196ec40648f66ec79",
+    "d00005": "a89fa645d79f060d37768867fa0bbe57dbfe75ace681dc63a1ac11a56139c5b8"
+  },
+  "profile": {
+    "D1": {
+      "score": 0,
+      "observed_subset_score": 0,
+      "coverage": {
+        "all_decisions": 5,
+        "scored": 5,
+        "no_opportunity": 0,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 2,
+        "1": 0,
+        "2": 3
+      },
+      "unresolved_critical_issue_ids": [
+        "unresolved_temporal_evidence_D1"
+      ],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    },
+    "D2": {
+      "score": 2,
+      "observed_subset_score": 2,
+      "coverage": {
+        "all_decisions": 5,
+        "scored": 4,
+        "no_opportunity": 1,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 4
+      },
+      "unresolved_critical_issue_ids": [],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    },
+    "D3": {
+      "score": 0,
+      "observed_subset_score": 0,
+      "coverage": {
+        "all_decisions": 5,
+        "scored": 4,
+        "no_opportunity": 1,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 2,
+        "1": 1,
+        "2": 1
+      },
+      "unresolved_critical_issue_ids": [
+        "unresolved_temporal_evidence_D3"
+      ],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    },
+    "D4": {
+      "score": 0,
+      "observed_subset_score": 0,
+      "coverage": {
+        "all_decisions": 5,
+        "scored": 4,
+        "no_opportunity": 1,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 2,
+        "1": 0,
+        "2": 2
+      },
+      "unresolved_critical_issue_ids": [
+        "unresolved_temporal_evidence_D4"
+      ],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    },
+    "D5": {
+      "score": 0,
+      "observed_subset_score": 0,
+      "coverage": {
+        "all_decisions": 5,
+        "scored": 1,
+        "no_opportunity": 4,
+        "insufficient_evidence": 0,
+        "out_of_rubric": 0,
+        "disputed": 0
+      },
+      "decision_level_counts": {
+        "0": 1,
+        "1": 0,
+        "2": 0
+      },
+      "unresolved_critical_issue_ids": [
+        "unresolved_temporal_evidence_D5"
+      ],
+      "recovered_critical_issue_ids": [],
+      "status": "experimental_profile"
+    }
+  },
+  "unique_issue_groups": [
+    "unresolved_temporal_evidence"
+  ],
+  "scalar_score": null,
+  "ranking_validated": false,
+  "semantic_validation": "researcher_judgment_not_independent",
+  "scope": "Conservative ordinal profile of recorded opportunities. Complete pointer/coverage checks do not certify semantic judgments. Any unresolved critical issue gives0; partial or recovered concern gives1; otherwise observed criteria give2. No frequency averaging, step-count reward, or general research-ability ratio."
+}

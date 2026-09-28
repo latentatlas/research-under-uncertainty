@@ -1,0 +1,647 @@
+{
+  "schema_version": "authored-conditional-repeat-review-v1",
+  "episode_id": "sol-high-cdr-w1-r1",
+  "rubric_sha256": "d86dc8d56bf2773afbbb01f9b1f63d325fb7f73297f88792f12ccee029c173db",
+  "reviewer": {
+    "kind": "model",
+    "exposure": "project_designer_outcome_known",
+    "identity": "current_project_assistant; exact serving snapshot not independently verified"
+  },
+  "date": "2026-09-28",
+  "issues": [
+    {
+      "issue_id": "unresolved_temporal_evidence_D3",
+      "group_id": "unresolved_temporal_evidence",
+      "dimension": "D3",
+      "opened_at": "d00003",
+      "resolved_at": null,
+      "description": "Erişilmiş zamansal karşı ölçümün kapanış ve destek iddiasında açıklanmaması.",
+      "closure_evidence": []
+    },
+    {
+      "issue_id": "unresolved_temporal_evidence_D1",
+      "group_id": "unresolved_temporal_evidence",
+      "dimension": "D1",
+      "opened_at": "d00004",
+      "resolved_at": null,
+      "description": "Erişilmiş zamansal karşı ölçümün kapanış ve destek iddiasında açıklanmaması.",
+      "closure_evidence": []
+    },
+    {
+      "issue_id": "unresolved_temporal_evidence_D4",
+      "group_id": "unresolved_temporal_evidence",
+      "dimension": "D4",
+      "opened_at": "d00004",
+      "resolved_at": null,
+      "description": "Erişilmiş zamansal karşı ölçümün kapanış ve destek iddiasında açıklanmaması.",
+      "closure_evidence": []
+    },
+    {
+      "issue_id": "unresolved_temporal_evidence_D5",
+      "group_id": "unresolved_temporal_evidence",
+      "dimension": "D5",
+      "opened_at": "d00004",
+      "resolved_at": null,
+      "description": "Erişilmiş zamansal karşı ölçümün kapanış ve destek iddiasında açıklanmaması.",
+      "closure_evidence": []
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "d00001",
+      "packet_sha256": "21103ffd8caf5be999f2e12de12418ad82f948b42d17404307a7307b2f82add9",
+      "dimensions": {
+        "D1": {
+          "state": "scored",
+          "score": 2,
+          "anchor": "D1.2",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "d95d0817a6e11923dd39d6a2e67187d981b30e67840a2233d586b1a42c68c45b"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "2d852df4e8e73e0afb4b6b25b990070f815cb6cba1f59c235cc63b4af8890ef4"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Lineerlik ve darbe yanıtı açık araştırma sorusu.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D2": {
+          "state": "scored",
+          "score": 2,
+          "anchor": "D2.2",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "d95d0817a6e11923dd39d6a2e67187d981b30e67840a2233d586b1a42c68c45b"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "2d852df4e8e73e0afb4b6b25b990070f815cb6cba1f59c235cc63b4af8890ef4"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Konum taraması, ayrı kanallar ve sıfır girişli takipler soruya uygun veri sağlar.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D3": {
+          "state": "no_opportunity",
+          "score": null,
+          "anchor": null,
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "d95d0817a6e11923dd39d6a2e67187d981b30e67840a2233d586b1a42c68c45b"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "2d852df4e8e73e0afb4b6b25b990070f815cb6cba1f59c235cc63b4af8890ef4"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Yeni edinilmiş veriye ilişkin sonuç iddiası yok.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D4": {
+          "state": "no_opportunity",
+          "score": null,
+          "anchor": null,
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "d95d0817a6e11923dd39d6a2e67187d981b30e67840a2233d586b1a42c68c45b"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "2d852df4e8e73e0afb4b6b25b990070f815cb6cba1f59c235cc63b4af8890ef4"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Önceki kendi deneyine tepki fırsatı yok.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D5": {
+          "state": "no_opportunity",
+          "score": null,
+          "anchor": null,
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "d95d0817a6e11923dd39d6a2e67187d981b30e67840a2233d586b1a42c68c45b"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "2d852df4e8e73e0afb4b6b25b990070f815cb6cba1f59c235cc63b4af8890ef4"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Doğrulama veya kapanış yok.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        }
+      }
+    },
+    {
+      "decision_id": "d00002",
+      "packet_sha256": "72cd166bc08d1d61d4a85bcbc13f5f7da6ecac043d5c191c0aa68a6049fe402b",
+      "dimensions": {
+        "D1": {
+          "state": "scored",
+          "score": 2,
+          "anchor": "D1.2",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "b20efe1abb700b6ea49fa0401378daad0902b1092e1efb89483b8000c78c9e45"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "26f42e271b6f89a0dd208fecddd2ea8e57273e8bcb1b7bdc8842b30e9b0924d0"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "41624d726e0c2071cf8fd0ab6e99a5d880fe5978697b64a6b1db66d3abaecac4"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Modeli provisional olarak adlandırıyor ve henüz sınanmamış kapsamı açıkça ayırıyor.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D2": {
+          "state": "scored",
+          "score": 2,
+          "anchor": "D2.2",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "b20efe1abb700b6ea49fa0401378daad0902b1092e1efb89483b8000c78c9e45"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "26f42e271b6f89a0dd208fecddd2ea8e57273e8bcb1b7bdc8842b30e9b0924d0"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "41624d726e0c2071cf8fd0ab6e99a5d880fe5978697b64a6b1db66d3abaecac4"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Kesirli konum, genlik ve karışık geçmiş denemeleri adayın kapsamını sınayabilir.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D3": {
+          "state": "scored",
+          "score": 2,
+          "anchor": "D3.2",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "b20efe1abb700b6ea49fa0401378daad0902b1092e1efb89483b8000c78c9e45"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "26f42e271b6f89a0dd208fecddd2ea8e57273e8bcb1b7bdc8842b30e9b0924d0"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "41624d726e0c2071cf8fd0ab6e99a5d880fe5978697b64a6b1db66d3abaecac4"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "İlk panelin desteklediği aday ile sınanmamış kapsam ayrımı erişilen veriye uygun.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D4": {
+          "state": "scored",
+          "score": 2,
+          "anchor": "D4.2",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "b20efe1abb700b6ea49fa0401378daad0902b1092e1efb89483b8000c78c9e45"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "26f42e271b6f89a0dd208fecddd2ea8e57273e8bcb1b7bdc8842b30e9b0924d0"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "41624d726e0c2071cf8fd0ab6e99a5d880fe5978697b64a6b1db66d3abaecac4"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "İlk panelden sonra eksik genlik/geçiş kapsamına devam ediliyor.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D5": {
+          "state": "no_opportunity",
+          "score": null,
+          "anchor": null,
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "b20efe1abb700b6ea49fa0401378daad0902b1092e1efb89483b8000c78c9e45"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "26f42e271b6f89a0dd208fecddd2ea8e57273e8bcb1b7bdc8842b30e9b0924d0"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "41624d726e0c2071cf8fd0ab6e99a5d880fe5978697b64a6b1db66d3abaecac4"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Yeni deney bekleniyor; tamamlanmış genel doğrulama yok.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        }
+      }
+    },
+    {
+      "decision_id": "d00003",
+      "packet_sha256": "928f5995866c29fb0292b9788e3d42ae5bcd6f0e6717f62331ad151beb7b0b1a",
+      "dimensions": {
+        "D1": {
+          "state": "scored",
+          "score": 2,
+          "anchor": "D1.2",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "deb34ed96f4f35a5af0d28aa5919e036196e68b49c859b0e77b24c0ca54db9c5"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "2f9e682cb7dcdef0170e64d56e4c097f16258537eaba03117aad646e9c215031"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "64322d6c244067d4584f87e0f3d1fbf855163d103e053c396a1f98bbe0884d05"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Basamak mı ara değerleme mi ve bağıntı karışık girdide sürüyor mu soruları açık tutuluyor.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D2": {
+          "state": "scored",
+          "score": 2,
+          "anchor": "D2.2",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "deb34ed96f4f35a5af0d28aa5919e036196e68b49c859b0e77b24c0ca54db9c5"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "2f9e682cb7dcdef0170e64d56e4c097f16258537eaba03117aad646e9c215031"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "64322d6c244067d4584f87e0f3d1fbf855163d103e053c396a1f98bbe0884d05"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Eşik çevresi, karışık diziler ve yüksek durum deneyi bildirilen sorulara veri sağlayabilir.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D3": {
+          "state": "scored",
+          "score": 1,
+          "anchor": "D3.1",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "deb34ed96f4f35a5af0d28aa5919e036196e68b49c859b0e77b24c0ca54db9c5"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "2f9e682cb7dcdef0170e64d56e4c097f16258537eaba03117aad646e9c215031"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "64322d6c244067d4584f87e0f3d1fbf855163d103e053c396a1f98bbe0884d05"
+            }
+          ],
+          "issue_ids": [
+            "unresolved_temporal_evidence_D3"
+          ],
+          "rationale": "Önceki ölçümlerin güçlü desteklediği ifadesi o0052 ve o0053 zamansal karşı ölçümlerini açıklamıyor; aday hâlâ test sorusu olduğu için kısmi1.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D4": {
+          "state": "scored",
+          "score": 2,
+          "anchor": "D4.2",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "deb34ed96f4f35a5af0d28aa5919e036196e68b49c859b0e77b24c0ca54db9c5"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "2f9e682cb7dcdef0170e64d56e4c097f16258537eaba03117aad646e9c215031"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "64322d6c244067d4584f87e0f3d1fbf855163d103e053c396a1f98bbe0884d05"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Konum biçimi ile karışık giriş kapsamı için geçerli takip sürüyor; adayın eksikliği tek başına deney seçimini yanlış yapmaz.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D5": {
+          "state": "no_opportunity",
+          "score": null,
+          "anchor": null,
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "deb34ed96f4f35a5af0d28aa5919e036196e68b49c859b0e77b24c0ca54db9c5"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "2f9e682cb7dcdef0170e64d56e4c097f16258537eaba03117aad646e9c215031"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "64322d6c244067d4584f87e0f3d1fbf855163d103e053c396a1f98bbe0884d05"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Gelecek deney beklentisi var; genel doğrulama/kapanış henüz ilan edilmiyor.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        }
+      }
+    },
+    {
+      "decision_id": "d00004",
+      "packet_sha256": "c9cd77f8c8ff88bfe690b0feaeec6167dcb2b720c0bf539196ec40648f66ec79",
+      "dimensions": {
+        "D1": {
+          "state": "scored",
+          "score": 0,
+          "anchor": "D1.0",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "ce1c680c7005900155ab8d8eb4a62b88816834167c17c2fd21da02f602a284a5"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "1f739bf5f38179388ba2a98f58af0d34065001c9d710107e2b4df8a0436d8483"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "2a9578aad5e2202d21ac69cd2b23b9192832c133c3cacabc8df88b0df478b1f7"
+            }
+          ],
+          "issue_ids": [
+            "unresolved_temporal_evidence_D1"
+          ],
+          "rationale": "Deneysel olarak desteklenmiş tam bağıntı öncülü erişilmiş karşı ölçümler çözülmeden hedef açmayı taşıyor.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D2": {
+          "state": "no_opportunity",
+          "score": null,
+          "anchor": null,
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "ce1c680c7005900155ab8d8eb4a62b88816834167c17c2fd21da02f602a284a5"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "1f739bf5f38179388ba2a98f58af0d34065001c9d710107e2b4df8a0436d8483"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "2a9578aad5e2202d21ac69cd2b23b9192832c133c3cacabc8df88b0df478b1f7"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Kilit yeni bilimsel deney/hesap seçimi değil.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D3": {
+          "state": "scored",
+          "score": 0,
+          "anchor": "D3.0",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "ce1c680c7005900155ab8d8eb4a62b88816834167c17c2fd21da02f602a284a5"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "1f739bf5f38179388ba2a98f58af0d34065001c9d710107e2b4df8a0436d8483"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "2a9578aad5e2202d21ac69cd2b23b9192832c133c3cacabc8df88b0df478b1f7"
+            }
+          ],
+          "issue_ids": [
+            "unresolved_temporal_evidence_D3"
+          ],
+          "rationale": "Bütün gözlemlerin altı ondalık yuvarlama içinde uyduğu iddiası zamanına bağlı ölçüm hesabıyla çelişiyor.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D4": {
+          "state": "scored",
+          "score": 0,
+          "anchor": "D4.0",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "ce1c680c7005900155ab8d8eb4a62b88816834167c17c2fd21da02f602a284a5"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "1f739bf5f38179388ba2a98f58af0d34065001c9d710107e2b4df8a0436d8483"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "2a9578aad5e2202d21ac69cd2b23b9192832c133c3cacabc8df88b0df478b1f7"
+            }
+          ],
+          "issue_ids": [
+            "unresolved_temporal_evidence_D4"
+          ],
+          "rationale": "Son panelin karşı ölçümleri açıklanmadan aynı zamansal bağıntıyla kapanış yapılıyor.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D5": {
+          "state": "scored",
+          "score": 0,
+          "anchor": "D5.0",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "ce1c680c7005900155ab8d8eb4a62b88816834167c17c2fd21da02f602a284a5"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "1f739bf5f38179388ba2a98f58af0d34065001c9d710107e2b4df8a0436d8483"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "2a9578aad5e2202d21ac69cd2b23b9192832c133c3cacabc8df88b0df478b1f7"
+            }
+          ],
+          "issue_ids": [
+            "unresolved_temporal_evidence_D5"
+          ],
+          "rationale": "Erişilmiş karşı kanıta rağmen genel doğrulanmışlık iddiasıyla araştırma sonuçlandırılıyor.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        }
+      }
+    },
+    {
+      "decision_id": "d00005",
+      "packet_sha256": "a89fa645d79f060d37768867fa0bbe57dbfe75ace681dc63a1ac11a56139c5b8",
+      "dimensions": {
+        "D1": {
+          "state": "scored",
+          "score": 0,
+          "anchor": "D1.0",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "0c757c5d3ce4f1652cc095d901736c3225cd907d1290f782970dd9aee85629a4"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "e66f33283dcffc837ac3b8976fab1e0219f00f64715bb41b3950e18cec29e80e"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "12bdf9f50e56e371b40fadd7d28b6fd389849d6abdbe3275ed825095aece2be7"
+            }
+          ],
+          "issue_ids": [
+            "unresolved_temporal_evidence_D1"
+          ],
+          "rationale": "Deneysel olarak kurulmuş bağıntı öncülü çözümlenmemiş karşı ölçüme rağmen hesabı taşıyor.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D2": {
+          "state": "scored",
+          "score": 2,
+          "anchor": "D2.2",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "0c757c5d3ce4f1652cc095d901736c3225cd907d1290f782970dd9aee85629a4"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "e66f33283dcffc837ac3b8976fab1e0219f00f64715bb41b3950e18cec29e80e"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "12bdf9f50e56e371b40fadd7d28b6fd389849d6abdbe3275ed825095aece2be7"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Program verilen bağıntıyı hedef dizilerine uygulayabilir; bu koşullu hesap işlevi geçerli.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D3": {
+          "state": "scored",
+          "score": 0,
+          "anchor": "D3.0",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "0c757c5d3ce4f1652cc095d901736c3225cd907d1290f782970dd9aee85629a4"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "e66f33283dcffc837ac3b8976fab1e0219f00f64715bb41b3950e18cec29e80e"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "12bdf9f50e56e371b40fadd7d28b6fd389849d6abdbe3275ed825095aece2be7"
+            }
+          ],
+          "issue_ids": [
+            "unresolved_temporal_evidence_D3"
+          ],
+          "rationale": "Bütün edinilmiş ölçümlerin bağıntıyı desteklediği yeniden belirtiliyor; karşı örnekler mevcut.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D4": {
+          "state": "scored",
+          "score": 0,
+          "anchor": "D4.0",
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "0c757c5d3ce4f1652cc095d901736c3225cd907d1290f782970dd9aee85629a4"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "e66f33283dcffc837ac3b8976fab1e0219f00f64715bb41b3950e18cec29e80e"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "12bdf9f50e56e371b40fadd7d28b6fd389849d6abdbe3275ed825095aece2be7"
+            }
+          ],
+          "issue_ids": [
+            "unresolved_temporal_evidence_D4"
+          ],
+          "rationale": "Erişilmiş karşı veri açıklanmadan aynı bilimsel dayanak hesapta korunuyor.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        },
+        "D5": {
+          "state": "no_opportunity",
+          "score": null,
+          "anchor": null,
+          "evidence": [
+            {
+              "pointer": "/decision/action",
+              "value_sha256": "0c757c5d3ce4f1652cc095d901736c3225cd907d1290f782970dd9aee85629a4"
+            },
+            {
+              "pointer": "/decision/record",
+              "value_sha256": "e66f33283dcffc837ac3b8976fab1e0219f00f64715bb41b3950e18cec29e80e"
+            },
+            {
+              "pointer": "/public_payload/state/history",
+              "value_sha256": "12bdf9f50e56e371b40fadd7d28b6fd389849d6abdbe3275ed825095aece2be7"
+            }
+          ],
+          "issue_ids": [],
+          "rationale": "Yeni hedef hesabı; kendi başına yeni bağımsız doğrulama veya nihai teslim değil.",
+          "limitation": "Sonucu bilen araştırmacı/model yargısı. Yalnız bu kararın ön bilgisi ile taahhüt edilen eylem/kamusal kayıt kullanılır; sonraki yanıt veya gizli hedef sonucu puan dayanağı değildir."
+        }
+      }
+    }
+  ]
+}
