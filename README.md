@@ -13,6 +13,7 @@ Research direction is by [LatentAtlas](https://github.com/latentatlas), with sub
 - [Results and their denominators](docs/RESULTS.md)
 - [What can be checked from this edition](docs/EVIDENCE-AND-LIMITS.md)
 - [Publication history and confidentiality](docs/PUBLICATION-HISTORY.md)
+- [Prospective validation on twelve fresh inputs](docs/FRESH12-PREREGISTRATION.md)
 
 ## Interim calibration results
 
