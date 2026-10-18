@@ -1,0 +1,31 @@
+{
+  "schema": "public-outcome-summary-v1",
+  "study_id": "october-calibration-session-1",
+  "model": "gpt-6-astra",
+  "reasoning": "max",
+  "scope": "development_calibration",
+  "mechanism_status": "withheld",
+  "levels": [
+    {
+      "level_id": "A",
+      "planned": 4,
+      "success": 4,
+      "failure": 0,
+      "missing": 0
+    },
+    {
+      "level_id": "B",
+      "planned": 4,
+      "success": 2,
+      "failure": 2,
+      "missing": 0
+    },
+    {
+      "level_id": "C",
+      "planned": 4,
+      "success": 0,
+      "failure": 4,
+      "missing": 0
+    }
+  ]
+}
