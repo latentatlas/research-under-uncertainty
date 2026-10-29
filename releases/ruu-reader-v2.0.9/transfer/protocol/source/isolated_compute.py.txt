@@ -1,0 +1,118 @@
+"""Fresh public-history-only worker with native macOS Seatbelt restrictions."""
+from pathlib import Path
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import tempfile
+import time
+import threading
+import signal
+
+HERE = Path(__file__).resolve().parent
+PYTHON = Path("<PINNED_CPYTHON_3_12>")
+RUNTIME = PYTHON.parent.parent
+SANDBOX = Path("/usr/bin/sandbox-exec")
+ENV = {"PATH": "/usr/bin:/bin", "LANG": "C", "LC_ALL": "C",
+       "PYTHONDONTWRITEBYTECODE": "1"}
+
+def quote(value):
+    return json.dumps(str(value))
+
+def profile(cwd):
+    """Allow executable/runtime reads, isolated scratch and standard descriptors only."""
+    return "\n".join([
+        "(version 1)", "(deny default)", '(import "dyld-support.sb")',
+        "(allow mach-bootstrap)", "(allow syscall*)",
+        f"(allow process-exec (literal {quote(PYTHON)}))",
+        "(allow file-read-metadata)",
+        "(allow sysctl-read)",
+        f"(allow file-map-executable (subpath {quote(RUNTIME)}) (subpath \"/System/Library\") (subpath \"/usr/lib\"))",
+        "(allow file-read* (subpath \"/System/Library\") (subpath \"/usr/lib\")",
+        f"  (subpath {quote(RUNTIME)}) (subpath {quote(cwd)})",
+        "  (literal \"/dev/null\") (literal \"/dev/urandom\") (subpath \"/dev/fd\"))",
+        f"(deny file-read* (subpath {quote(RUNTIME/'lib/python3.12/site-packages')}))",
+        f"(allow file-write* (subpath {quote(cwd)}) (literal \"/dev/null\") (subpath \"/dev/fd\"))",
+        "(deny network*)", "(deny process-fork)",
+    ])
+
+def run_worker(request, *, diagnostic_code=None, timeout=30):
+    """diagnostic_code is operator-only OS QA; never chosen by participant envelopes."""
+    if sys.platform != "darwin" or not SANDBOX.is_file() or not PYTHON.is_file():
+        raise RuntimeError("required native isolation unavailable; no fallback")
+    started = time.monotonic()
+    with tempfile.TemporaryDirectory(prefix="snapshot-private-calc-") as tmp:
+        cwd = Path(tmp).resolve()
+        for name in ("policy_runtime.py", "compute_original.py"):
+            (cwd / name).write_bytes((HERE / name).read_bytes())
+        worker = (
+            "import sys; sys.path.insert(0,'.'); "
+            "import resource,json; resource.setrlimit(resource.RLIMIT_CPU,(30,30)); "
+            "resource.setrlimit(resource.RLIMIT_FSIZE,(1048576,1048576)); "
+            "from compute_original import compute; r=json.load(sys.stdin); "
+            "print(json.dumps(compute(r['code'],r['history']),allow_nan=False))"
+        )
+        if diagnostic_code is not None:
+            worker = diagnostic_code
+        policy = profile(cwd)
+        argv = [str(SANDBOX), "-p", policy, str(PYTHON), "-I", "-S", "-B", "-c", worker]
+        p = subprocess.Popen(argv, stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,
+                             text=True,cwd=cwd,env=ENV,close_fds=True,start_new_session=True)
+        stopped=threading.Event(); memory={'peak_sampled_rss_bytes':0,'killed_on_rss':False,'monitor_error':False}
+        def monitor():
+            while not stopped.wait(.05) and p.poll() is None:
+                sample=subprocess.run(['/bin/ps','-p',str(p.pid),'-o','rss='],capture_output=True,text=True)
+                if sample.returncode==0 and sample.stdout.strip().isdigit():
+                    rss=int(sample.stdout.strip())*1024
+                    memory['peak_sampled_rss_bytes']=max(memory['peak_sampled_rss_bytes'],rss)
+                    if rss>1073741824:
+                        memory['killed_on_rss']=True
+                        try: os.killpg(p.pid,signal.SIGKILL)
+                        except ProcessLookupError: pass
+                        break
+                elif p.poll() is None:
+                    memory['monitor_error']=True
+                    try: os.killpg(p.pid,signal.SIGKILL)
+                    except ProcessLookupError: pass
+                    break
+        watcher=threading.Thread(target=monitor,daemon=True);watcher.start()
+        try:
+            stdout,stderr=p.communicate(json.dumps(request,allow_nan=False),timeout=timeout)
+            raw={'returncode':p.returncode,'stdout':stdout,'stderr':stderr,'timeout':False}
+        except subprocess.TimeoutExpired:
+            try: os.killpg(p.pid,signal.SIGKILL)
+            except ProcessLookupError: pass
+            stdout,stderr=p.communicate()
+            raw={'returncode':p.returncode,'stdout':stdout,'stderr':stderr,'timeout':True}
+        finally:
+            stopped.set();watcher.join(timeout=2)
+        receipt = {
+            "cwd": str(cwd), "environment_keys": sorted(ENV),
+            "profile_sha256": hashlib.sha256(policy.encode()).hexdigest(),
+            "python_sha256": hashlib.sha256(PYTHON.read_bytes()).hexdigest(),
+            "worker_policy_sha256": hashlib.sha256((cwd / "policy_runtime.py").read_bytes()).hexdigest(),
+            "diagnostic_only": diagnostic_code is not None,
+            "wall_seconds": time.monotonic()-started,
+            "memory_monitor": memory,
+            "memory_limit_scope": "Sampled RSS stop above 1 GiB; not a hard allocation ceiling",
+        }
+    receipt["cwd_removed"] = not cwd.exists()
+    return raw, receipt
+
+def compute(code, history, timeout=30):
+    raw, receipt = run_worker({"code": code, "history": history}, timeout=timeout)
+    if not receipt["cwd_removed"]:
+        raise RuntimeError("isolation cleanup failed")
+    if raw["timeout"] or (raw["returncode"] is not None and raw["returncode"] < 0):
+        return {"status": "code_resource_stop", "error": "calculation resource limit"}
+    if raw["returncode"] != 0:
+        return {"status": "evaluator_error", "error": "isolated worker failed"}
+    try:
+        value = json.loads(raw["stdout"])
+        if type(value) is not dict or value.get("status") not in ("ok", "code_error"):
+            raise ValueError("worker output schema")
+        # Never relay arbitrary worker stderr, paths or host diagnostics to the model.
+        return value
+    except (ValueError, TypeError):
+        return {"status": "evaluator_error", "error": "isolated worker output invalid"}

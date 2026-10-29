@@ -1,0 +1,294 @@
+{
+  "claims": {
+    "C1": {
+      "claim": "In the older 32-trial panel, optional applicability and mandatory external construction are different",
+      "limits": [
+        "Older mandatory executed-action agreement is by construction; new follow-up B correspondence is separately observed",
+        "empty optional pair denominator unassessed",
+        "Behavior observed under an imperfect analysis interface; causal interface effect unassessed"
+      ],
+      "paths": [
+        "artifact/data/crossing.json",
+        "artifact/check.py"
+      ]
+    },
+    "C10": {
+      "claim": "Post hoc on original 5000 draws: q1 219, q0 283, selected 372, fair-random expected 251 certificates",
+      "limits": [
+        "Existing-input retrospective calculation",
+        "Random expectation is not an observed randomized run",
+        "No new sample, no change to primary interval or historical work counters",
+        "No general selector optimality"
+      ],
+      "paths": [
+        "artifact/acquisition/replay.py",
+        "companion/body.tex"
+      ]
+    },
+    "C11": {
+      "claim": "Separate follow-up: 48 original assignments, 46 completed, 2 technical, 0 protocol/active/unstarted; Astra 22+2, Sol 24+0",
+      "limits": [
+        "Three execution segments, not one uninterrupted run",
+        "Failed positions 13/14 retained, not replaced or recoded as L",
+        "Four purposeful contexts, repeats not independent worlds"
+      ],
+      "paths": [
+        "artifact/followup/check.py",
+        "artifact/followup/trials.json",
+        "artifact/followup/reference.json",
+        "artifact/followup/accounting.json",
+        "artifact/followup/SOURCE-BINDINGS.json",
+        "paper/body.tex",
+        "paper/appendix.tex",
+        "artifact/followup/source_check.py",
+        "artifact/followup/final-index.json",
+        "artifact/followup/SCHEMA.json",
+        "artifact/data/crossing.json"
+      ]
+    },
+    "C12": {
+      "claim": "Required-record/model-proposal B: each profile 8 valid and 8 proposal-matching records; both supported rules choose the same action on all 8",
+      "limits": [
+        "Correspondence is observed, not proof that the record caused the proposal",
+        "No verified semantic hypothesis or internal faithfulness claim",
+        "Source-table derivation is available; it does not verify hypothesis semantics or independently attest historical execution"
+      ],
+      "paths": [
+        "artifact/followup/check.py",
+        "artifact/followup/trials.json",
+        "artifact/followup/reference.json",
+        "artifact/followup/accounting.json",
+        "artifact/followup/SOURCE-BINDINGS.json",
+        "paper/body.tex",
+        "paper/appendix.tex",
+        "artifact/followup/source_check.py",
+        "artifact/followup/final-index.json",
+        "artifact/followup/SCHEMA.json",
+        "artifact/data/crossing.json"
+      ]
+    },
+    "C13": {
+      "claim": "Descriptive paired P changes: Astra B-A +1/7 and C-B -2/7; Sol B-A -1/8 and C-B +1/8",
+      "limits": [
+        "No pooled primary estimate, population interval, equivalence or model ranking",
+        "P is conditional continuation feasibility, not full task success",
+        "Continuous numerical/runtime premises retained; labels from old bound menu census",
+        "C-B is total disclosed-regime contrast, not fixed-record mechanical correction"
+      ],
+      "paths": [
+        "artifact/followup/check.py",
+        "artifact/followup/trials.json",
+        "artifact/followup/reference.json",
+        "artifact/followup/accounting.json",
+        "artifact/followup/SOURCE-BINDINGS.json",
+        "paper/body.tex",
+        "paper/appendix.tex",
+        "artifact/followup/source_check.py",
+        "artifact/followup/final-index.json",
+        "artifact/followup/SCHEMA.json",
+        "artifact/data/crossing.json"
+      ]
+    },
+    "C14": {
+      "claim": "All completed C proposals already matched record selection: Astra 7/7, Sol 8/8; observed override opportunities zero",
+      "limits": [
+        "Executed-action agreement is by construction",
+        "No measured benefit of overriding a conflicting proposal",
+        "No new live crossing samples"
+      ],
+      "paths": [
+        "artifact/followup/check.py",
+        "artifact/followup/trials.json",
+        "artifact/followup/reference.json",
+        "artifact/followup/accounting.json",
+        "artifact/followup/SOURCE-BINDINGS.json",
+        "paper/body.tex",
+        "paper/appendix.tex",
+        "artifact/followup/source_check.py",
+        "artifact/followup/final-index.json",
+        "artifact/followup/SCHEMA.json",
+        "artifact/data/crossing.json"
+      ]
+    },
+    "C15": {
+      "claim": "Known follow-up usage and retained unknown reserve are separate; cached input/reasoning output are subsets",
+      "limits": [
+        "Frozen-tariff local credit equivalents, not provider bill or ceiling",
+        "Two unknown Astra requests retain 2,100,000 input and 256,000 output reservation",
+        "First successful access does not attest immutable server weights/tier or permanent 429 resolution"
+      ],
+      "paths": [
+        "artifact/followup/check.py",
+        "artifact/followup/trials.json",
+        "artifact/followup/reference.json",
+        "artifact/followup/accounting.json",
+        "artifact/followup/SOURCE-BINDINGS.json",
+        "paper/body.tex",
+        "paper/appendix.tex",
+        "artifact/followup/source_check.py",
+        "artifact/followup/final-index.json",
+        "artifact/followup/SCHEMA.json",
+        "artifact/data/crossing.json"
+      ]
+    },
+    "C16": {
+      "claim": "Follow-up family outcomes: Astra continuous 9P/3L, route 10P and 2 technical; Sol continuous 8P/4L, route 12P.",
+      "limits": [
+        "Purposeful histories, repeats and separate profiles; no calibrated difficulty or population comparison",
+        "Both route menus include an L action",
+        "Existing label census; continuous premises retained"
+      ],
+      "paths": [
+        "artifact/followup/breakdown.py",
+        "artifact/followup/breakdown.json",
+        "paper/table-followup-families.tex",
+        "paper/table-followup-histories.tex"
+      ]
+    },
+    "C17": {
+      "claim": "Directional pairs: Astra B-A 1 gain/0 loss/6 same/1 missing and C-B 0/2/5/1; Sol B-A 0/1/7/0 and C-B 2/1/5/0.",
+      "limits": [
+        "Same includes P-to-P and L-to-L",
+        "Net changes descriptive only; C-B is a total condition contrast"
+      ],
+      "paths": [
+        "artifact/followup/breakdown.py",
+        "artifact/followup/breakdown.json",
+        "paper/table-followup-transitions.tex"
+      ]
+    },
+    "C18": {
+      "claim": "Two follow-up C records change supported-rule action but keep the bound task label, one P-to-P and one L-to-L.",
+      "limits": [
+        "Existing-record calculations, not new live crossings",
+        "No measured benefit of correcting a conflicting proposal"
+      ],
+      "paths": [
+        "artifact/followup/breakdown.py",
+        "artifact/followup/breakdown.json",
+        "paper/table-followup-rule-examples.tex"
+      ]
+    },
+    "C19": {
+      "claim": "Record-level measurements distinguish availability, correspondence, sensitivity and added cells; no independent behavioral or discovery-utility gain is established.",
+      "limits": [
+        "The crossing proposal is our pilot proposal, not asserted widespread practice",
+        "No independent diagnosis accuracy, future-behavior prediction or experiment-choice advantage measured",
+        "Literature scopes explicit; no exhaustive novelty or head-to-head claim"
+      ],
+      "paths": [
+        "paper/body.tex",
+        "paper/references.bib",
+        "RELATED-WORK-SCOPE.md"
+      ]
+    },
+    "C2": {
+      "claim": "Observed 32/32; weak family 29/32; scan 32/32; 0 extra cells",
+      "limits": [
+        "common-menu structural identity",
+        "not runtime or causal diagnostic superiority",
+        "Action sensitivity is reproducible; continuous P/L labels retain numerical/runtime premises",
+        "The sole rule-sensitive mandatory record incurred an analysis error"
+      ],
+      "paths": [
+        "artifact/crossing_check.py",
+        "artifact/data/crossing-reference.json"
+      ]
+    },
+    "C3": {
+      "claim": "Pilot component patterns and selector sensitivity",
+      "limits": [
+        "researcher completion",
+        "no internal faithfulness",
+        "Twelve candidate plans and five metrics recomputed; sensitivity grades are linked archival evidence, not regraded here",
+        "Continuous labels conditional on numerical/runtime premises"
+      ],
+      "paths": [
+        "legacy-replay/data/references.json",
+        "artifact/source/pilot-sensitivity.private.json",
+        "legacy-replay/replay.py",
+        "artifact/pilot_sensitivity.py"
+      ]
+    },
+    "C4": {
+      "claim": "48 transfer trials: 1 supported record, 0 supported pairs",
+      "limits": [
+        "crossing effect unassessed",
+        "24 route trials made no analysis attempt; 24 continuous trials made 72 attempts, 67 ok and 5 errors"
+      ],
+      "paths": [
+        "legacy-replay/replay.py",
+        "artifact/source/transfer-interventions.json",
+        "artifact/interface_audit.py"
+      ]
+    },
+    "C5": {
+      "claim": "5000 paired draws: net 89, +.0178, interval [.012284958848050642,.022904001234075738]",
+      "limits": [
+        "Finite frame with explicit three-minimal-state and development exclusions",
+        "Deterministic replay of saved raw inputs, not new acquisition",
+        "Historical runtime/host independence not reattested"
+      ],
+      "paths": [
+        "artifact/check.py",
+        "artifact/paired_statistics.py",
+        "artifact/data/acquisition-reference.json",
+        "artifact/acquisition/replay.py",
+        "artifact/acquisition/record-schema.json",
+        "artifact/acquisition/SOURCE-BINDINGS.json"
+      ]
+    },
+    "C6": {
+      "claim": "Conditional continuous numerical premise",
+      "limits": [
+        "uniform library accuracy and historical math image binding remain open"
+      ],
+      "paths": [
+        "paper/runtime-proof.tex",
+        "artifact/numeric_constants.py"
+      ]
+    },
+    "C7": {
+      "claim": "Bounded primary-source positioning, with active automata/query-selection context",
+      "limits": [
+        "no exhaustive novelty proof",
+        "no head-to-head experiment",
+        "one inaccessible lead retained as unreviewed"
+      ],
+      "paths": [
+        "RELATED-WORK-SCOPE.md",
+        "paper/references.bib",
+        "companion/references.bib"
+      ]
+    },
+    "C8": {
+      "claim": "32 menu labels and all 80 request prompt/payload hashes reproduce",
+      "limits": [
+        "Continuous numerical/runtime premises remain open",
+        "No live provider regeneration or attestation",
+        "One host-specific path anonymized in inspection-only helper"
+      ],
+      "paths": [
+        "artifact/menu_replay.py",
+        "artifact/protocol/check.py",
+        "artifact/protocol/wire-schema.json",
+        "artifact/protocol/SOURCE-BINDINGS.json"
+      ]
+    },
+    "C9": {
+      "claim": "Common-menu 48 analyses: 41 ok, 7 errors in 7 trials, one of three slots each; 5 optional and 2 mandatory",
+      "limits": [
+        "No archived participant code executed",
+        "Final decisions still evaluated; no trial exclusion or relabeling",
+        "Effect of a corrected interface on actions/record structure unassessed"
+      ],
+      "paths": [
+        "artifact/interface_audit.py",
+        "artifact/protocol/check.py",
+        "artifact/data/crossing.json"
+      ]
+    }
+  },
+  "date": "2026-10-29",
+  "version": "v2.0.9"
+}

@@ -1,0 +1,161 @@
+"""One authorized dispatch, 32 fixed trials, no repair/retry/resume branch."""
+from copy import deepcopy
+import os,subprocess,sys,time,hashlib
+from local import HERE,ROOT,CLI,PYTHON,read,save,sha,digest,now,Journal
+from admission import verify,authorization,check_operational,Awake,process_exists,process_group_exists
+from profiles import ParticipantProfile,ResourceLimits
+from wire import render,ParticipantProtocolError
+from evidence import allocations,profile_of,context,expected_grade
+from executable_selector import consume_final,ContractError
+from isolated_compute import run_worker
+from strict_io import loads
+import transport,telemetry,identity
+
+transport.CONFIG.update({'otel.environment':'executable-decision-record-v1','otel.log_user_prompt':False,
+ 'otel.exporter.otlp-http.endpoint':'http://127.0.0.1:43189/v1/logs','otel.exporter.otlp-http.protocol':'json'})
+class Hold(RuntimeError):pass
+
+def charge(usage):
+ return {'known':usage is not None,'input':usage['input_tokens'] if usage is not None else 1050000,
+         'output':usage['output_tokens'] if usage is not None else 128000}
+
+def before_call(ledger,count,started):
+ if len(ledger)>=128 or count>=4:raise Hold('model request quota')
+ if sum(r['charge']['input'] for r in ledger)+1050000>134400000:raise Hold('input reserve')
+ if sum(r['charge']['output'] for r in ledger)+128000>16384000:raise Hold('output reserve')
+ available=int(3780-(time.monotonic()-started)-120)
+ if available<1:raise Hold('trial wall reserve')
+ return min(900,available)
+
+def analyze(code,history,deadline):
+ remain=deadline-time.monotonic()
+ if remain<=0:raise Hold('trial wall before analysis')
+ raw,receipt=run_worker({'code':code,'history':deepcopy(history)},timeout=min(30,remain))
+ if not receipt['cwd_removed'] or receipt['memory_monitor']['monitor_error']:raise Hold('analysis isolation/cleanup')
+ if raw['timeout'] or (raw['returncode'] is not None and raw['returncode']<0):
+  result={'status':'code_resource_stop','error':'calculation resource limit'}
+ elif raw['returncode']!=0:raise Hold('isolated analysis worker failed')
+ else:
+  try:
+   result=loads(raw['stdout'])
+   if type(result) is not dict or result.get('status') not in ('ok','code_error'):raise ValueError('schema')
+  except (ValueError,TypeError) as exc:raise Hold('analysis output invalid') from exc
+ return result,receipt
+
+def run_trial(a,agent,ledger,journal,awake,auth_sha,baseline,freeze_sha):
+ trial=HERE/'live'/f"trial-{a['order']:02d}";trial.mkdir(mode=0o700)
+ started=time.monotonic();deadline=started+3780;ctx=context(a);packet=read(HERE/a['packet_path'])
+ save(trial/'START.json',{'allocation':a,'started_utc':now(),'pid':os.getpid(),'trial_wall_seconds':3780})
+ row={'allocation':a,'status':None,'label':None,'calls':[],'analysis_calls':0,'action_applied':False,
+      'instrumentation':None,'trial_wall_seconds':None};records=[]
+ try:
+  for decision in range(1,5):
+   if verify()!=freeze_sha:raise Hold('freeze identity changed')
+   awake.check();check_operational(port=False)
+   if sha(HERE/'LIVE-AUTHORIZATION.json')!=auth_sha:raise Hold('authority changed')
+   agent.limits=ResourceLimits(128,before_call(ledger,decision-1,started),134400000,16384000,3780)
+   payload={'snapshot':deepcopy(packet),'condition':a['condition'],'analysis_records':deepcopy(records),
+     'remaining_analysis_calls':3-len(records),'remaining_model_decisions':4-len(records)}
+   num=len(agent.calls)+1;directory=HERE/'live/calls'/f'{num:03d}-decision'
+   save(trial/f'PAYLOAD-{decision}.json',payload)
+   journal.append('call_intent',trial=a['order'],decision=decision,call=num,payload_sha256=digest(payload),
+     prompt_sha256=hashlib.sha256(render(payload).encode()).hexdigest(),reservation=charge(None))
+   envelope=None;fault=None
+   try:
+    with telemetry.call_record(directory):envelope=agent.decide(payload)
+   except (transport.TransportFault,ParticipantProtocolError) as exc:fault={'kind':exc.kind,'message':str(exc)}
+   call=read(directory/'call.json');observed=identity.observe(directory)
+   kw=dict(expected_payload=payload,expected_profile=agent.profile,expected_limits=agent.limits,expected_executable=CLI,
+    previous_thread_ids=[r['thread_id'] for r in ledger if r.get('thread_id')],
+    previous_workdirs=[r['working_directory'] for r in ledger])
+   audit=transport.audit_failed_call(directory,expected_kind=fault['kind'],**kw) if fault else agent.last_audit
+   continuity=identity.continuity(baseline or observed,observed)
+   receipt={'call':num,'trial':a['order'],'decision':decision,'utc':now(),'usage':call.get('usage'),
+    'charge':charge(call.get('usage')),'thread_id':call.get('thread_id'),'working_directory':call['working_directory'],
+    'pid':call.get('pid'),'pgid':call.get('pgid'),'fault':fault,'call_sha256':sha(directory/'call.json'),
+    'telemetry_sha256':sha(directory/'operational-telemetry.json'),'limits':agent.limits.to_dict(),
+    'audit':audit,'identity':observed,'continuity':continuity,'payload_sha256':digest(payload)}
+   save(directory/'RECEIPT.json',receipt);ledger.append(receipt);row['calls'].append(num)
+   journal.append('call_receipt',call=num,trial=a['order'],decision=decision,receipt_sha256=sha(directory/'RECEIPT.json'),
+     fault_kind=fault['kind'] if fault else None,usage_known=receipt['charge']['known'],audit_passed=audit['passed'])
+   if call.get('pid') and process_exists(call['pid']):raise Hold('CLI remains after receipt')
+   if call.get('pgid') and process_group_exists(call['pgid']):raise Hold('CLI process group remains')
+   if not audit['passed'] or not continuity['apply_proposed_scientific_action']:raise Hold('identity/audit failure')
+   baseline=baseline or observed
+   if fault and fault['kind']!='participant_protocol_error':raise Hold('transport: '+fault['kind'])
+   if receipt['charge']['input']>1050000 or receipt['charge']['output']>128000:raise Hold('actual use exceeds reserve')
+   if time.monotonic()>deadline:raise Hold('trial wall reached')
+   if fault:row['status']='invalid_protocol';break
+   d=envelope['decision']
+   if 'analyze' in d:
+    if len(records)>=3:row['status']='invalid_protocol_excess_analysis';break
+    journal.append('analysis_intent',trial=a['order'],decision=decision)
+    result,ar=analyze(d['analyze'],packet['history'],deadline)
+    save(trial/f'ANALYSIS-{len(records)+1}.json',{'submitted_code':d['analyze'],'result':result,'receipt':ar})
+    records.append({'submitted_code':d['analyze'],'result':result});row['analysis_calls']+=1
+    journal.append('analysis_complete',trial=a['order'],decision=decision,status=result['status'],
+     analysis_sha256=sha(trial/f'ANALYSIS-{len(records)}.json'));continue
+   # Validation precedes the one prospective action sink; grading happens after.
+   selected=[]
+   try:dec=consume_final(d['final_text'],a['condition'],ctx,lambda vector:selected.append(vector))
+   except ContractError as exc:row.update(status='invalid_protocol_record',protocol_error=exc.code);break
+   if selected!=[dec['requested_action']]:raise Hold('selector sink cardinality')
+   save(trial/'DECISION.json',dec);action={k:dec[k] for k in ('action_id','requested_action')};save(trial/'ACTION.json',action)
+   journal.append('grade_intent',trial=a['order'],action_sha256=sha(trial/'ACTION.json'),decision_sha256=sha(trial/'DECISION.json'))
+   remain=deadline-time.monotonic()
+   if remain<=0:raise Hold('trial wall before grading')
+   completed=subprocess.run([str(PYTHON),'-I','-B',str(HERE/'grade_worker.py'),str(a['order']),str(trial/'ACTION.json'),str(trial/'GRADE.private.json')],
+    cwd=ROOT,capture_output=True,text=True,timeout=min(120,remain),env={'PATH':'/usr/bin:/bin','LANG':'C','PYTHONDONTWRITEBYTECODE':'1'})
+   save(trial/'GRADING-RECEIPT.json',{'returncode':completed.returncode,'stdout':completed.stdout,'stderr':completed.stderr})
+   if completed.returncode!=0:raise Hold('privileged grader error')
+   g=read(trial/'GRADE.private.json')
+   if g['binding']!=expected_grade(a,action['action_id']) or digest(g['grade'])!=g['binding']['grade_sha256']:raise Hold('fresh grade/census binding')
+   if time.monotonic()>deadline:raise Hold('trial wall after grading')
+   row.update(status='evaluated',label=g['binding']['label'],action_applied=True,instrumentation=dec['instrumentation'],
+    grade_sha256=sha(trial/'GRADE.private.json'),decision_sha256=sha(trial/'DECISION.json'),operations=g['binding']['operations']);break
+  if row['status'] is None:row['status']='no_final_action'
+ except Exception as exc:row.update(status='technical_missing',hold_reason=type(exc).__name__+': '+str(exc));raise
+ finally:
+  row['trial_wall_seconds']=time.monotonic()-started;save(trial/'RESULT.json',row)
+  journal.append('trial_finished',trial=a['order'],status=row['status'],result_sha256=sha(trial/'RESULT.json'))
+ return row,baseline
+
+def main():
+ os.umask(0o077)
+ if sys.argv[1:]!=['--live']:raise PermissionError('explicit --live required')
+ for n in ('DISPATCH-INTENT.json','ACTIVATION.json','live','START-ERROR.json','CLOSURE-ERROR.json'):
+  if (HERE/n).exists():raise FileExistsError('prior dispatch trace: no restart')
+ freeze=verify(full=True);authorization(freeze);operational=check_operational();op=read(HERE/'operator/INTENT.json')
+ if op['freeze_sha256']!=freeze or op['authorization_sha256']!=sha(HERE/'LIVE-AUTHORIZATION.json'):raise Hold('operator binding')
+ handshake_deadline=time.monotonic()+10
+ while not (HERE/'operator/DISPATCH.json').exists():
+  if (HERE/'operator/START-ERROR.json').exists() or time.monotonic()>=handshake_deadline:raise Hold('operator dispatch receipt missing')
+  time.sleep(.05)
+ dispatch=read(HERE/'operator/DISPATCH.json')
+ if dispatch['pid']!=os.getpid() or dispatch['freeze_sha256']!=freeze or dispatch['authorization_sha256']!=op['authorization_sha256']:
+  raise Hold('operator dispatch receipt identity')
+ activation={'freeze_sha256':freeze,'authorization_sha256':sha(HERE/'LIVE-AUTHORIZATION.json'),
+  'pid':os.getpid(),'utc':now(),'operational':operational,'old_h4_resumed':False}
+ save(HERE/'DISPATCH-INTENT.json',activation);save(HERE/'ACTIVATION.json',activation)
+ (HERE/'live').mkdir(mode=0o700);journal=Journal(HERE/'live/journal');ledger=[];baselines={};hold=None;keep=None
+ plan=read(HERE/'PLAN.json')
+ agent=transport.CodexParticipant(ParticipantProfile.from_dict(plan['profiles'][0]),ResourceLimits.from_dict(plan['limits']),CLI,HERE/'live/calls',live_enabled=True)
+ journal.append('start',allocation_sha256=sha(HERE/'ALLOCATION.json'),pid=os.getpid())
+ try:
+  with Awake() as awake,telemetry.server():
+   keep=awake.evidence;save(HERE/'live/START.json',dict(activation,keep_awake=keep))
+   for a in allocations():
+    agent.profile=ParticipantProfile.from_dict(profile_of(a));key=agent.profile.fingerprint
+    _,baselines[key]=run_trial(a,agent,ledger,journal,awake,activation['authorization_sha256'],baselines.get(key),freeze)
+   verify(full=True)
+ except Exception as exc:hold=type(exc).__name__+': '+str(exc);journal.append('hold',reason=hold)
+ from finalize import close
+ closure=close(hold,freeze,activation,keep)
+ print({'passed':closure['passed'],'hold':closure['hold']},flush=True)
+
+if __name__=='__main__':
+ try:main()
+ except BaseException as exc:
+  target=HERE/('CLOSURE-ERROR.json' if (HERE/'ACTIVATION.json').exists() else 'START-ERROR.json')
+  if not target.exists():save(target,{'utc':now(),'type':type(exc).__name__,'error':str(exc),'pid':os.getpid(),'automatic_retry':False})
+  raise

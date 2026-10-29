@@ -1,0 +1,72 @@
+{
+  "archived_program_text": "Some later payloads contain the participant analysis text. It is data, never executed by the offline checks.",
+  "files": {
+    "COMMON.txt": {
+      "distributed_sha256": "4ec2112f1ffe77aac20cbce04db11bc83d7e3edb2802bc302231cf7601863f36",
+      "source": "outputs/research-executable-decision-live-20261025-01/COMMON.txt",
+      "source_sha256": "4ec2112f1ffe77aac20cbce04db11bc83d7e3edb2802bc302231cf7601863f36"
+    },
+    "executable_record.txt": {
+      "distributed_sha256": "e37318143227bc4235ffd3dab67e8f5518bfc966c6b675d8c540eed81d8b666f",
+      "source": "outputs/research-executable-decision-live-20261025-01/executable_record.txt",
+      "source_sha256": "e37318143227bc4235ffd3dab67e8f5518bfc966c6b675d8c540eed81d8b666f"
+    },
+    "historical-code/compute_original.py.txt": {
+      "distributed_sha256": "6c4982769a4b3d2188b88b6915111f9f7f4e342b901451b02f26c93e5eca11de",
+      "source": "outputs/research-executable-decision-live-20261025-01/compute_original.py",
+      "source_sha256": "6c4982769a4b3d2188b88b6915111f9f7f4e342b901451b02f26c93e5eca11de"
+    },
+    "historical-code/isolated_compute.py.txt": {
+      "distributed_sha256": "a4832e7fd15a331f9fb631d586ad33c27482f69d9067bd533ec7b2d360263b59",
+      "source": "outputs/research-executable-decision-live-20261025-01/isolated_compute.py",
+      "source_sha256": "c257184187527d1a799b60b4d108f5576e8b6e922c0eae58a16fd6783b7daa0e",
+      "transformation": "One machine-specific workspace prefix replaced by /REVIEW_WORKSPACE/ for anonymity; relative pinned interpreter suffix and code preserved. Inspection only; not executable historical authentication."
+    },
+    "historical-code/profiles.py.txt": {
+      "distributed_sha256": "0de8b3a7617b984910e7035d635bf5b71c201ae9e8434388026fc1a83af34387",
+      "source": "outputs/research-executable-decision-live-20261025-01/profiles.py",
+      "source_sha256": "0de8b3a7617b984910e7035d635bf5b71c201ae9e8434388026fc1a83af34387"
+    },
+    "historical-code/runner.py.txt": {
+      "distributed_sha256": "674786cb2b78e7bb3bec973de2e00dcc0e737b3d091220d84a223f4eea7e429c",
+      "source": "outputs/research-executable-decision-live-20261025-01/runner.py",
+      "source_sha256": "674786cb2b78e7bb3bec973de2e00dcc0e737b3d091220d84a223f4eea7e429c"
+    },
+    "historical-code/wire.py.txt": {
+      "distributed_sha256": "02e5aec1009fefda05a1429d52ac38c0c5cf569496d76746baa8623307c4b44b",
+      "source": "outputs/research-executable-decision-live-20261025-01/wire.py",
+      "source_sha256": "02e5aec1009fefda05a1429d52ac38c0c5cf569496d76746baa8623307c4b44b"
+    },
+    "inputs/probe-01.json": {
+      "distributed_sha256": "04b4bce65efe6a3c5c54bd9c486fd985612cfdea5c7022ee42775c76cfe98549",
+      "source": "outputs/research-executable-decision-live-20261025-01/inputs/probe-01.json",
+      "source_sha256": "04b4bce65efe6a3c5c54bd9c486fd985612cfdea5c7022ee42775c76cfe98549"
+    },
+    "inputs/probe-02.json": {
+      "distributed_sha256": "a303571e2ca852d1c5e7f02822f66797ff056bf9c45b54ad16fc50fa48747fc6",
+      "source": "outputs/research-executable-decision-live-20261025-01/inputs/probe-02.json",
+      "source_sha256": "a303571e2ca852d1c5e7f02822f66797ff056bf9c45b54ad16fc50fa48747fc6"
+    },
+    "inputs/probe-03.json": {
+      "distributed_sha256": "264f6a71c2a34a17641d019029907fe280a9dc8db59a566a4d3182d0945f3509",
+      "source": "outputs/research-executable-decision-live-20261025-01/inputs/probe-03.json",
+      "source_sha256": "264f6a71c2a34a17641d019029907fe280a9dc8db59a566a4d3182d0945f3509"
+    },
+    "inputs/probe-04.json": {
+      "distributed_sha256": "3eccdaa815cbda05c505e05067f7808f77cc8afc4095882e539edb70bb2580ce",
+      "source": "outputs/research-executable-decision-live-20261025-01/inputs/probe-04.json",
+      "source_sha256": "3eccdaa815cbda05c505e05067f7808f77cc8afc4095882e539edb70bb2580ce"
+    },
+    "optional_record.txt": {
+      "distributed_sha256": "e5488786b61de2e6f032d469c727dcd9524fb976fd9cd0f797ec510fac53ec95",
+      "source": "outputs/research-executable-decision-live-20261025-01/optional_record.txt",
+      "source_sha256": "e5488786b61de2e6f032d469c727dcd9524fb976fd9cd0f797ec510fac53ec95"
+    }
+  },
+  "requests": {
+    "N": 80,
+    "exact_payloads_and_prompts": true,
+    "storage": "Exact payloads plus render template and expected SHA256 of full prompt; no lossy text projection.",
+    "transport_authenticity": "Local archived requests; configured profile is not independent provider attestation."
+  }
+}

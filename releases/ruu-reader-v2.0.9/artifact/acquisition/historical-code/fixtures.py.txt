@@ -1,0 +1,80 @@
+"""Purpose-written artificial controls, not ranks from any research catalog."""
+from itertools import product
+
+# The source intention fixes these controls before their results are inspected.
+# State-table codes are a convenient fixture spelling only; no hidden world is read.
+CASES = [(0, 0), (46655, 255), (1, 85), (7, 170), (19, 51), (31, 204),
+         (59, 15), (127, 240), (255, 105), (1023, 150), (4095, 60), (8191, 195),
+         (0, 22), (0, 34), (127, 52)]
+# Last three are purpose-selected control fixtures from the bounded, preserved
+# fixture-coverage-search-v01. They are never counted as evaluation draws.
+
+
+def table_from_fixture(code):
+    digits = []
+    for power in range(6):
+        d = (code // (6 ** power)) % 6
+        digits.append((d // 2, d % 2))
+    return tuple(digits)
+
+
+def definitions():
+    return [{"trial_id": "s%04d" % (i + 1), "table": table_from_fixture(code),
+             "actions": [(word >> bit) & 1 for bit in range(7, -1, -1)]}
+            for i, (code, word) in enumerate(CASES)]
+
+
+def independent_oracle(history):
+    """Alternative Cartesian-product enumeration, explicit path walking and sets."""
+    choices = tuple(product(range(3), (0, 1)))
+    initial = set()
+    branches = {q: {0: set(), 1: set()} for q in ("q0", "q1")}
+    counts = {q: {0: 0, 1: 0} for q in branches}
+    kept = []
+    witnesses = {}
+    examined = steps = target_steps = query_evals = 0
+    for edges in product(choices, repeat=6):
+        examined += 1
+        state = 0
+        for action, expected in history:
+            state, observed = edges[state * 2 + action]
+            steps += 1
+            if observed != expected:
+                break
+        else:
+            target_parts = []
+            for word in ((0, 0), (1, 0)):
+                s = state
+                for a in word:
+                    s, out = edges[2 * s + a]
+                    target_steps += 1
+                target_parts.append(out)
+            target = target_parts[0] * 2 + target_parts[1]
+            initial.add(target)
+            ys = []
+            for action, q in enumerate(("q0", "q1")):
+                y = edges[2 * state + action][1]
+                query_evals += 1
+                branches[q][y].add(target)
+                counts[q][y] += 1
+                ys.append(y)
+            kept.append(tuple(ys))
+            witnesses.setdefault(tuple(ys), {}).setdefault(target, edges)
+    scores = []
+    for order, q in enumerate(("q0", "q1")):
+        sizes = [len(branches[q][y]) for y in (0, 1)]
+        scores.append((-sum(k == 1 for k in sizes), max(sizes), order, q))
+    selected = sorted(scores)[0][-1]
+    gains = losses = False
+    for y0, y1 in kept:
+        f = len(branches["q0"][y0]) == 1
+        a = len(branches[selected][y1 if selected == "q1" else y0]) == 1
+        gains |= a and not f
+        losses |= f and not a
+    return {"initial_targets": initial, "branches": branches, "counts": counts,
+            "compatible": len(kept), "selected": selected,
+            "possible_gain_loss": {"gain_possible": gains, "loss_possible": losses},
+            "semantic_witnesses": next(([{"table": table, "target": target} for target, table in sorted(group.items())[:2]]
+                                         for group in witnesses.values() if len(group) > 1), None),
+            "work": {"examined": examined, "history_steps": steps,
+                     "target_steps": target_steps, "query_evaluations": query_evals}}

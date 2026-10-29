@@ -1,38 +1,43 @@
 # Research Under Uncertainty
 
-How well can an AI agent choose experiments, revise an explanation and act successfully in an unfamiliar system? This project develops tasks and measurements for studying those abilities together, while keeping task completion separate from evidence that a mechanism has been learned.
+How can we evaluate the evidence behind an AI research agent's next decision? This project studies experimental decisions, the records supplied to justify them, and the limits of what those records establish.
 
-The current development question is whether matched task levels produce a repeatable change in difficulty under the same information, tools and resource limits. In the first completed session of a two-session calibration, GPT-6 Astra at max reasoning succeeded in 4 of 4 episodes at Level A, 2 of 4 at Level B and 0 of 4 at Level C. These are encouraging development observations from four fixed starting conditions. The full calibration and validation on fresh conditions are separate steps.
+This release provides the current **decision-record study, v2.0.9**, with source tables and offline checking code. It is a research artifact; journal submission, acceptance and independent laboratory replication are not claimed. The proposed broader benchmark remains future work.
 
-Research direction is by [LatentAtlas](https://github.com/latentatlas), with substantial assistance from Codex in implementation, analysis and writing. [Contribution details](docs/CONTRIBUTIONS.md).
+[Download the complete public package](https://github.com/latentatlas/research-under-uncertainty/releases/tag/ruu-reader-v2.0.9). The scientific reader is under `releases/ruu-reader-v2.0.9/`; the other files provide the overview and historical context.
 
-## Read the study
+## Start here
 
-- [Research question and design choices](docs/PROJECT-BRIEF.md)
-- [Task, scoring and resource controls](docs/METHODS.md)
-- [Results and their denominators](docs/RESULTS.md)
-- [What can be checked from this edition](docs/EVIDENCE-AND-LIMITS.md)
-- [Publication history and confidentiality](docs/PUBLICATION-HISTORY.md)
-- [Prospective validation on twelve fresh inputs](docs/FRESH12-PREREGISTRATION.md)
+1. [Three-minute work sample: question, findings and limits](docs/WORK-SAMPLE.md).
+2. [Current study and exact verification instructions](releases/ruu-reader-v2.0.9/README.md).
+3. [Main paper](releases/ruu-reader-v2.0.9/paper/manuscript.pdf).
+4. [Claim-to-source map](releases/ruu-reader-v2.0.9/CLAIM-MAP.json).
+5. [Proposed next study, clearly separated from completed work](docs/NEXT-STUDY.md).
 
-## Interim calibration results
+## Check the distributed evidence
 
-The same four starting conditions were used at every level. Each condition received one attempt at each level in this session.
+With CPython 3.12 and its standard library, from the repository root:
 
-| Candidate level | Planned episodes | Success | Scientific failure | Unscored |
-| --- | ---: | ---: | ---: | ---: |
-| A | 4 | 4 | 0 | 0 |
-| B | 4 | 2 | 2 | 0 |
-| C | 4 | 0 | 4 | 0 |
+```sh
+cd releases/ruu-reader-v2.0.9
+python3.12 -I -B -S verify_all.py --followup-only
+python3.12 -I -B -S verify_all.py
+```
 
-The labels identify development configurations; their hidden parameters are withheld. The table describes the first session, closed on 17 October 2026. It is not the final result of the planned 24-episode collection. The second session is outside this snapshot. All 12 outcomes from the first session are included, including failures and episodes with technical retransmissions.
+The first command validates the exact tree, reconstructs the follow-up record checks and regenerates its descriptive tables. The second also repeats the older numerical work and the separate finite-class observation-selection calculation. It can take several minutes. Neither command needs an API key, account, paid inference or network access. Keep logs and generated files outside the exact reader directory.
 
-[Structured aggregate counts](data/calibration-summary.json) accompany the table. [Methods](docs/METHODS.md) explain the unchanged task budgets and the distinction between scientific failure and an unscored termination. [Results](docs/RESULTS.md) also preserve the outcome summary of the earlier September pilot, which used a different task and scoring unit.
+These commands recalculate results from distributed inputs. They do not collect new model responses, reproduce a provider's historical model weights, execute participant-generated programs or establish independent experimental replication. Not every original model response or usage receipt is redistributed. The reader README states the remaining numerical and provenance limits.
 
-## Scope of this edition
+## What the current study shows
 
-This edition contains a research account and aggregate results. Evaluation laws, private configurations, simulator code and reconstructive interaction records are not distributed. The public counts can be reconciled across the table and JSON file; regenerating the original trajectories and scores requires the protected research archive. No full replay or independent verification of the underlying outcomes is claimed for this edition.
+The follow-up has 48 assigned trials: 46 completed and two technical losses retained in the accounting. In the required-record/model-proposal condition, each of two profiles has eight valid records matching the proposal. Both supported selection rules choose the same action in all sixteen records. Correspondence alone therefore does not establish that the record caused the proposal or faithfully describes internal reasoning.
 
-An earlier distribution included evaluation internals and was withdrawn from public access. This revision changes what is distributed; it cannot undo previous exposure. [Publication history](docs/PUBLICATION-HISTORY.md) explains that limitation and the revised scope of the portfolio entry.
+All 15 completed external-selector proposals already agree with the selector. There is no observed opportunity in that condition to demonstrate the benefit of overriding a conflicting proposal. These are four purposeful historical contexts with repeats, not a population sample or a general model ranking. The main label concerns conditional continuation feasibility, not full task success.
 
-Edition prepared 18 October 2026. [Portfolio revision notes](RELEASE-NOTES.md). [License](LICENSE.txt).
+## Earlier public snapshots
+
+The [18 October summary](docs/PROJECT-BRIEF.md), [methods](docs/METHODS.md), [results](docs/RESULTS.md), [evidence boundaries](docs/EVIDENCE-AND-LIMITS.md) and [fresh-input preregistration](docs/FRESH12-PREREGISTRATION.md) remain historical documents. They describe different study stages and are not silently updated by the current reader release. In particular, the full September process-pilot evidence is not redistributed by this package. Do not sum different panels as interchangeable independent episodes.
+
+Research direction is by Huseyin Buldurgan, with substantial AI assistance in design discussion, implementation, analysis and writing. [Existing contribution record](docs/CONTRIBUTIONS.md). The current paper contains its own AI-assistance disclosure.
+
+[Publication scope and previous exposure](docs/PUBLICATION-HISTORY.md) · [Revision notes](RELEASE-NOTES.md) · [Repository license](LICENSE.txt) · [Reader-specific licenses](releases/ruu-reader-v2.0.9/LICENSES.md). The reader's included third-party license notices remain applicable.

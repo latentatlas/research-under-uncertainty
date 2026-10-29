@@ -1,0 +1,32 @@
+\documentclass[10pt]{article}
+\usepackage{tmlr}
+\usepackage{amsmath,amssymb,booktabs,longtable,array,calc}
+\usepackage{graphicx,xcolor,tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{hyperref,url}
+\newcommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\hypersetup{hidelinks}
+
+\title{One Additional Observation, More Conditional Certificates:\\A Paired Study in a Finite System Class}
+\author{Anonymous authors}
+\begin{document}\raggedbottom\maketitle
+\begingroup\renewcommand{\thefootnote}{}\footnotetext{AI assistance: An LLM-based assistant contributed to experimental design, implementation, analysis, literature review, and manuscript drafting and revision. AI tools are not authors.}\endgroup
+\begin{abstract}
+Does a development-selected query policy certify more future targets than a
+fixed query at the same environmental observation budget? We compare two
+deterministic policies on 5,000 pre-specified paired draws from a finite frame
+of system classes and histories. A certificate requires unanimous target
+predictions in a nonempty compatible candidate set. The selected policy
+certifies 372 targets versus 283 for the fixed query: 90 selected-only and
+one fixed-only outcome. The net difference is 1.78 percentage points, with
+the pre-specified at-least-95\% interval [1.23, 2.29]. All 655 issued certificates
+match the privileged audit. Equal observation budgets require unequal local
+computation; 92.56\% of selected-policy draws remain uncertified. Coverage of
+the true system by the candidate class is a premise. This is a conditional
+acquisition result, not a new active-learning principle, live LLM result,
+universal guarantee or proof of a gain of at least two percentage points.
+\end{abstract}
+\input{body.tex}
+\bibliography{references}\bibliographystyle{tmlr}
+\appendix\input{appendix.tex}
+\end{document}

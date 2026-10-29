@@ -1,0 +1,79 @@
+"""Private finite-horizon graph and independently checkable value certificates."""
+from functools import lru_cache
+from tasks import valid_action
+
+GOAL=18
+HORIZON=12
+
+def cost(w,node,action):
+    j=int(action[0])
+    return w['base'][j]+((node+w['offset'][j])%w['period'][j])
+
+def transition(w,state,action):
+    if not valid_action('route',action):raise ValueError('illegal route action')
+    n,f=state
+    if n>=GOAL or f<0:raise ValueError('closed route')
+    return [min(GOAL,n+int(action[0])+1),f-cost(w,n,action)]
+
+def value_table(w):
+    # None denotes impossible within the remaining action horizon.
+    table=[[None]*GOAL+[0]]
+    for remaining in range(1,HORIZON+1):
+        row=[]
+        for n in range(GOAL):
+            choices=[cost(w,n,[j,0])+table[-1][min(GOAL,n+j+1)] for j in range(3) if table[-1][min(GOAL,n+j+1)] is not None]
+            row.append(min(choices) if choices else None)
+        table.append(row+[0])
+    return table
+
+def verify_table(w,table):
+    # Separate recursive implementation verifies every cell, including unreachable cells.
+    @lru_cache(None)
+    def solve(node,left):
+        if node==18:return 0
+        if left==0:return None
+        best=None
+        for j in (0,1,2):
+            tail=solve(min(18,node+j+1),left-1)
+            if tail is None:continue
+            v=w['base'][j]+((node+w['offset'][j])%w['period'][j])+tail
+            if best is None or v<best:best=v
+        return best
+    if len(table)!=13 or any(len(r)!=19 for r in table):raise ValueError('certificate shape')
+    for left in range(13):
+        for n in range(19):
+            if table[left][n]!=solve(n,left):raise ValueError('invalid route certificate cell')
+    return True
+
+def best_action(w,node,left,table):
+    options=[]
+    for j in range(3):
+        tail=table[left-1][min(GOAL,node+j+1)]
+        if tail is not None:options.append((cost(w,node,[j,0])+tail,j))
+    if not options:raise ValueError('no continuation')
+    return [min(options)[1],0]
+
+def assess(w,state,step):
+    n,f=state;left=HORIZON-step
+    if not 0<=step<=HORIZON or not 0<=n<=GOAL:raise ValueError('route state')
+    table=value_table(w);verify_table(w,table)
+    required=table[left][n]
+    feasible=f>=0 and required is not None and required<=f
+    witness=[];s=list(state)
+    if feasible:
+        while s[0]<GOAL:
+            a=best_action(w,s[0],HORIZON-step-len(witness),table)
+            s=transition(w,s,a);witness.append({'action':a,'after':s})
+        if s[1]<0 or step+len(witness)>HORIZON:raise ValueError('invalid positive witness')
+    return {'verdict':'reachable_by_witness' if feasible else 'lost_by_certificate',
+            'witness_success':feasible,'witness':witness,'required_fuel':required,
+            'certificate':{'certified':not feasible,'method':'exhaustive_integer_bellman_table',
+                           'state':list(state),'step':step,'table':table,'independent_recurrence_verified':True}}
+
+def replay(w,history):
+    state=[0,w['initial_fuel']]
+    if history['states'][0]!=state:raise ValueError('initial route state')
+    for i,a in enumerate(history['actions']):
+        state=transition(w,state,a)
+        if history['states'][i+1]!=state:raise ValueError('route history identity')
+    return state

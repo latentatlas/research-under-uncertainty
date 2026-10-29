@@ -1,0 +1,71 @@
+"""Two-message, no-authority actor. It receives one permitted view then one bit receipt."""
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import json
+import os
+import time
+import resource
+from wire import canonical, digest, need, guard_view, guard_receipt, ARMS, QUERIES
+from compute import scan, possibilities, finish
+from selector import select_query
+
+
+def deny_io(event, args):
+    if event in ("open", "os.listdir", "os.scandir", "os.system", "os.fork", "os.posix_spawn",
+                 "subprocess.Popen", "ctypes.dlopen", "ctypes.dlsym") or event.startswith("socket."):
+        raise PermissionError("actor_post_load_io_denied")
+
+
+def receive():
+    line = sys.stdin.buffer.readline(65537)
+    need(line.endswith(b"\n") and len(line) <= 65536, "input_frame")
+    return json.loads(line)
+
+
+def send(value):
+    sys.stdout.buffer.write(canonical(value) + b"\n")
+    sys.stdout.buffer.flush()
+
+
+def main():
+    resource.setrlimit(resource.RLIMIT_CPU, (25, 25))
+    resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+    sys.addaudithook(deny_io)
+    start = time.monotonic()
+    cpu = time.process_time()
+    message = receive()
+    need(type(message) is dict and set(message) == {"arm", "view"}, "start_fields")
+    arm = message["arm"]
+    need(arm in ARMS, "arm")
+    view = guard_view(message["view"])
+    result = scan(view["history"], QUERIES) if arm == "adaptive" else None
+    query = select_query(result["cardinalities"]) if result else "q0"
+    if result:
+        result["work"]["selection_branch_checks"] = 4
+    selection = {"schema": "query-selection-v1", "trial_id": view["trial_id"], "arm": arm,
+                 "view_sha256": digest(view), "query_id": query,
+                 "pre_observation_history_checks": result["work"]["history_checks"] if result else 0,
+                 "pre_observation_query_evaluations": result["work"]["query_candidate_evaluations"] if result else 0,
+                 "possible_gain_loss": possibilities(result, query) if result else None}
+    send(selection)
+    receipt = guard_receipt(receive(), view, arm, query)
+    if result is None:
+        result = scan(view["history"], ("q0",))
+    certificate = finish(result, query, receipt["output"], arm == "adaptive")
+    payload = {"schema": "arm-result-v1", "trial_id": view["trial_id"], "arm": arm,
+               "view_sha256": digest(view), "selection_sha256": digest(selection),
+               "observation_sha256": digest(receipt), "query_id": query, "output": receipt["output"],
+               **certificate, "work": result["work"],
+               "timing": {"actor_cpu_seconds": time.process_time() - cpu,
+                          "actor_wall_seconds": time.monotonic() - start},
+               "pid": os.getpid(), "process_io_gate": "OS_read_scope_plus_post_load_Python_audit_hook"}
+    send(payload)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as exc:
+        send({"schema": "actor-error-v1", "error_type": type(exc).__name__, "error_code": str(exc)[:160]})
+        raise SystemExit(2)

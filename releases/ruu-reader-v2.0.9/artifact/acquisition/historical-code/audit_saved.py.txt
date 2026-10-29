@@ -1,0 +1,117 @@
+"""Read-only arithmetic/identity audit of existing synthetic evidence; no world execution."""
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import copy
+import json
+import runtime as r
+from wire import digest, need
+
+
+def audit_run(directory, expected_status):
+    directory = Path(directory)
+    plan = r.read(directory / "PLAN.json")
+    seal = r.read(directory / "COMMITMENT.json")
+    closure = r.read(directory / "CLOSURE.json")
+    saved = r.read(directory / "READOUT.json")
+    truth = r.read(directory / "PRIVATE-TRUTH-AUDIT.json")
+    events = r.read(directory / "EVENTS.json")
+    ids = plan["planned_ids"]
+    n = len(ids)
+    need(n == plan["planned_N"] == seal["planned_N"] == saved["planned_N"] == saved["completed_pairs"], "audit_denominator")
+    need(len(set(ids)) == n and list(plan["views"]) == sorted(ids), "audit_id_uniqueness")
+    need([t for t, _ in seal["ordered_rows"]] == ids and [t["trial_id"] for t in truth] == ids, "audit_id_order")
+    need(seal["plan_sha256"] == r.sha(directory / "PLAN.json") and seal["truth_reads_before_commitment"] == 0, "audit_plan_binding")
+    for key, filename in [("commitment_sha256", "COMMITMENT.json"), ("truth_audit_sha256", "PRIVATE-TRUTH-AUDIT.json"),
+                          ("readout_sha256", "READOUT.json"), ("events_sha256", "EVENTS.json")]:
+        need(closure[key] == r.sha(directory / filename), "audit_closure_chain:" + key)
+    need(closure["status"] == expected_status and closure["all_actor_children_exited"] is True, "audit_closure_status")
+    rows = []
+    for t, h in seal["ordered_rows"]:
+        path = directory / (t + ".json")
+        need(r.sha(path) == h, "audit_committed_hash")
+        pair = r.read(path)
+        need(pair["view"]["trial_id"] == t and digest(pair["view"]) == plan["views"][t], "audit_view_link")
+        r.validate_pair(pair, pair["view"])
+        rows.append(pair)
+    issued_pairs = [(p["arms"]["adaptive"]["result"]["certificate"], p["arms"]["fixed"]["result"]["certificate"]) for p in rows]
+    cells = {"n%d%d" % (a, f): sum(pair == (bool(a), bool(f)) for pair in issued_pairs)
+             for a, f in [(1, 1), (1, 0), (0, 1), (0, 0)]}
+    mistakes = []
+    for p, key in zip(rows, truth):
+        need(type(key["truth"]) is int and 0 <= key["truth"] <= 3, "audit_truth_encoding")
+        w = sum(p["arms"][a]["result"]["certificate"] and p["arms"][a]["result"]["prediction"] != key["truth"] for a in r.ARMS)
+        need(w == key["wrong_certificates"], "audit_wrong_certificate_count")
+        mistakes.append(w)
+    issued = sum(a + f for a, f in issued_pairs)
+    decision = r.statistics.decision(n, **cells, wrong_certificates=sum(w > 0 for w in mistakes))
+    need(cells == saved["cells"] and decision == saved["decision"], "audit_primary_arithmetic")
+    need(sum(mistakes) == saved["wrong_certificates"] and sum(w > 0 for w in mistakes) == saved["wrong_pairs"]
+         and issued == saved["issued_certificates"], "audit_validity_arithmetic")
+    main = plan["kind"] == "fixed_N_main_study"
+    expected_cert_status = "not_assessed_no_certificates" if not issued else "invalid_certificate_hold" if any(mistakes) else "all_issued_match_on_this_study_sample" if main else "all_issued_match_on_this_control_set"
+    need(expected_cert_status == saved["certificate_audit"], "audit_nonvacuous_certificate_status")
+    totals = {a: {k: sum(p["arms"][a]["result"]["work"][k] for p in rows) for k in r.COUNTERS} for a in r.ARMS}
+    need(totals == saved["work"], "audit_work_totals")
+    marginal = {k: totals["adaptive"][k] - totals["fixed"][k] for k in r.COUNTERS}
+    net = cells["n10"] - cells["n01"]
+    need(saved["net_certificates"] == net and saved["marginal_work"] == marginal and
+         saved["marginal_work_per_net_certificate"] == {k: v / net if net > 0 else None for k, v in marginal.items()}, "audit_marginal_cost")
+    ambiguous = [p["arms"]["adaptive"]["result"]["initial_target_cardinality"] > 1 for p in rows]
+    different = [p["arms"]["adaptive"]["result"]["query_id"] != p["arms"]["fixed"]["result"]["query_id"] for p in rows]
+    possible = [p["arms"]["adaptive"]["selection"]["possible_gain_loss"] for p in rows]
+    diagnostics = {"initially_ambiguous": sum(ambiguous), "initially_singleton": n - sum(ambiguous),
+                   "query_disagreement": sum(different), "possible_gain": sum(p["gain_possible"] for p in possible),
+                   "possible_loss": sum(p["loss_possible"] for p in possible),
+                   "realized_gain_with_possible_gain": sum(a and not f and p["gain_possible"] for (a, f), p in zip(issued_pairs, possible)),
+                   "realized_loss_with_possible_loss": sum(f and not a and p["loss_possible"] for (a, f), p in zip(issued_pairs, possible))}
+    need(diagnostics == saved["diagnostics"], "audit_diagnostic_arithmetic")
+    for arm in r.ARMS:
+        certs = [p["arms"][arm]["result"]["certificate"] for p in rows]
+        for label, mask in [("all_draws", [True] * n), ("initially_ambiguous", ambiguous), ("query_disagreement", different)]:
+            numerator = sum(c and m for c, m in zip(certs, mask))
+            den = sum(mask)
+            need(saved["branch_hit_rates"][arm][label] == {"numerator": numerator, "denominator": den,
+                 "rate": numerator / den if den else None}, "audit_diagnostic_denominator")
+    expected_events = [("pair_committed", t) for t in ids] + [("all_pairs_sealed", None)] + [("truth_read", t) for t in ids]
+    need([(e["event"], e.get("trial_id")) for e in events] == expected_events
+         and [e["index"] for e in events] == list(range(2 * n + 1)), "audit_event_order")
+    need(saved["shared_environment_work"]["extra_observations"] == 2 * n and
+         saved["shared_environment_work"]["truth_audit_steps"] == 4 * n and
+         saved["main_population_draws"] == (n if main else 0) and
+         saved["scientific_population_sample"] is main and
+         saved["provider_calls"] == saved["technical_missing"] == saved["unknown_work_records"] == 0,
+         "audit_usage_scope")
+    return {"directory": directory.name, "pairs": n, "status": "passed", "expected_outcome": expected_status}
+
+
+def audit_checks(directory):
+    directory = Path(directory)
+    checks = r.read(directory / "CHECKS.json")
+    need(checks["status"] == "passed" and checks["check_count"] == len(checks["checks"])
+         and all(x["status"] == "passed" for x in checks["checks"]), "audit_control_completion")
+    for name, h in checks["source_hashes"].items():
+        need(r.sha(directory / "source-snapshot" / name) == h, "audit_control_source_snapshot")
+    runs = [audit_run(directory / name, "invalid_certificate_hold" if name == "wrong-certificate" else "passed")
+            for name in ("healthy", "duplicate-records", "wrong-certificate", "no-certificates",
+                         "blind-0-0", "blind-0-1", "blind-1-0", "blind-1-1")]
+    for path in (directory / "private-pairs").glob("*.json"):
+        row = r.read(path); r.validate_pair(row, row["view"])
+    seal = r.read(directory / "tamper" / "COMMITMENT.json")
+    tid, old = seal["ordered_rows"][0]
+    need(r.sha(directory / "tamper" / (tid + ".json")) != old and
+         not (directory / "tamper" / "PRIVATE-TRUTH-AUDIT.json").exists(), "audit_intentional_integrity_fault")
+    projection = r.read(directory / "SCIENTIFIC-PROJECTION.json")
+    healthy = directory / "healthy"
+    plan = r.read(healthy / "PLAN.json")
+    actual_projection = {"pairs": [r.scientific_projection(r.read(healthy / (t + ".json"))) for t in plan["planned_ids"]],
+                         "readout": r.reproduce_scientific_readout(r.read(healthy / "READOUT.json"))}
+    need(projection == actual_projection and checks["scientific_projection_sha256"] == r.sha(directory / "SCIENTIFIC-PROJECTION.json"), "audit_projection")
+    return {"status": "passed", "checks": checks["check_count"], "saved_runs": runs,
+            "world_program_execution": 0, "provider_calls": 0, "fresh_population_draws": 0}
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        raise SystemExit("usage: audit_saved.py EXISTING_CONTROL_DIRECTORY")
+    print(json.dumps(audit_checks(sys.argv[1]), indent=2))

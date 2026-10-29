@@ -1,3 +1,11 @@
+# Reader release — 29 October 2026
+
+Adds the exact reviewed v2.0.9 reader under `releases/ruu-reader-v2.0.9/`, including its manifest, source tables, checkers, papers and license notices. A short work-sample guide distinguishes completed results from the proposed next benchmark. The scientific package contains 299 files; its internal file set must remain unchanged.
+
+No new model trials are claimed by this packaging change. The earlier portfolio summary remains historical. The public scope is the current-study reader and these repository guides. The full scientific reader contains 299 files. The complete public package also retains the historical summaries. Future benchmark mechanisms, private application material and unrelated research archives are excluded. The existing `portfolio-v0.1` tag is preserved; this release uses the separate `ruu-reader-v2.0.9` tag.
+
+---
+
 # Portfolio summary revision
 
 Prepared 18 October 2026 for the existing portfolio-v0.1 entry.

@@ -1,0 +1,279 @@
+"""One fixed-N local dispatch. No provider, retry, resume, replacement or publication."""
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import copy
+import json
+import os
+import time
+import traceback
+from datetime import datetime, timezone
+import runtime as r
+import sampling
+from wire import need, digest, canonical
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parent.parent
+DESIGN = ROOT / "outputs/research-paired-observation-design-20261027-01"
+PRIOR_RUNTIME = ROOT / "outputs/research-paired-observation-runtime-20261027-01"
+CATALOG = ROOT / "outputs/research-consensus-gate-20261026-01/PRIVATE-CATALOG.json"
+PRIOR_DRAW = ROOT / "outputs/research-consensus-gate-20261026-01/main-v01/PRIVATE-DRAW.json"
+PIN = ROOT / "work/research-runtime-pins/h4-python-536e86a21ddcb95a/python/bin/python3.12"
+N = 5000
+RUN = HERE / "main-v01"
+
+
+def now():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def sources():
+    return {str(p.relative_to(HERE)): r.sha(p) for p in sorted(HERE.rglob("*.py"))
+            if "qa" not in p.relative_to(HERE).parts}
+
+
+def source_frame():
+    frame = r.read(DESIGN / "SAMPLING-FRAME.json")
+    eligible = r.read(DESIGN / "PRIVATE-ELIGIBILITY.json")
+    need(r.sha(DESIGN / "PRIVATE-ELIGIBILITY.json") == frame["eligibility_sha256"], "eligibility_hash")
+    need(r.sha(CATALOG) == eligible["source_catalog_sha256"] and
+         r.sha(PRIOR_DRAW) == eligible["prior_draw_sha256"], "source_identity")
+    catalog = r.read(CATALOG)
+    local = eligible["eligible_source_local_indices"]
+    excluded = eligible["source_local_indices_excluded"]
+    need(len(catalog["worlds"]) == len(catalog["original_indices"]) == 9851, "catalog_count")
+    need(len(local) == frame["remaining_classes"] == 8372 and
+         frame["remaining_class_history_pairs"] == len(local) * 256 == 2143232, "frame_size")
+    need(local == sorted(set(local)) and excluded == sorted(set(excluded)) and len(excluded) == 1479,
+         "eligibility_order_uniqueness")
+    need(set(local).isdisjoint(excluded) and set(local) | set(excluded) == set(range(9851)), "eligibility_partition")
+    need([catalog["original_indices"][i] for i in local] == eligible["eligible_original_indices"], "original_class_identity")
+    need(set(eligible["eligible_original_indices"]).isdisjoint(catalog["excluded_development_world_indices"]),
+         "development_exclusion")
+    return frame, eligible, catalog
+
+
+def freeze():
+    need(Path(sys.executable).resolve() == PIN.resolve(), "pinned_python")
+    need(not (HERE / "AUTHORIZATION.json").exists() and not (HERE / "FREEZE.json").exists()
+         and not RUN.exists(), "already_prepared_inspect_no_retry")
+    control = r.read(HERE / "qa/preflight-v01/CHECKS.json")
+    integration = r.read(HERE / "qa/INTEGRATION.json")
+    need(control["status"] == integration["status"] == "passed" and control["check_count"] == 153,
+         "preflight_required")
+    for name, h in control["source_hashes"].items():
+        need(r.sha(HERE / name) == h, "tested_runtime_source_changed")
+    need(integration["source_hashes"] == sources(), "tested_integration_source_changed")
+    frame, eligible, _ = source_frame()
+    baseline = r.read(HERE / "BASELINE.json")["files"]
+    for rel, h in baseline.items():
+        need(r.sha(ROOT / rel) == h, "prior_file_changed:" + rel)
+    immutable = ("actor/worker.py", "actor/compute.py", "actor/wire.py", "actor/selector.py", "paired_statistics.py", "sandbox.py")
+    need(all(r.sha(HERE / name) == r.sha(PRIOR_RUNTIME / name) for name in immutable), "scientific_actor_changed")
+    r.write_new(HERE / "AUTHORIZATION.json", {
+        "schema": "fixed-paired-study-authorization-v1", "created_utc": now(),
+        "user_quote": "güzel devam edelim", "context": "Continue from verified RESULTS243 to the separately recorded fixed N5000 study.",
+        "N": N, "new_iid_with_replacement_draws": N, "extra_environment_observations": 2 * N,
+        "one_attempt_only": True, "automatic_retry": False, "replacement_draws": 0,
+        "provider_calls": 0, "publication": False, "automation_changes": False,
+        "prior_design_contract_sha256": r.sha(DESIGN / "CONTRACT.json"),
+        "supersedes_only_prior_design_and_implementation_not_started_scope": True})
+    # The sole OS-generated seed is persisted before any rank is mapped or world executed.
+    r.write_new(HERE / "PRIVATE-SEED.json", {"schema": "seed-v1", "created_utc": now(),
+        "entropy_source": "os.urandom(32), once; no candidate seed search", "seed_hex": os.urandom(32).hex(),
+        "mapping": "SHA256 domain+seed+uint64be counter; eight uint32be words/block; rejection before modulo"})
+    freeze_data = {"schema": "fixed-paired-study-freeze-v1", "created_utc": now(), "N": N,
+        "source_hashes": sources(), "authorization_sha256": r.sha(HERE / "AUTHORIZATION.json"),
+        "seed_sha256": r.sha(HERE / "PRIVATE-SEED.json"), "baseline_sha256": r.sha(HERE / "BASELINE.json"),
+        "design_contract_sha256": r.sha(DESIGN / "CONTRACT.json"),
+        "eligibility_sha256": r.sha(DESIGN / "PRIVATE-ELIGIBILITY.json"), "catalog_sha256": r.sha(CATALOG),
+        "preflight_sha256": r.sha(HERE / "qa/preflight-v01/CHECKS.json"),
+        "integration_sha256": r.sha(HERE / "qa/INTEGRATION.json"),
+        "frame_classes": 8372, "population_pairs": 2143232,
+        "budget": {"pairs": N, "actor_processes": 2*N, "extra_environment_observations": 2*N,
+            "history_steps": 8*N, "privileged_target_steps": 4*N,
+            "actor_cpu_seconds_each": 25, "actor_receive_wall_seconds_each_message": 30,
+            "actor_clean_exit_wait_seconds": 5, "total_wall_seconds_checked_before_each_arm": 21600,
+            "no_cross_arm_or_record_cache": True, "order": ["fixed", "adaptive"],
+            "wall_timing_order_limit": "Fixed precedes adaptive; timing is descriptive on this host, not an order-randomized performance estimate."},
+        "one_final_look": True, "no_outcome_driven_N_or_policy_change": True,
+        "actor_truth_access": "none; trusted parent retains private environment; no adversarial host guarantee"}
+    r.write_new(HERE / "FREEZE.json", freeze_data)
+    print(json.dumps({"status": "frozen", "N": N, "freeze_sha256": r.sha(HERE / "FREEZE.json"),
+                      "selected_prior_files_checked": len(baseline), "main_draws": 0, "main_observations": 0}))
+
+
+def validate_freeze():
+    f = r.read(HERE / "FREEZE.json")
+    need(f["N"] == N and f["source_hashes"] == sources(), "source_freeze")
+    for key, path in [("authorization_sha256", HERE / "AUTHORIZATION.json"),
+                      ("seed_sha256", HERE / "PRIVATE-SEED.json"), ("baseline_sha256", HERE / "BASELINE.json"),
+                      ("design_contract_sha256", DESIGN / "CONTRACT.json"),
+                      ("eligibility_sha256", DESIGN / "PRIVATE-ELIGIBILITY.json"),
+                      ("catalog_sha256", CATALOG), ("preflight_sha256", HERE / "qa/preflight-v01/CHECKS.json"),
+                      ("integration_sha256", HERE / "qa/INTEGRATION.json")]:
+        need(r.sha(path) == f[key], "freeze_binding:" + key)
+    a = r.read(HERE / "AUTHORIZATION.json")
+    need(a["N"] == N and a["new_iid_with_replacement_draws"] == N and
+         a["extra_environment_observations"] == 2*N and a["one_attempt_only"] is True and
+         a["automatic_retry"] is False and a["provider_calls"] == 0, "dispatch_authorization")
+    need(Path(sys.executable).resolve() == PIN.resolve(), "pinned_python")
+    return f
+
+
+class Journal:
+    def __init__(self):
+        self.index = 0
+        self.path = RUN / "JOURNAL.jsonl"
+        self.path.touch(exist_ok=False)
+
+    def add(self, event, **fields):
+        row = {"index": self.index, "utc": now(), "event": event, **fields}
+        with self.path.open("ab") as file:
+            file.write(canonical(row) + b"\n"); file.flush(); os.fsync(file.fileno())
+        self.index += 1
+
+
+def collect(environment, receipts, journal, deadline):
+    """Same tested protocol; persist each stage before advancing, including partial failures."""
+    original = environment.original_digest()
+    view = environment.permitted_view()
+    arms = {}
+    for arm in r.ARMS:
+        need(time.monotonic() < deadline, "total_wall_budget")
+        directory = receipts / arm; directory.mkdir()
+        actor = r.Actor()
+        r.USAGE["actor_processes"] += 1
+        journal.add("actor_started", trial_id=view["trial_id"], arm=arm, pid=actor.p.pid)
+        try:
+            actor.send({"arm": arm, "view": view})
+            selection = actor.receive()
+            r.write_new(directory / "SELECTION.json", selection)
+            r.validate_selection(selection, view, arm)
+            observation = environment.observe(selection)
+            r.write_new(directory / "OBSERVATION.json", observation)
+            actor.send(observation)
+            result = actor.receive()
+            r.write_new(directory / "RESULT.json", result)
+            process = actor.finish()
+            r.write_new(directory / "PROCESS.json", process)
+            arms[arm] = {"selection": selection, "observation": observation, "result": result, "process": process}
+            r.validate_arm(arms[arm], view, arm)
+        finally:
+            actor.close()
+            r.USAGE["forced_actor_cleanup"] += actor.forced_cleanup
+            journal.add("actor_exited", trial_id=view["trial_id"], arm=arm, pid=actor.p.pid,
+                        exit_code=actor.p.returncode, forced_cleanup=actor.forced_cleanup)
+    pair = {"schema": "paired-observation-result-v1", "view": view, "arms": arms,
+            "environment_work": copy.deepcopy(environment.work), "original_unchanged": environment.original_digest() == original}
+    r.validate_pair(pair, view)
+    return pair
+
+
+def dispatch():
+    f = validate_freeze()
+    need(not RUN.exists(), "one_dispatch_only_no_retry_or_resume")
+    RUN.mkdir()
+    wall, cpu = time.monotonic(), time.process_time()
+    journal = Journal()
+    ledger = None
+    started = completed = draws = 0
+    try:
+        r.write_new(RUN / "DISPATCH.json", {"created_utc": now(), "pid": os.getpid(), "ppid": os.getppid(),
+            "python": sys.executable, "python_sha256": r.sha(Path(sys.executable)), "N": N,
+            "freeze_sha256": r.sha(HERE / "FREEZE.json"), "authorization_sha256": f["authorization_sha256"],
+            "keep_awake": "external caffeinate wrapper; wrapper exit is verified by command completion", "attempt": 1})
+        journal.add("dispatch", pid=os.getpid())
+        frame, eligible, catalog = source_frame()
+        sample = sampling.draw(frame["remaining_class_history_pairs"], N,
+                               sampling.words(r.read(HERE / "PRIVATE-SEED.json")["seed_hex"]))
+        draws = len(sample["ranks"])
+        sample.update({"seed_sha256": f["seed_sha256"], "eligibility_sha256": f["eligibility_sha256"],
+                       "catalog_sha256": f["catalog_sha256"]})
+        draw_sha = r.write_new(RUN / "PRIVATE-DRAW.json", sample)
+        need(sample["status"] == "complete" and draws == N, "entropy_incomplete_no_reseed")
+        environments, source_rows = {}, []
+        for i, rank in enumerate(sample["ranks"], 1):
+            eligible_index, actions = sampling.split(rank, len(eligible["eligible_source_local_indices"]))
+            source_index = eligible["eligible_source_local_indices"][eligible_index]
+            table = catalog["worlds"][source_index]
+            t = "t%04d" % i
+            environment = r.Environment(t, table, actions, main=True)
+            environments[t] = environment
+            source_rows.append({"trial_id": t, "rank": rank, "eligible_index": eligible_index,
+                "source_index": source_index, "original_index": catalog["original_indices"][source_index],
+                "table_sha256": digest(table), "actions_sha256": digest(actions),
+                "original_state_sha256": environment.original_digest(), "view_sha256": digest(environment.permitted_view())})
+        binding_sha = r.write_new(RUN / "PRIVATE-SOURCE-BINDINGS.json", source_rows)
+        ledger = r.Ledger(RUN / "records", [e.permitted_view() for e in environments.values()], draw_sha,
+                         main_binding={"N": N, "freeze_sha256": r.sha(HERE / "FREEZE.json"),
+                                       "authorization_sha256": f["authorization_sha256"], "draw_sha256": draw_sha})
+        r.write_new(RUN / "START.json", {"utc": now(), "planned_N": N, "draw_sha256": draw_sha,
+            "plan_sha256": ledger.plan_sha256, "source_bindings_sha256": binding_sha,
+            "truth_reads": 0, "population_draws": draws, "provider_calls": 0})
+        journal.add("all_draws_and_views_bound", N=N, plan_sha256=ledger.plan_sha256)
+        (RUN / "receipts").mkdir()
+        deadline = wall + f["budget"]["total_wall_seconds_checked_before_each_arm"]
+        for t, environment in environments.items():
+            need(time.monotonic() < deadline, "total_wall_budget")
+            receipts = RUN / "receipts" / t; receipts.mkdir()
+            started += 1
+            r.write_new(receipts / "START.json", {"utc": now(), "trial_id": t, "view_sha256": digest(environment.permitted_view())})
+            journal.add("pair_started", trial_id=t)
+            pair = collect(environment, receipts, journal, deadline)
+            ledger.commit(pair)
+            completed += 1
+            journal.add("pair_committed", trial_id=t, row_sha256=ledger.rows[t], completed_pairs=completed)
+            if completed == 1 or completed % 100 == 0:
+                print(json.dumps({"phase": "collection", "completed_pairs": completed, "planned_N": N,
+                    "extra_observations": r.USAGE["main_extra_observations"], "privileged_truth_reads": 0,
+                    "wall_seconds": round(time.monotonic() - wall, 2)}), flush=True)
+        journal.add("collection_complete", completed_pairs=completed)
+        seal_sha = ledger.seal()
+        journal.add("all_predictions_sealed_before_truth", commitment_sha256=seal_sha)
+        need(r.USAGE["main_truth_steps"] == 0 and r.USAGE["main_extra_observations"] == 2*N,
+             "pre_truth_usage_invariant")
+        result = r.readout(ledger, environments)
+        journal.add("truth_audit_complete", records=N, target_steps=r.USAGE["main_truth_steps"])
+        validate_freeze()
+        need(r.USAGE["actor_processes"] == 2*N and r.USAGE["forced_actor_cleanup"] == 0,
+             "process_closure_invariant")
+        r.write_new(RUN / "USAGE.json", {"main_usage": dict(r.USAGE), "provider_calls": 0,
+            "assistant_usage": "not_measured", "controller_cpu_seconds": time.process_time() - cpu,
+            "total_wall_seconds": time.monotonic() - wall,
+            "unaccounted_main_observations": 0, "unknown_actor_work_records": 0})
+        journal.add("closed", status="passed" if result["wrong_certificates"] == 0 else "invalid_certificate_hold")
+        r.write_new(RUN / "CLOSURE.json", {"status": "passed" if result["wrong_certificates"] == 0 else "invalid_certificate_hold",
+            "utc": now(), "pid": os.getpid(), "completed_pairs": completed, "unstarted": N-started,
+            "technical_missing": 0, "provider_calls": 0, "all_actor_children_exited": True,
+            "freeze_sha256": r.sha(HERE / "FREEZE.json"), "authorization_sha256": f["authorization_sha256"],
+            "draw_sha256": draw_sha, "source_bindings_sha256": binding_sha,
+            "start_sha256": r.sha(RUN / "START.json"), "dispatch_sha256": r.sha(RUN / "DISPATCH.json"),
+            "records_closure_sha256": r.sha(ledger.directory / "CLOSURE.json"),
+            "usage_sha256": r.sha(RUN / "USAGE.json"), "journal_sha256": r.sha(journal.path)})
+        print(json.dumps({"phase": "closed", "completed_pairs": completed,
+                          "status": r.read(RUN / "CLOSURE.json")["status"]}), flush=True)
+    except BaseException as exc:
+        failure = {"status": "technical_incomplete", "utc": now(), "error_type": type(exc).__name__,
+            "error_code": str(exc)[:300], "planned_N": N, "draws": draws,
+            "started_pairs": started, "completed_pairs": completed, "unstarted": N-started,
+            "technical_missing": N-completed, "usage": dict(r.USAGE),
+            "replacement_draws": 0, "automatic_retry": False, "provider_calls": 0,
+            "wall_seconds": time.monotonic() - wall, "controller_cpu_seconds": time.process_time() - cpu}
+        if ledger is not None and ledger.phase == "collecting" and len(ledger.rows) < N:
+            failure["partial_evidence"] = ledger.incomplete()
+        (RUN / "PRIVATE-FAILURE-TRACE.txt").write_text(traceback.format_exc())
+        r.write_new(RUN / "FAILURE.json", failure)
+        journal.add("technical_hold", completed_pairs=completed, error_type=type(exc).__name__)
+        print(json.dumps({"status": "technical_incomplete", "completed_pairs": completed,
+                          "failure_artifact": "main-v01/FAILURE.json", "automatic_retry": False}), flush=True)
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    if sys.argv[1:] == ["--freeze"]:
+        freeze()
+    elif sys.argv[1:] == ["--dispatch"]:
+        dispatch()
+    else:
+        raise SystemExit("usage: study.py --freeze | --dispatch")

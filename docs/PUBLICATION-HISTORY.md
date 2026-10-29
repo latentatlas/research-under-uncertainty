@@ -1,3 +1,11 @@
+# Current reader release — 29 October 2026
+
+This release adds a specifically reviewed current-study reader under `releases/ruu-reader-v2.0.9/`. Its disclosure includes the selected scientific inputs required by its offline checks; it is broader than the 18 October aggregate-only summary described below. This does not reopen the private archive, restore withdrawn Git objects, or authorize release of a future benchmark's hidden mechanisms. The author authorized public release of this reviewed reader and its repository guides on 29 October 2026. This authorization is specific to the current study; future benchmark mechanisms remain outside it.
+
+The older summary and its exposure history remain intact below. A locally prepared manuscript or artifact is not evidence of journal submission, acceptance or independent replication.
+
+---
+
 # Publication history and revised scope
 
 The portfolio entry originally described a September 2026 pilot with executable replay material and detailed records. A later October distribution included protected evaluation internals. Public access to that repository was closed on 17 October 2026.

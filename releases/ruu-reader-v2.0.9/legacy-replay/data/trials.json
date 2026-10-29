@@ -1,0 +1,842 @@
+[
+  {
+    "ordinal": 1,
+    "case_id": "case-01",
+    "repeat": 1,
+    "delivery_sha256": "1eabd88d7b2522da762c3ae3a11045137ce874fcf7e361700d8804a4de79ac1a",
+    "action": [
+      0.11756768,
+      -0.58836879
+    ],
+    "opaque_id": "snapshot-01",
+    "delivered_snapshot": {
+      "case_id": "snapshot-01",
+      "history": {
+        "actions": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.3,
+            0.0
+          ],
+          [
+            0.5,
+            0.0
+          ],
+          [
+            0.0,
+            -0.5
+          ]
+        ],
+        "states": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            1.195,
+            -0.08
+          ],
+          [
+            1.546885244226,
+            0.101652075908
+          ],
+          [
+            1.637079003969,
+            -0.435682052858
+          ],
+          [
+            1.443203778856,
+            -0.429720021359
+          ]
+        ]
+      },
+      "physical_step": 4,
+      "remaining_physical_steps": 28,
+      "task": {
+        "action_norm_limit": 0.6,
+        "analysis_input": "provided_history_only",
+        "escape_radius": 4.0,
+        "history_origin": "recorded_trajectory_cut_before_the_requested_action",
+        "max_analysis_calls": 3,
+        "physical_actions_requested": 1,
+        "physical_horizon": 32,
+        "response": {
+          "action": [
+            "finite_number",
+            "finite_number"
+          ]
+        },
+        "target_radius": 0.05,
+        "target_state_steps": [
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      }
+    }
+  },
+  {
+    "ordinal": 2,
+    "case_id": "boundary-02",
+    "repeat": 1,
+    "delivery_sha256": "e328709c9ac298b6343ee03dd05a525b63036ebd617ea75f516fd211ba47b6b3",
+    "action": [
+      0.557133656,
+      -0.222715265
+    ],
+    "opaque_id": "snapshot-02",
+    "delivered_snapshot": {
+      "case_id": "snapshot-02",
+      "history": {
+        "actions": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.4,
+            0.0
+          ],
+          [
+            0.4,
+            0.0
+          ],
+          [
+            0.0,
+            -0.4
+          ],
+          [
+            0.15,
+            -0.58
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.12,
+            -0.58
+          ],
+          [
+            0.46,
+            -0.38
+          ],
+          [
+            0.5977739113202971,
+            -0.03830601708392009
+          ]
+        ],
+        "states": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            1.195,
+            -0.08
+          ],
+          [
+            1.591709636259,
+            0.191043204544
+          ],
+          [
+            1.725868566075,
+            -0.243807451563
+          ],
+          [
+            1.642012219287,
+            -0.244859988476
+          ],
+          [
+            1.331667753611,
+            -0.402490513719
+          ],
+          [
+            1.570226219334,
+            -0.518324270034
+          ],
+          [
+            1.94555341413,
+            -0.066347868705
+          ],
+          [
+            1.784354444202,
+            0.157993853102
+          ],
+          [
+            2.012533898157,
+            -0.49789333376
+          ]
+        ]
+      },
+      "physical_step": 9,
+      "remaining_physical_steps": 23,
+      "task": {
+        "action_norm_limit": 0.6,
+        "analysis_input": "provided_history_only",
+        "escape_radius": 4.0,
+        "history_origin": "recorded_trajectory_cut_before_the_requested_action",
+        "max_analysis_calls": 3,
+        "physical_actions_requested": 1,
+        "physical_horizon": 32,
+        "response": {
+          "action": [
+            "finite_number",
+            "finite_number"
+          ]
+        },
+        "target_radius": 0.05,
+        "target_state_steps": [
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      }
+    }
+  },
+  {
+    "ordinal": 3,
+    "case_id": "case-03",
+    "repeat": 1,
+    "delivery_sha256": "28099b180682434193c2957ce96766c6b6410ec1ed9b6ce88a50f09e0178c7bb",
+    "action": [
+      0.13303121372640483,
+      -0.5850664021925029
+    ],
+    "opaque_id": "snapshot-03",
+    "delivered_snapshot": {
+      "case_id": "snapshot-03",
+      "history": {
+        "actions": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.4,
+            0.0
+          ],
+          [
+            0.4,
+            0.0
+          ],
+          [
+            0.0,
+            -0.4
+          ]
+        ],
+        "states": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            1.195,
+            -0.08
+          ],
+          [
+            1.591709636259,
+            0.191043204544
+          ],
+          [
+            1.725868566075,
+            -0.243807451563
+          ],
+          [
+            1.642012219287,
+            -0.244859988476
+          ]
+        ]
+      },
+      "physical_step": 4,
+      "remaining_physical_steps": 28,
+      "task": {
+        "action_norm_limit": 0.6,
+        "analysis_input": "provided_history_only",
+        "escape_radius": 4.0,
+        "history_origin": "recorded_trajectory_cut_before_the_requested_action",
+        "max_analysis_calls": 3,
+        "physical_actions_requested": 1,
+        "physical_horizon": 32,
+        "response": {
+          "action": [
+            "finite_number",
+            "finite_number"
+          ]
+        },
+        "target_radius": 0.05,
+        "target_state_steps": [
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      }
+    }
+  },
+  {
+    "ordinal": 4,
+    "case_id": "boundary-01",
+    "repeat": 1,
+    "delivery_sha256": "31acd92aa0e644f160e3c91d0c7842d9fedd31703a95f36c0203ea7e3aa4ed85",
+    "action": [
+      -0.3,
+      -0.519615242
+    ],
+    "opaque_id": "snapshot-04",
+    "delivered_snapshot": {
+      "case_id": "snapshot-04",
+      "history": {
+        "actions": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.3,
+            0.0
+          ],
+          [
+            0.5,
+            0.0
+          ],
+          [
+            0.0,
+            -0.5
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.03989036,
+            -0.59867249
+          ],
+          [
+            -0.2285494762584707,
+            -0.5547647581659985
+          ],
+          [
+            -0.37489906055850275,
+            -0.46845436746107083
+          ],
+          [
+            -0.12229590212135594,
+            -0.5874031940033385
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.5651345576967305,
+            -0.20154833588477172
+          ]
+        ],
+        "states": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            1.195,
+            -0.08
+          ],
+          [
+            1.546885244226,
+            0.101652075908
+          ],
+          [
+            1.637079003969,
+            -0.435682052858
+          ],
+          [
+            1.443203778856,
+            -0.429720021359
+          ],
+          [
+            1.698882897136,
+            -0.550119051946
+          ],
+          [
+            1.402078614437,
+            -0.690479648284
+          ],
+          [
+            1.095109396221,
+            -0.628322627156
+          ],
+          [
+            0.900437342043,
+            -0.319791945669
+          ],
+          [
+            0.906081026751,
+            -0.995496467601
+          ],
+          [
+            1.105073116896,
+            -1.162283790574
+          ],
+          [
+            1.912301884882,
+            -1.196924430455
+          ]
+        ]
+      },
+      "physical_step": 11,
+      "remaining_physical_steps": 21,
+      "task": {
+        "action_norm_limit": 0.6,
+        "analysis_input": "provided_history_only",
+        "escape_radius": 4.0,
+        "history_origin": "recorded_trajectory_cut_before_the_requested_action",
+        "max_analysis_calls": 3,
+        "physical_actions_requested": 1,
+        "physical_horizon": 32,
+        "response": {
+          "action": [
+            "finite_number",
+            "finite_number"
+          ]
+        },
+        "target_radius": 0.05,
+        "target_state_steps": [
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      }
+    }
+  },
+  {
+    "ordinal": 5,
+    "case_id": "case-03",
+    "repeat": 2,
+    "delivery_sha256": "28099b180682434193c2957ce96766c6b6410ec1ed9b6ce88a50f09e0178c7bb",
+    "action": [
+      0.13,
+      -0.5857
+    ],
+    "opaque_id": "snapshot-03",
+    "delivered_snapshot": {
+      "case_id": "snapshot-03",
+      "history": {
+        "actions": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.4,
+            0.0
+          ],
+          [
+            0.4,
+            0.0
+          ],
+          [
+            0.0,
+            -0.4
+          ]
+        ],
+        "states": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            1.195,
+            -0.08
+          ],
+          [
+            1.591709636259,
+            0.191043204544
+          ],
+          [
+            1.725868566075,
+            -0.243807451563
+          ],
+          [
+            1.642012219287,
+            -0.244859988476
+          ]
+        ]
+      },
+      "physical_step": 4,
+      "remaining_physical_steps": 28,
+      "task": {
+        "action_norm_limit": 0.6,
+        "analysis_input": "provided_history_only",
+        "escape_radius": 4.0,
+        "history_origin": "recorded_trajectory_cut_before_the_requested_action",
+        "max_analysis_calls": 3,
+        "physical_actions_requested": 1,
+        "physical_horizon": 32,
+        "response": {
+          "action": [
+            "finite_number",
+            "finite_number"
+          ]
+        },
+        "target_radius": 0.05,
+        "target_state_steps": [
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      }
+    }
+  },
+  {
+    "ordinal": 6,
+    "case_id": "boundary-01",
+    "repeat": 2,
+    "delivery_sha256": "31acd92aa0e644f160e3c91d0c7842d9fedd31703a95f36c0203ea7e3aa4ed85",
+    "action": [
+      0.51303156,
+      0.31112476
+    ],
+    "opaque_id": "snapshot-04",
+    "delivered_snapshot": {
+      "case_id": "snapshot-04",
+      "history": {
+        "actions": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.3,
+            0.0
+          ],
+          [
+            0.5,
+            0.0
+          ],
+          [
+            0.0,
+            -0.5
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.03989036,
+            -0.59867249
+          ],
+          [
+            -0.2285494762584707,
+            -0.5547647581659985
+          ],
+          [
+            -0.37489906055850275,
+            -0.46845436746107083
+          ],
+          [
+            -0.12229590212135594,
+            -0.5874031940033385
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.5651345576967305,
+            -0.20154833588477172
+          ]
+        ],
+        "states": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            1.195,
+            -0.08
+          ],
+          [
+            1.546885244226,
+            0.101652075908
+          ],
+          [
+            1.637079003969,
+            -0.435682052858
+          ],
+          [
+            1.443203778856,
+            -0.429720021359
+          ],
+          [
+            1.698882897136,
+            -0.550119051946
+          ],
+          [
+            1.402078614437,
+            -0.690479648284
+          ],
+          [
+            1.095109396221,
+            -0.628322627156
+          ],
+          [
+            0.900437342043,
+            -0.319791945669
+          ],
+          [
+            0.906081026751,
+            -0.995496467601
+          ],
+          [
+            1.105073116896,
+            -1.162283790574
+          ],
+          [
+            1.912301884882,
+            -1.196924430455
+          ]
+        ]
+      },
+      "physical_step": 11,
+      "remaining_physical_steps": 21,
+      "task": {
+        "action_norm_limit": 0.6,
+        "analysis_input": "provided_history_only",
+        "escape_radius": 4.0,
+        "history_origin": "recorded_trajectory_cut_before_the_requested_action",
+        "max_analysis_calls": 3,
+        "physical_actions_requested": 1,
+        "physical_horizon": 32,
+        "response": {
+          "action": [
+            "finite_number",
+            "finite_number"
+          ]
+        },
+        "target_radius": 0.05,
+        "target_state_steps": [
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      }
+    }
+  },
+  {
+    "ordinal": 7,
+    "case_id": "case-01",
+    "repeat": 2,
+    "delivery_sha256": "1eabd88d7b2522da762c3ae3a11045137ce874fcf7e361700d8804a4de79ac1a",
+    "action": [
+      0.1,
+      -0.5916079783
+    ],
+    "opaque_id": "snapshot-01",
+    "delivered_snapshot": {
+      "case_id": "snapshot-01",
+      "history": {
+        "actions": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.3,
+            0.0
+          ],
+          [
+            0.5,
+            0.0
+          ],
+          [
+            0.0,
+            -0.5
+          ]
+        ],
+        "states": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            1.195,
+            -0.08
+          ],
+          [
+            1.546885244226,
+            0.101652075908
+          ],
+          [
+            1.637079003969,
+            -0.435682052858
+          ],
+          [
+            1.443203778856,
+            -0.429720021359
+          ]
+        ]
+      },
+      "physical_step": 4,
+      "remaining_physical_steps": 28,
+      "task": {
+        "action_norm_limit": 0.6,
+        "analysis_input": "provided_history_only",
+        "escape_radius": 4.0,
+        "history_origin": "recorded_trajectory_cut_before_the_requested_action",
+        "max_analysis_calls": 3,
+        "physical_actions_requested": 1,
+        "physical_horizon": 32,
+        "response": {
+          "action": [
+            "finite_number",
+            "finite_number"
+          ]
+        },
+        "target_radius": 0.05,
+        "target_state_steps": [
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      }
+    }
+  },
+  {
+    "ordinal": 8,
+    "case_id": "boundary-02",
+    "repeat": 2,
+    "delivery_sha256": "e328709c9ac298b6343ee03dd05a525b63036ebd617ea75f516fd211ba47b6b3",
+    "action": [
+      0.32458468227982173,
+      -0.5046234069375966
+    ],
+    "opaque_id": "snapshot-02",
+    "delivered_snapshot": {
+      "case_id": "snapshot-02",
+      "history": {
+        "actions": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.4,
+            0.0
+          ],
+          [
+            0.4,
+            0.0
+          ],
+          [
+            0.0,
+            -0.4
+          ],
+          [
+            0.15,
+            -0.58
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            -0.12,
+            -0.58
+          ],
+          [
+            0.46,
+            -0.38
+          ],
+          [
+            0.5977739113202971,
+            -0.03830601708392009
+          ]
+        ],
+        "states": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            1.195,
+            -0.08
+          ],
+          [
+            1.591709636259,
+            0.191043204544
+          ],
+          [
+            1.725868566075,
+            -0.243807451563
+          ],
+          [
+            1.642012219287,
+            -0.244859988476
+          ],
+          [
+            1.331667753611,
+            -0.402490513719
+          ],
+          [
+            1.570226219334,
+            -0.518324270034
+          ],
+          [
+            1.94555341413,
+            -0.066347868705
+          ],
+          [
+            1.784354444202,
+            0.157993853102
+          ],
+          [
+            2.012533898157,
+            -0.49789333376
+          ]
+        ]
+      },
+      "physical_step": 9,
+      "remaining_physical_steps": 23,
+      "task": {
+        "action_norm_limit": 0.6,
+        "analysis_input": "provided_history_only",
+        "escape_radius": 4.0,
+        "history_origin": "recorded_trajectory_cut_before_the_requested_action",
+        "max_analysis_calls": 3,
+        "physical_actions_requested": 1,
+        "physical_horizon": 32,
+        "response": {
+          "action": [
+            "finite_number",
+            "finite_number"
+          ]
+        },
+        "target_radius": 0.05,
+        "target_state_steps": [
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      }
+    }
+  }
+]

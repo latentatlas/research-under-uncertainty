@@ -1,0 +1,71 @@
+"""The wire envelope carries either one analysis request or the final action object."""
+from copy import deepcopy
+import math
+from pathlib import Path
+from strict_io import canonical
+
+VERSION = 'transfer-fixed-history-v1'
+from tasks import task, valid_action
+PROTOCOL = (Path(__file__).parent/'PARTICIPANT.md').read_text()
+ACTION = {'type':'object','properties':{'action':{'type':'array','items':{'type':'number'},'minItems':2,'maxItems':2}},'required':['action'],'additionalProperties':False}
+ANALYZE = {'type':'object','properties':{'analyze':{'type':'string'}},'required':['analyze'],'additionalProperties':False}
+WIRE_SCHEMA = {'type':'object','properties':{'decision':{'anyOf':[ACTION,ANALYZE]}},'required':['decision'],'additionalProperties':False}
+
+class ParticipantProtocolError(ValueError):
+    def __init__(self, message, *, evidence_ref=None):
+        super().__init__(message)
+        self.kind='participant_protocol_error'; self.evidence_ref=evidence_ref
+
+def parse_wire(value):
+    if type(value) is not dict or set(value)!={'decision'} or type(value['decision']) is not dict:
+        raise ParticipantProtocolError('one decision object required')
+    d=value['decision']
+    if set(d)=={'analyze'}:
+        if type(d['analyze']) is not str or not 1<=len(d['analyze'])<=60000:
+            raise ParticipantProtocolError('analysis code length/type')
+    elif set(d)=={'action'}:
+        a=d['action']
+        if (type(a) is not list or len(a)!=2 or any(type(v) not in (int,float) or not math.isfinite(v) for v in a)):
+            raise ParticipantProtocolError('finite two-number action required')
+    else:
+        raise ParticipantProtocolError('one analyze or action required')
+    return deepcopy(value)
+
+def render(payload, protocol=PROTOCOL):
+    validate_payload(payload)
+    return protocol+'\n\nVISIBLE RECORD\n'+canonical(payload)
+
+def validate_payload(p):
+    if type(p) is not dict or set(p)!={'snapshot','analysis_records','remaining_analysis_calls','remaining_model_decisions'}:
+        raise ValueError('public payload allowlist')
+    s=p['snapshot']
+    if type(s) is not dict or set(s)!={'case_id','history','physical_step','remaining_physical_steps','task'}:
+        raise ValueError('snapshot allowlist')
+    if not s['case_id'].startswith('snapshot-') or type(s['physical_step']) is not int:
+        raise ValueError('opaque id/step')
+    family=s['task'].get('family'); expected_task=task(family)
+    if canonical(s['task'])!=canonical(expected_task): raise ValueError('public task identity')
+    horizon=expected_task['physical_horizon']
+    if not 0<=s['physical_step']<horizon: raise ValueError('physical step')
+    if s['remaining_physical_steps']!=horizon-s['physical_step']:
+        raise ValueError('physical time not reset')
+    h=s['history']
+    if set(h)!={'states','actions'} or len(h['actions'])!=s['physical_step'] or len(h['states'])!=s['physical_step']+1:
+        raise ValueError('visible history shape')
+    for v in h['states']+h['actions']:
+        if type(v) is not list or len(v)!=2 or any(type(x) not in (int,float) or not math.isfinite(x) for x in v):
+            raise ValueError('visible numeric history')
+    if any(not valid_action(family,a) for a in h['actions']): raise ValueError('illegal historical action')
+    if family=='continuous':
+        if h['states'][0]!=[1.,0.] or any(math.hypot(*z)>4 for z in h['states']): raise ValueError('continuous history')
+    else:
+        if h['states'][0][0]!=0 or any(any(type(v) is not int for v in z) or not 0<=z[0]<18 or z[1]<0 for z in h['states']): raise ValueError('route history')
+        if any(h['states'][i+1][0]!=min(18,h['states'][i][0]+int(a[0])+1) or h['states'][i+1][1]>=h['states'][i][1] for i,a in enumerate(h['actions'])): raise ValueError('route public transition')
+    n=len(p['analysis_records'])
+    if n>3 or p['remaining_analysis_calls']!=3-n or p['remaining_model_decisions']!=4-n:
+        raise ValueError('decision allowance')
+    for row in p['analysis_records']:
+        if set(row)!={'submitted_code','result'} or type(row['submitted_code']) is not str or type(row['result']) is not dict:
+            raise ValueError('public analysis record')
+    canonical(p)
+    return True

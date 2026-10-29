@@ -1,0 +1,160 @@
+\section{Narrow runtime proof audit}
+\label{app:runtime-proof}
+
+This appendix states a sufficient numerical contract for the continuous
+projection argument and documents which parts were established locally.
+The real-arithmetic argument, the archived recurrence computation, the
+current machine implementation and the historical execution environment
+are distinct evidence layers. None of the checks below adds a live agent
+trial or reruns a physical episode.
+
+\paragraph{Identity and trust assumptions.}
+The inspected executable matches the experimental Python digest. It is
+CPython 3.12.14 on ARM64. The current math image is
+\texttt{libsystem\_m.dylib}; its UUID, text/constants hashes and relevant
+function bytes were recorded. The current thread reports a zero floating-point
+control register: round to nearest, with no flush-to-zero or alternative
+handling enabled. We assume the ordinary IEEE binary64 semantics of
+the decoded add, multiply, divide, fused multiply-add and square-root
+instructions. The source-to-instruction interpretation is a manual
+derivation with exact constant checks, not a proof-assistant-certified
+binary analysis. The historical inventories pin Python but do not attest
+the loaded math image or control register; equivalence to the historical
+environment remains an explicit assumption.
+
+\paragraph{Bound for the captured norm implementation.}
+Let $u=2^{-53}$ and $d=2^{-1075}$, the unit roundoff and half the smallest
+subnormal. Here $u$ denotes roundoff, not a physical action. For finite
+binary64 coordinates, put $a=\max(|x_1|,|x_2|)$ and
+$b=\min(|x_1|,|x_2|)$, and let $r=\sqrt{a^2+b^2}$ in exact arithmetic.
+The captured function returns $a$ when $b=0$. Otherwise it drops $b$
+only if the stored exponent difference exceeds 27. This implies
+$b/a<2^{-27}$, including a subnormal $b$, so dropping it reduces the
+exact norm by less than $r2^{-55}=ru/4$.
+
+For nonzero retained inputs, the decoded branches use the following
+scales, where $e_a$ is the biased exponent field of $a$:
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Exponent field & Input scale & Undo scale\\
+\midrule
+$e_a<539$ & $2^{768}$ & $2^{-768}$\\
+$539\leq e_a<1534$ & $1$ & $1$\\
+$e_a\geq1534$ & $2^{-768}$ & $2^{768}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The retained inputs scale exactly. In the small-input branch even the
+smallest subnormal becomes $2^{-306}$. In the large-input branch a
+nonzero retained $b$ has exponent difference at most 27 and remains
+normal after scaling. In all branches the squared larger input and
+the sum are normal and cannot overflow. The core computes
+$t=\operatorname{RN}(a_s^2)$,
+$v=\operatorname{RN}(b_s^2+t)$ by a fused operation, and
+$w=\operatorname{RN}(\sqrt v)$, before undoing the scale.
+Thus $w$ lies within factors $(1-u)^2$ and $(1+u)^2$ of the scaled norm.
+Undoing a power-of-two scale is exact for a finite normal output;
+subnormal rounding contributes at most $d$. Overflowed outputs are not
+finite accepted norms. Combining the discarded-input allowance gives
+the sufficient bound, for a finite returned norm $h$,
+\begin{equation}
+ r(1-3u)-d\ \leq\ h\ \leq\ r(1+3u)+d.
+ \label{eq:hypot-bound}
+\end{equation}
+The rational checker verifies
+$(1-u/4)(1-u)^2\geq1-3u$ and $(1+u)^2\leq1+3u$.
+In particular, $h\leq4$ implies $r<5$ and
+$|h-r|<H=16u$. This is an analytic bound for the captured sequence
+under the stated instruction semantics, not an accuracy inference from
+test samples.
+
+\paragraph{Action normalization.}
+Let $L$ be the exact binary64 value of $0.6$. An accepted but unscaled
+action satisfies $h\leq L$, hence
+$r\leq(L+d)/(1-3u)<L+8u$. When $h>L$, the validator rescales by
+$aL/h$. Here $r>1/2$ and $h>1/2$. The compiled multiplication by a real
+scalar and division by a positive real denominator each round each
+component once; the zero imaginary terms do not introduce a separate
+nonzero error. Using $\sqrt2<3/2$ gives
+\begin{equation}
+ \|a_{\rm applied}\|_2
+ \leq \frac{L(1+u)^2}{1-3u-2d}
+       +3d(1+u)+\tfrac32 d
+ < L+8u.
+ \label{eq:action-bound}
+\end{equation}
+This covers accepted rescaling, including subnormal allowances, rather
+than treating the rejection tolerance as an applied-action allowance.
+
+\paragraph{Two remaining library accuracy contracts.}
+Write $\widehat s=\operatorname{pow}(h,2)$ and
+$C(\phi)=\operatorname{cmath.exp}(i\phi)$ for the computed values.
+The needed contracts are
+\begin{equation}
+ |\widehat s-h^2|\leq\epsilon_{\rm pow},\qquad
+ \|C(\phi)\|_2\leq1+\delta_{\rm rot}.
+ \label{eq:remaining-contracts}
+\end{equation}
+They must hold uniformly over relevant norm inputs and permitted finite
+phases. The second includes the wrapper's \texttt{exp} and combined
+\texttt{\_\_sincos\_stret} computation. No bound on angular error is
+needed: every such control vector has norm at most
+$(1+\delta_{\rm rot})(L+8u)$, irrespective of its direction.
+Inspection of call targets establishes the operation path but does not
+prove either accuracy contract.
+
+\paragraph{Composed one-step bound.}
+For a state before computed escape, $r<5$. Let $\alpha,\beta,c,L$
+denote the exact binary64 task constants, so the reference drift is
+$(\alpha+\beta r^2)x+c$. Set $B=32u+d$. Under the sufficient choices
+$\epsilon_{\rm pow}=\delta_{\rm rot}=2^{-30}$, the relevant basic-operation
+intermediates have magnitude below 32; the square is handled separately
+by its library contract. Each basic rounding error is therefore at most
+$B$. The squared-radius error is bounded by
+$10H+H^2+\epsilon_{\rm pow}$. Two basic operations form the drift
+multiplier. Scaling the state and adding the bias give vector error
+at most $5\beta(10H+H^2+\epsilon_{\rm pow})+13B$.
+The compiled complex product uses one ordinary product and one fused
+operation per component; its error contributes less than $3B$.
+Final vector addition contributes less than $3B/2$.
+
+Consequently the sufficient loss allowance beyond the ideal $-L$ term is
+\begin{equation}
+ E=5\beta(10H+H^2+\epsilon_{\rm pow})
+    +18B+8u+\delta_{\rm rot}(L+8u).
+ \label{eq:composed-error}
+\end{equation}
+The exact rational evaluation is approximately
+$6.2870891\times10^{-10}<10^{-9}$. For $\|q\|_2\leq1$ and a positive
+projection lower bound $p$, this yields
+\[
+ q^\top x'\geq(\alpha+\beta p^2)p+q^\top c-L-E.
+\]
+The archived subtraction and downward floor therefore remain sufficient
+\emph{if} the stated instruction, library and historical-equivalence
+premises hold. The prior audit's minimum terminal gap exceeds $0.0371$;
+it also clears the norm-test error. The same ten unique archived
+projection certificates are covered conditionally, with no relabeling.
+
+\paragraph{Checks and open obligations.}
+The archived local audit checked exact inequality constants, captured function
+identity and historical inventory coverage. The reader bundle rechecks only
+the exact constants and exponent ranges with \texttt{artifact/numeric\_constants.py};
+it does not recapture or attest the historical runtime. Fifty-two norm inputs,
+including exponent/underflow edges, twenty square inputs and twenty-six
+phases were probed in the archived audit interpreter. Every finite tested output
+satisfies the sufficient bounds; an overflowed norm is recorded separately.
+These are scalar diagnostics, not uniform accuracy proofs. Negative
+controls reject altered function bytes and oversized error budgets, and
+retain an open status when a library premise or historical binding is
+missing. They test the checker, not the missing premises themselves.
+
+The remaining obligations are explicit: prove both bounds in
+Eq.~\eqref{eq:remaining-contracts} for the relevant library implementation,
+and justify its equivalence and floating-point settings in the historical
+runs. Current image hashes cannot supply absent historical attestation.
+Accordingly, this addendum narrows the numerical assumptions and supports
+their composition; it does not turn the archived results into unconditional
+machine-verified claims. Exact route dynamic programming and the
+observed trial counts are unchanged.

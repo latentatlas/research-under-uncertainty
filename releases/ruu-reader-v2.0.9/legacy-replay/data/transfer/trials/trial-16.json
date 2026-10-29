@@ -1,0 +1,738 @@
+{
+  "action": {
+    "action": [
+      1,
+      0
+    ]
+  },
+  "allocation": {
+    "case_id": "snapshot-08",
+    "delivery_path": "inputs.private/snapshot-08.json",
+    "delivery_sha256": "c5d07a6bce01e1a2c15b4713c97ea65dfe5a7e0a02fe144a926572d2bb099a90",
+    "family": "route",
+    "instance": 2,
+    "ordinal": 16,
+    "packet_sha256": "c5d07a6bce01e1a2c15b4713c97ea65dfe5a7e0a02fe144a926572d2bb099a90",
+    "profile": {
+      "mode": "single_agent",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "max"
+    },
+    "repeat": 1,
+    "state_index": 2
+  },
+  "analyses": [],
+  "grade": {
+    "after": {
+      "certificate": {
+        "certified": false,
+        "independent_recurrence_verified": true,
+        "method": "exhaustive_integer_bellman_table",
+        "state": [
+          10,
+          18
+        ],
+        "step": 5,
+        "table": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            0
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            13,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            19,
+            18,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            26,
+            24,
+            21,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            null,
+            null,
+            null,
+            32,
+            31,
+            27,
+            25,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            39,
+            37,
+            34,
+            31,
+            30,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            38,
+            36,
+            33,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            37,
+            35,
+            32,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            36,
+            35,
+            32,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            36,
+            35,
+            32,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            36,
+            35,
+            32,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            36,
+            35,
+            32,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ]
+        ]
+      },
+      "required_fuel": 17,
+      "verdict": "reachable_by_witness",
+      "witness": [
+        {
+          "action": [
+            0,
+            0
+          ],
+          "after": [
+            11,
+            15
+          ]
+        },
+        {
+          "action": [
+            1,
+            0
+          ],
+          "after": [
+            13,
+            12
+          ]
+        },
+        {
+          "action": [
+            1,
+            0
+          ],
+          "after": [
+            15,
+            7
+          ]
+        },
+        {
+          "action": [
+            2,
+            0
+          ],
+          "after": [
+            18,
+            1
+          ]
+        }
+      ],
+      "witness_success": true
+    },
+    "before": {
+      "certificate": {
+        "certified": false,
+        "independent_recurrence_verified": true,
+        "method": "exhaustive_integer_bellman_table",
+        "state": [
+          8,
+          21
+        ],
+        "step": 4,
+        "table": [
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            0
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            13,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            19,
+            18,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            26,
+            24,
+            21,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            null,
+            null,
+            null,
+            32,
+            31,
+            27,
+            25,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            39,
+            37,
+            34,
+            31,
+            30,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            38,
+            36,
+            33,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            37,
+            35,
+            32,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            36,
+            35,
+            32,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            36,
+            35,
+            32,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            36,
+            35,
+            32,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ],
+          [
+            36,
+            35,
+            32,
+            30,
+            29,
+            26,
+            24,
+            23,
+            20,
+            18,
+            17,
+            14,
+            12,
+            11,
+            8,
+            6,
+            5,
+            3,
+            0
+          ]
+        ]
+      },
+      "required_fuel": 20,
+      "verdict": "reachable_by_witness",
+      "witness": [
+        {
+          "action": [
+            1,
+            0
+          ],
+          "after": [
+            10,
+            18
+          ]
+        },
+        {
+          "action": [
+            0,
+            0
+          ],
+          "after": [
+            11,
+            15
+          ]
+        },
+        {
+          "action": [
+            1,
+            0
+          ],
+          "after": [
+            13,
+            12
+          ]
+        },
+        {
+          "action": [
+            1,
+            0
+          ],
+          "after": [
+            15,
+            7
+          ]
+        },
+        {
+          "action": [
+            2,
+            0
+          ],
+          "after": [
+            18,
+            1
+          ]
+        }
+      ],
+      "witness_success": true
+    },
+    "case_id": "snapshot-08",
+    "diagnostic_score": "feasibility_preserved_by_witness",
+    "grading_lock_sha256": "3cac554b9876c5caf80b71ff3c501b545a693dab79a7aca8745d6798b1493525",
+    "local_physics_steps": 10,
+    "mechanism_learning": false,
+    "packet_sha256": "c5d07a6bce01e1a2c15b4713c97ea65dfe5a7e0a02fe144a926572d2bb099a90",
+    "response": {
+      "action": [
+        1,
+        0
+      ]
+    }
+  },
+  "result": {
+    "action_applied": true,
+    "analysis_calls": 0,
+    "calls": [
+      40
+    ],
+    "case_id": "snapshot-08",
+    "delivery_sha256": "c5d07a6bce01e1a2c15b4713c97ea65dfe5a7e0a02fe144a926572d2bb099a90",
+    "diagnostic_score": "feasibility_preserved_by_witness",
+    "family": "route",
+    "grade_sha256": "30fe7ece0ddbcebef37ce05653214deef267b8e19d9f191291addec1f3aac9d0",
+    "instance": 2,
+    "local_physics_steps": 10,
+    "ordinal": 16,
+    "profile": {
+      "mode": "single_agent",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "max"
+    },
+    "repeat": 1,
+    "state_index": 2,
+    "status": "evaluated",
+    "trial_wall_seconds": 16.038489124999614
+  },
+  "result_sha256": "d4b82e4bb35fb8483a0388507f701df91e8e40f100f9271e2155ae85416bb3cd"
+}

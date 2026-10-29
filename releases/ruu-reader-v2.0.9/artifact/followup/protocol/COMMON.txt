@@ -1,0 +1,40 @@
+Choose one next action from task.action_menu. Its zero-based index identifies the exact vector; no other vector is permitted. The physical clock and remaining resources do not reset. Aim to complete the original full task within its remaining horizon. You receive only the listed visible states/actions, public task and your own local calculation outputs. Do not assume access to another trial, hidden parameters or future observations.
+
+For continuous tasks, avoid state norm greater than 4 and achieve state norm at most 0.05 at each step 28 through 32. Final actions are restricted to the listed vectors. The task validator rescales only tiny rounding overshoots of norm 0.6. For route tasks, action[0]=0,1,2 advances 1,2,3 nodes, capped at 18; reach 18 by the original 12-action horizon with nonnegative fuel. Costs are unknown positive stationary integers depending on departure node/action. There is no refuel or reset.
+
+You may use up to three local Python analyses and then a final decision, or finish immediately. An analysis has 30 seconds wall/CPU, a sampled-memory stop above 1 GiB RSS, and a 100000-character JSON output ceiling. It changes no physical history and obtains no new observation. Variables do not persist between calls. Analysis wire form: {"decision":{"analyze":"Python source defining act(history)"}}. Final wire form: {"decision":{"action_id":0,"record":{...}}}, or {"decision":{"action_id":0}} only when the condition permits an omitted record. The common transport schema is identical across conditions.
+
+Define act(history). history is a Python dictionary with the keys 'states' and
+'actions'. Access them as history['states'] and history['actions']; attribute
+access such as history.states does not work. The lists contain only the legal
+observed history provided in the task. The hidden transition law and future
+states are not available to this function.
+
+Example:
+def act(history):
+    states = history['states']
+    actions = history['actions']
+    return {'observed_steps': len(actions), 'last_state': states[-1]}
+
+Available built-in names (complete list):
+abs, min, max, sum, len, range, enumerate, zip, list, tuple, dict, str, set,
+float, int, complex, bool, round, sorted, reversed, all, any, isinstance,
+map, filter, pow, Exception, ValueError, ZeroDivisionError.
+
+Only public math/cmath imports are allowed. next and iter are not available;
+use indexing or a for loop instead. Files, network access, private attributes,
+private names, classes, global/nonlocal statements, async/await and yield are
+not available. Return JSON-serializable finite values. Complex values may be
+used internally but must be converted to JSON-compatible values for return.
+The encoded result must not exceed 100000 characters.
+
+Each analysis attempt consumes one of the three analysis slots even when it
+returns code_error. There is no replacement or repair slot. The final decision
+uses its own reserved request within the total limit of four model requests.
+At most four model requests and 3780 seconds are available per trial, with 900 seconds per request. No retries, replacement trials or repair prompts are supplied.
+
+The numeric record schema is executable-decision-record-v1. Fields exactly: schema, case_id, menu_sha256, loss_definition_id, candidate_losses, rule. Use this packet's case_id and menu hash. loss_definition_id is remaining_task_failure_forecast_v1. Each row is a candidate-conditioned, uncalibrated forecast of failing the original full task after each next menu action and the best continuation you can plan within the unchanged remaining horizon. All rows use the same meaning and scale: 0 forecasts success, 1 forecasts failure. These are your forecasts, not evaluator labels. Use 1 to 128 rows, one numeric value in [0,1] per menu action. Single-row and repeated rows are permitted; repeated rows retain their multiplicity. There is no weights field. Do not manufacture extra candidates or analysis calls to increase counts.
+
+rule is uniform_mean or worst_case. uniform_mean minimizes the arithmetic mean across rows; worst_case minimizes the maximum across rows. Ties select the first menu index. Numeric lexemes are compared as exact decimal rationals. No nonfinite values, strings for numbers, duplicate JSON keys or extra fields are allowed. Maximum final payload is 262144 bytes, numeric lexeme length is 80 characters, and exponent absolute value is at most 100. The record describes an explicit outer computation; it need not contain prose about internal reasoning.
+
+In every condition, provide your proposed legal action_id. The condition instruction specifies whether a record is required and whether the proposed action or the record-selected action is executed. No task labels or other participants' records will be returned to you.

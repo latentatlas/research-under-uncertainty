@@ -1,0 +1,218 @@
+{
+  "schema": "world04-portable-provenance-v1",
+  "source_files": {
+    "source-001": "ac93f2e1fdceea975352ea96544a898818ae3801dc7e7b6d0100d8d9b25fa301",
+    "source-002": "f1dca5d24e33604eab305139ec304d7c11adfe039ee55689b36451daf0e1995e",
+    "source-003": "ec180c4bbc6c2a1f96b36a2a746b064990376cd70eb5bb89b19f5270dd14bdf2",
+    "source-004": "ab6c9b2473133bd8ecc588d529e7f287d1f6b39617a90193341f0113189c67b0",
+    "source-005": "7441d60040a9b493179272aaee7ec51e21600601adb863a892d86c9458243acc",
+    "source-006": "2e0fde23fff920c390f996b94c2ea9cb038ca97ff99fe694dca591ec7b80ac20",
+    "source-007": "9b532b0a4cac216784a3a7f48ab5921cf38f08b710fe20a6a1a60a8c299be150",
+    "source-008": "f34952ced99e1d873596f878f9e5e4555f66edf211126ff73913c2551e56c082",
+    "source-009": "a38a317c8353cfb9b785090a18119dec2d989965eaf80881549d5e17c4574fae",
+    "source-010": "415f958d250e2e69f3fa1feb9ccce9b0a10ed71c605a57688566121246920dd9",
+    "source-011": "71c335d2daf6d9cf6508db7c6fc91699e0a4e32dd5ccca960820ff5e6d8b27ef",
+    "source-012": "e60696658fbb89f3f88ebeefd214682582e59f34e4e1ec45b50763049e9a0d8e",
+    "source-013": "11cd4e7f2a72577e822c2f9406617ad87ef43a04573fc0f59c519595def9ca9f",
+    "source-014": "1f26f503ef329dadbab44eb87d6e5bde651e58b148089e44a10b5d574f2817e0",
+    "source-015": "496a2a729fab5a740df4fe3f64b65159e14ac97a35c181e6a3bbaaac5063050f",
+    "source-016": "8b18643e542fec8cc6af6d484be7ac67f1956e24b95b82fa6599e871307ed352",
+    "source-017": "c6364d4209127ec4a7be7ab6c2ebae5883c5aadde1c681f24f429598867eb1de",
+    "source-018": "1eabd88d7b2522da762c3ae3a11045137ce874fcf7e361700d8804a4de79ac1a",
+    "source-019": "3ad244d3b32110a8e90fa2635d968dc2203f8bf1a8910695c4a5f596c68010d1",
+    "source-020": "a05007e6dd8554587c18204eb79b660e5f04b0ba7072b6b5a902092d9ee75bab",
+    "source-021": "715547d61fe8352c965476c471d4f050703b57261acf3b727561d0ea89d8f707",
+    "source-022": "a6fafce33a98e52777f0df5ddead7cc0ba10616ed9bb8f612edac885f0076f85",
+    "source-023": "e328709c9ac298b6343ee03dd05a525b63036ebd617ea75f516fd211ba47b6b3",
+    "source-024": "30d0ccea1a796c533bae7cbf3e082df9f91e2ed347120ec305fb7dc0f70f76b0",
+    "source-025": "1031bcbf3ba17a0745efd33370a581733d6813510c7aeb61d8d9972566af077e",
+    "source-026": "e0bf5eb50aaea9532c32fadc1b27ed4c25a568f51180cf49572a3bdec9bc29aa",
+    "source-027": "ad08a17b20f7bd9547963e0e8d2ff73b8ddee4002f8848fc823276323828438e",
+    "source-028": "28099b180682434193c2957ce96766c6b6410ec1ed9b6ce88a50f09e0178c7bb",
+    "source-029": "ecc28d3ee1a3e34c1c47b4e047e794e0ce62486df9ef4eb623fed2721083e412",
+    "source-030": "27385b5230357292687bdb6b812c00d68cf43a8943a1b7f72a6f545710109b37",
+    "source-031": "299b651b3a00a596fd2bd61f06d0bc16e42db1a918249fd4ecf7df0ad85911b6",
+    "source-032": "bc319ff71d44823fb067a853de339a42dfe1a60d2d1ed0b8f7eada918a126894",
+    "source-033": "31acd92aa0e644f160e3c91d0c7842d9fedd31703a95f36c0203ea7e3aa4ed85",
+    "source-034": "135e63cb16e95a395ab096f3ed14df3d3657cb77dc4ea6613048c2792d970d18",
+    "source-035": "4d6090b76f3c307ea0a9b6169062fa0a33f6b4b4ec535a6805f3683d3376a6ea",
+    "source-036": "875aad63fb6aaa0439d172e455532e8059ad068bd9327bbe78d2dbcbfe0ec5ac",
+    "source-037": "ad08a17b20f7bd9547963e0e8d2ff73b8ddee4002f8848fc823276323828438e",
+    "source-038": "500fd6252214bc2359f4fe71f46e0ac8ce13d07e9354aa39dacfe4763b1f17e9",
+    "source-039": "ebacf623ef947099d1e71d58c4cc18c9c6c6bdc1fce17190de92c67e448c636c",
+    "source-040": "037c2708295de92a4395f630a5cf2117fa902a7cd76522684789b87c879a20ac",
+    "source-041": "bc319ff71d44823fb067a853de339a42dfe1a60d2d1ed0b8f7eada918a126894",
+    "source-042": "ee6f4177e8b5140af195fce5e8dd52204dcf4d9affd5f06ef226d4b2138eb18e",
+    "source-043": "19eb69651f2a23cf39b53c522a668abf13ae04d305ec3ad379640b8428aba393",
+    "source-044": "deaf921204b46a1e529df14820c5af89eb45558f0642364041c30cd6a8890ace",
+    "source-045": "c6364d4209127ec4a7be7ab6c2ebae5883c5aadde1c681f24f429598867eb1de",
+    "source-046": "eb06cb35c69e76e7cbe6b5709ef6a8b28156368c6f414274dc129aff22abcec2",
+    "source-047": "51228dcf782bf4f8e89922102730bbb96fe3133d55b4b2ba63a811425f435b30",
+    "source-048": "83578d3d6544e4d984e0b0ae4ad768fd93dc8e388c72ff6fd0df40ac0d20c364",
+    "source-049": "a6fafce33a98e52777f0df5ddead7cc0ba10616ed9bb8f612edac885f0076f85",
+    "source-050": "3855765a019653487232d901dd650035c3bb54f766098e6b9d45e6e35a02b19e",
+    "source-051": "2c25e9ee08301c478b26afb40f00249c97014eefe5821fc12a6ce58cafc24693",
+    "source-052": "d42ed597aa0054b6de772264632b95e8a442da72c2ad5df57efd6b401ac44d10",
+    "source-053": "e2b935351ed227ae2c4790c1221c396708cb2ec523c423798951a0b0f5e401d4",
+    "source-054": "65df7e921974353cc00bc7748b351d9b22f18f91f88e68786dff279f7a385317",
+    "source-055": "53d8c7652f1a4cf4016b28314a26002a795acfe110596324c7b267426fcb210a",
+    "source-056": "56047ca0e15e5be72a82c2f261d2e012eeefbdfa06dcc5ef0ad516087d195e9c",
+    "source-057": "053b93994092825276ff123f679de801d20442250ae83101847eee2ce59b34aa",
+    "source-058": "f8e5d6b9ad34b7e850d2cf002cf3c69c739225c7b183b03656f869cf63eb9b95",
+    "source-059": "e6d976d2093445c10261855004ff4c86bd644bbe5bf5bf613ed0b3989c2bd13e",
+    "source-060": "14339e0b1f72ab9029fc377219c1e245e9d44564a94448160c48da375574f327",
+    "source-061": "206f943569a09cc7c3fd68da62f9bd58de83d7d0aa519f06e8c39cc1f7bee9a3",
+    "source-062": "b0eae346dd631dcb446375cbf84703b78da9412e8dac7e4e22f57ba9323ea6f2",
+    "source-063": "d9f44b7110fb1341ad3757ce6c582cee330e9ca3e97c00071f4bc700496ab1a2",
+    "source-064": "3683b8c7f788215b4846e961c16bb26b408440ae9246080ce858ce043b7b8738",
+    "source-065": "efd20d114c1a9f935630fe916f6aa6269e6add92ed9518d8eb8aafaf5e14fbda",
+    "source-066": "026ad1245a9547dc7e019f82609cfe920474f24733ac9ab229eec108534eee99",
+    "source-067": "ca7b39f808d4d2ce3c549801704f5ef33271d8dc6dbade9c285e68b53e670b3c",
+    "source-068": "6297a2d81c99900fdfd163c486cfd62312956366032294087049fc3ad848c17d"
+  },
+  "code_transformations": [
+    {
+      "source": "source-002",
+      "definition": "drift",
+      "destination": "src/w04replay/physics_base.py",
+      "ast_sha256": "e2e764fad7b266d0c6d2b83136d86b6d11cd2eb1cd3bf1e8fe71ddd0cf8583b0",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-002",
+      "definition": "transition",
+      "destination": "src/w04replay/physics_base.py",
+      "ast_sha256": "a40b1c5e4c81e501a5c360fc7df0750cc489fb508b2d123f31c8d2826467ed25",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-003",
+      "destination": "src/w04replay/physics.py",
+      "operation": "two_import_paths_only; all constants and definitions unchanged"
+    },
+    {
+      "source": "source-004",
+      "destination": "src/w04replay/snapshot_core.py",
+      "operation": "digest import and bind_method source path only; numerical method unchanged"
+    },
+    {
+      "source": "source-005",
+      "definition": "near",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "04cd5ed57ee97bb0acbb554047ae2c3982df01aa5436e097d0363e0f2e18786f",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "angle",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "b367e0a9eb78ad28074167b7fefbd41c4b28058a00922a4e9768b84b970176b7",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "features",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "3ec009da5861cbd9b3164353f83afc165dc297b3416a0330f2d4ed3fd52ca4e8",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "matrix",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "9260d6c91704e5c53904a2c3e20fd9ded92231f59b0ee8c20460f84a0e900baa",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "step",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "64142bfed1f375d7517c08e3158719f50a6bb5a3f5bd5ab237c5578a3a039ebc",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "project",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "9a09f64e839ab0f0610e8624d01fabf1001aa759c70d9a7e55b0db4eefaeb75a",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "unpack",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "42979c0dbd488e5fc96386e582853895e10056b350cac7ff45f55ade962dd632",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "evaluate",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "f84b1e64d9a93268ef6a722e208d3b56ea0f4a355739a9a46b45a6e84ceca93c",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "optimize",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "7a42bc436884ba5e6cffd54d37c5090b0758c2c46e33dd89dff43b95a91a749d",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "attempt",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "8d78b3e6d85967ef3fc3efef68ce5142d930ddcdc368eb4ad96ff2ebb49b442a",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "one_step_model",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "dcf778af436937a6a9452b28247bb5fe3d5feaa25c032fdae2cd22a8e298ad8a",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "predict",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "a1fe7aa49cc4f0cec1f25c2d30353e37e9b60b090d08637615d0e2dae3006720",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "minimax",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "7b7d3dab74551867eb6f00ae9b24f9c614f5fc1f5079a2348c0eff454bd8c487",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "weighted",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "658f993714ad97deac2ed790b0aa65c71d3cca9bface557f907ba6da5bd875f8",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "definition": "rotation",
+      "destination": "src/w04replay/components.py",
+      "ast_sha256": "0e73e08678920746db8be913b29d876c1c90a8f5eaf69f26409117d9515cf536",
+      "operation": "definition_preserved"
+    },
+    {
+      "source": "source-005",
+      "destination": "src/w04replay/components.py",
+      "operation": "main scientific body unchanged; inputs become arguments, archive IO removed",
+      "body_sha256": "3fa61cf2741ba4bcd6af7452aeda8ad29698181c367eacc391c489c0712e895a"
+    }
+  ],
+  "selected_cases": [
+    "case-01",
+    "boundary-01",
+    "case-03",
+    "boundary-02"
+  ],
+  "data_projection": "Only selected case histories/worlds, eight action identities, four last analysis numeric outputs and historical comparison targets. No participant program execution, raw model event streams, provider runtime or Git history.",
+  "scope": "Private local workbench; exact disclosure scope and public release authorization remain pending."
+}

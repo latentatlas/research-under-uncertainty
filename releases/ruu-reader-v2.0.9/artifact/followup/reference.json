@@ -1,0 +1,190 @@
+{
+  "combined_counts": {
+    "planned": 48,
+    "real_unstarted": 0,
+    "recorded": 48,
+    "started": 48,
+    "started_without_result": 0,
+    "status_counts": {
+      "completed": 46,
+      "technical": 2
+    }
+  },
+  "full_task_success_measured": false,
+  "pooled_primary_inference": false,
+  "profiles": {
+    "gpt-6-astra": {
+      "arms": {
+        "A_optional_model": {
+          "execution_agreement_by_construction": false,
+          "labels": {
+            "L": 1,
+            "P": 6
+          },
+          "planned": 8,
+          "record_proposal_matches": 0,
+          "recorded": 8,
+          "records_with_duplicate_rows": 0,
+          "same_rule_action_records": 0,
+          "single_row_records": 0,
+          "status_counts": {
+            "completed": 7,
+            "technical": 1
+          },
+          "valid_record_denominator": 0
+        },
+        "B_required_model": {
+          "execution_agreement_by_construction": false,
+          "labels": {
+            "P": 8
+          },
+          "planned": 8,
+          "record_proposal_matches": 8,
+          "recorded": 8,
+          "records_with_duplicate_rows": 0,
+          "same_rule_action_records": 8,
+          "single_row_records": 8,
+          "status_counts": {
+            "completed": 8
+          },
+          "valid_record_denominator": 8
+        },
+        "C_required_executor": {
+          "execution_agreement_by_construction": true,
+          "labels": {
+            "L": 2,
+            "P": 5
+          },
+          "planned": 8,
+          "record_proposal_matches": 7,
+          "recorded": 8,
+          "records_with_duplicate_rows": 0,
+          "same_rule_action_records": 6,
+          "single_row_records": 6,
+          "status_counts": {
+            "completed": 7,
+            "technical": 1
+          },
+          "valid_record_denominator": 7
+        }
+      },
+      "fully_scientifically_completed_triplets": 7,
+      "pairs": {
+        "A_optional_model__B_required_model": {
+          "difference": 0.14285714285714285,
+          "interpretation": "descriptive pilot; no population interval or model ranking",
+          "missing_or_technical_pairs": 1,
+          "observed_pairs": 7,
+          "planned_pairs": 8,
+          "right_minus_left_net": 1
+        },
+        "B_required_model__C_required_executor": {
+          "difference": -0.2857142857142857,
+          "interpretation": "descriptive pilot; no population interval or model ranking",
+          "missing_or_technical_pairs": 1,
+          "observed_pairs": 7,
+          "planned_pairs": 8,
+          "right_minus_left_net": -2
+        }
+      },
+      "partial_triplets": 0,
+      "planned_partial_triplets": 0,
+      "planned_trials": 24,
+      "planned_triplets": 8,
+      "profile": {
+        "mode": "single_agent",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "max",
+        "service_tier": "fast"
+      },
+      "scientifically_incomplete_triplets": 1,
+      "triplets_with_technical_loss": 1
+    },
+    "gpt-6.1-sol": {
+      "arms": {
+        "A_optional_model": {
+          "execution_agreement_by_construction": false,
+          "labels": {
+            "L": 1,
+            "P": 7
+          },
+          "planned": 8,
+          "record_proposal_matches": 0,
+          "recorded": 8,
+          "records_with_duplicate_rows": 0,
+          "same_rule_action_records": 0,
+          "single_row_records": 0,
+          "status_counts": {
+            "completed": 8
+          },
+          "valid_record_denominator": 0
+        },
+        "B_required_model": {
+          "execution_agreement_by_construction": false,
+          "labels": {
+            "L": 2,
+            "P": 6
+          },
+          "planned": 8,
+          "record_proposal_matches": 8,
+          "recorded": 8,
+          "records_with_duplicate_rows": 0,
+          "same_rule_action_records": 8,
+          "single_row_records": 6,
+          "status_counts": {
+            "completed": 8
+          },
+          "valid_record_denominator": 8
+        },
+        "C_required_executor": {
+          "execution_agreement_by_construction": true,
+          "labels": {
+            "L": 1,
+            "P": 7
+          },
+          "planned": 8,
+          "record_proposal_matches": 8,
+          "recorded": 8,
+          "records_with_duplicate_rows": 1,
+          "same_rule_action_records": 7,
+          "single_row_records": 7,
+          "status_counts": {
+            "completed": 8
+          },
+          "valid_record_denominator": 8
+        }
+      },
+      "fully_scientifically_completed_triplets": 8,
+      "pairs": {
+        "A_optional_model__B_required_model": {
+          "difference": -0.125,
+          "interpretation": "descriptive pilot; no population interval or model ranking",
+          "missing_or_technical_pairs": 0,
+          "observed_pairs": 8,
+          "planned_pairs": 8,
+          "right_minus_left_net": -1
+        },
+        "B_required_model__C_required_executor": {
+          "difference": 0.125,
+          "interpretation": "descriptive pilot; no population interval or model ranking",
+          "missing_or_technical_pairs": 0,
+          "observed_pairs": 8,
+          "planned_pairs": 8,
+          "right_minus_left_net": 1
+        }
+      },
+      "partial_triplets": 0,
+      "planned_partial_triplets": 0,
+      "planned_trials": 24,
+      "planned_triplets": 8,
+      "profile": {
+        "mode": "single_agent",
+        "model": "gpt-6.1-sol",
+        "reasoning_effort": "max",
+        "service_tier": "fast"
+      },
+      "scientifically_incomplete_triplets": 0,
+      "triplets_with_technical_loss": 0
+    }
+  }
+}

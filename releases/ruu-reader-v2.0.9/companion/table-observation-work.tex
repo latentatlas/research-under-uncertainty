@@ -1,0 +1,27 @@
+\begin{table}[!ht]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Measured operation & Fixed & Selected\\
+\midrule
+Environment extra observations & 5,000 & 5,000\\
+Candidate--history checks & 233,280,000 & 233,280,000\\
+Candidate history steps & 494,337,048 & 494,337,048\\
+Query--candidate evaluations & 5,283,246 & 10,566,492\\
+Selection-branch checks & 0 & 20,000\\
+Target--candidate evaluations & 5,283,246 & 5,283,246\\
+Target--candidate steps & 21,132,984 & 21,132,984\\
+Certificate-branch lookups & 5,000 & 5,000\\
+Reused query values within an arm & 0 & 5,283,246\\
+Actor CPU seconds & 136.38 & 137.96\\
+Actor wall seconds & 143.91 & 146.28\\
+Actor-process wall seconds & 311.74 & 313.80\\
+\bottomrule
+\end{tabular}
+\caption{Work for the separate 5,000-draw acquisition study.
+Counters are operation-specific and may overlap; reused values are
+not additional evaluations. No cross-arm or cross-record caching is
+used. Timing does not identify an order-independent speed difference.}
+\label{tab:observation-work}
+\end{table}

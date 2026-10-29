@@ -1,0 +1,1 @@
+{"decision":{"action_id":7,"record":{"candidate_losses":[[0.98,0.99,0.96,0.88,0.78,0.69,0.63,0.61,0.66,0.75,0.85,0.94,0.82]],"case_id":"probe-02","loss_definition_id":"remaining_task_failure_forecast_v1","menu_sha256":"ff850874e70cbd63814bd43bd84219bd9a22a505accf6671ad0748c17f69096a","rule":"uniform_mean","schema":"executable-decision-record-v1"}}}

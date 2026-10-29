@@ -1,0 +1,332 @@
+"""Synthetic-only gate qualification. Every run has an immutable local source snapshot."""
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import copy
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import tempfile
+import time
+from datetime import datetime, timezone
+import runtime as r
+import fixtures
+import sandbox
+from wire import canonical, digest, ContractError, guard_view
+
+HERE = Path(__file__).resolve().parent
+SOURCE_NAMES = ("runtime.py", "sandbox.py", "fixtures.py", "controls.py", "paired_statistics.py",
+                "actor/wire.py", "actor/compute.py", "actor/selector.py", "actor/worker.py")
+
+
+def run(destination):
+    destination = Path(destination)
+    destination.mkdir(exist_ok=False)
+    snapshots = destination / "source-snapshot"
+    snapshots.mkdir()
+    hashes = {}
+    for name in SOURCE_NAMES:
+        p = snapshots / name
+        p.parent.mkdir(exist_ok=True)
+        shutil.copyfile(HERE / name, p)
+        hashes[name] = r.sha(p)
+    r.write_new(destination / "INTENT.json", {"created_utc": datetime.now(timezone.utc).isoformat(),
+                "kind": "synthetic_controls_only", "source_hashes": hashes,
+                "fixture_definition_sha256": digest(fixtures.definitions()), "population_draws": 0})
+    wall, cpu = time.monotonic(), time.process_time()
+    checks = []
+    reference_work = {"examined": 0, "history_steps": 0, "target_steps": 0, "query_evaluations": 0}
+    sandbox_probe_processes = 0
+
+    def check(name, condition):
+        if not condition:
+            raise AssertionError(name)
+        checks.append({"name": name, "status": "passed"})
+
+    def rejected(name, fn, code=None):
+        try:
+            fn()
+        except (ContractError, ValueError, RuntimeError, OSError) as exc:
+            check(name, code is None or code in str(exc))
+            return
+        raise AssertionError(name + ": unexpectedly accepted")
+
+    try:
+        environments = {}
+        pairs = []
+        replay_science = []
+        before_truth = {}
+        fixture_rows = fixtures.definitions()
+        semantic_fixture = None
+        for f in fixture_rows:
+            env = r.Environment(f["trial_id"], f["table"], f["actions"])
+            reverse_env = r.Environment(f["trial_id"], f["table"], f["actions"])
+            pair = r.collect_pair(env)
+            reverse = r.collect_pair(reverse_env, tuple(reversed(r.ARMS)))
+            (destination / "private-pairs").mkdir(exist_ok=True)
+            r.write_new(destination / "private-pairs" / (f["trial_id"] + ".json"), pair)
+            r.write_new(destination / "private-pairs" / (f["trial_id"] + "-reverse.json"), reverse)
+            check("arm_order_science_" + f["trial_id"], canonical(r.scientific_projection(pair)) == canonical(r.scientific_projection(reverse)))
+            check("all_records_exactly_two_observations_" + f["trial_id"], env.work["extra_observations"] == {"fixed": 1, "adaptive": 1})
+            oracle = fixtures.independent_oracle(pair["view"]["history"])
+            for k, v in oracle["work"].items():
+                reference_work[k] += v
+            if semantic_fixture is None and oracle["semantic_witnesses"]:
+                semantic_fixture = (f["actions"], oracle["semantic_witnesses"])
+            for arm in r.ARMS:
+                result = pair["arms"][arm]["result"]
+                chosen = oracle["selected"] if arm == "adaptive" else "q0"
+                expected_targets = sorted(oracle["branches"][chosen][result["output"]])
+                check("independent_certificate_and_meter_" + f["trial_id"] + "_" + arm,
+                      result["query_id"] == chosen and result["target_values"] == expected_targets
+                      and result["initial_target_cardinality"] == len(oracle["initial_targets"])
+                      and result["compatible_before"] == oracle["compatible"]
+                      and result["compatible_after"] == oracle["counts"][chosen][result["output"]]
+                      and result["work"]["history_steps"] == oracle["work"]["history_steps"])
+            check("pre_observation_possibility_" + f["trial_id"],
+                  pair["arms"]["adaptive"]["selection"]["possible_gain_loss"] == oracle["possible_gain_loss"])
+            environments[f["trial_id"]] = env
+            before_truth[f["trial_id"]] = copy.deepcopy(env)
+            pairs.append(pair)
+            replay_science.append(r.scientific_projection(pair))
+        views = [p["view"] for p in pairs]
+        check("initial_singletons_exercised", any(p["arms"]["fixed"]["result"]["initial_target_cardinality"] == 1 for p in pairs))
+        check("ambiguous_histories_exercised", any(p["arms"]["fixed"]["result"]["initial_target_cardinality"] > 1 for p in pairs))
+        check("certifying_and_abstaining_outputs_exercised", {p["arms"][a]["result"]["certificate"] for p in pairs for a in r.ARMS} == {True, False})
+        check("no_shared_cache_processes", len({p["arms"][a]["result"]["pid"] for p in pairs for a in r.ARMS}) == 2 * len(pairs))
+        check("alternative_query_and_realized_gain_control", any(p["arms"]["adaptive"]["result"]["query_id"] == "q1"
+              and p["arms"]["adaptive"]["result"]["certificate"] and not p["arms"]["fixed"]["result"]["certificate"] for p in pairs))
+
+        # A 2x2 semantic control: two valid class members with identical permitted
+        # histories AND both possible one-step outputs, different true targets;
+        # independently vary a private answer-key file. Neither is actor input.
+        check("semantic_world_pair_exists", semantic_fixture is not None)
+        actions, witnesses = semantic_fixture
+        blind_pairs = []
+        blind_truths = []
+        private_key = destination / "PRIVATE-KEY.json"
+        for world_i, witness in enumerate(witnesses):
+            for key_i in (0, 1):
+                private_key.write_text(json.dumps({"answer_key": key_i * 3}))
+                env = r.Environment("s4000", witness["table"], actions)
+                pair = r.collect_pair(env)
+                ledger = r.Ledger(destination / ("blind-%d-%d" % (world_i, key_i)), [pair["view"]], digest(["semantic-control", world_i, key_i]))
+                ledger.commit(pair); ledger.seal()
+                r.readout(ledger, {"s4000": env})
+                truth = r.read(ledger.directory / "PRIVATE-TRUTH-AUDIT.json")[0]["truth"]
+                check("semantic_truth_matches_known_fixture_%d_%d" % (world_i, key_i), truth == witness["target"])
+                blind_truths.append(truth)
+                blind_pairs.append(r.scientific_projection(pair))
+        check("valid_world_and_answer_key_blindness", len({digest(x) for x in blind_pairs}) == 1 and len(set(blind_truths)) == 2)
+        check("different_target_same_view_is_ambiguous", all(not b["arms"][arm]["result"]["certificate"] for b in blind_pairs for arm in r.ARMS))
+        r.write_new(destination / "SEMANTIC-BLINDNESS.json", {"same_scientific_digest": digest(blind_pairs[0]),
+                    "valid_class_worlds": 2, "private_key_variants": 2, "distinct_true_targets": len(set(blind_truths)),
+                    "actual_actor_runs": 8, "all_commit_before_truth": True})
+
+        # Duplicates remain two observations-per-pair and two denominator entries.
+        duplicate_pairs = []
+        duplicate_envs = {}
+        for trial in ("s3001", "s3002"):
+            env = r.Environment(trial, fixture_rows[0]["table"], fixture_rows[0]["actions"])
+            duplicate_pairs.append(r.collect_pair(env))
+            duplicate_envs[trial] = env
+        duplicate_ledger = r.Ledger(destination / "duplicate-records", [p["view"] for p in duplicate_pairs], digest(["duplicate_controls"]))
+        for pair in duplicate_pairs: duplicate_ledger.commit(pair)
+        duplicate_ledger.seal()
+        duplicate_readout = r.readout(duplicate_ledger, duplicate_envs)
+        check("duplicates_preserve_denominator_and_work", duplicate_readout["planned_N"] == 2
+              and duplicate_pairs[0]["view"]["history_id"] == duplicate_pairs[1]["view"]["history_id"]
+              and duplicate_readout["shared_environment_work"]["extra_observations"] == 4
+              and all(v["history_checks"] == 2 * 46656 for v in duplicate_readout["work"].values()))
+
+        # Identity, exact surface, one-use, original-cutoff and mutable clone tests.
+        f0 = fixture_rows[0]
+        clean = lambda: r.Environment(f0["trial_id"], f0["table"], f0["actions"])
+        selection = pairs[0]["arms"]["fixed"]["selection"]
+        for field, value, code in [("query_id", "target", "selection_query"), ("trial_id", "s5000", "selection_identity"),
+                                    ("view_sha256", "0" * 64, "selection_identity"), ("arm", "other", "selection_arm")]:
+            bad = copy.deepcopy(selection); bad[field] = value
+            env = clean()
+            rejected("observation_reject_" + field, lambda e=env,b=bad: e.observe(b), code)
+            check("rejected_query_no_spend_" + field, sum(env.work["extra_observations"].values()) == 0)
+        bad = copy.deepcopy(selection); bad["continuation"] = [0]
+        rejected("continuation_and_extra_fields_denied", lambda: clean().observe(bad), "selection_fields")
+        env = clean(); env.observe(selection)
+        rejected("second_observation_denied", lambda: env.observe(selection), "one_observation_budget")
+        env = clean(); env._Environment__cutoff += 1
+        rejected("altered_original_detected", lambda: env.observe(selection), "original_state_changed")
+        env = clean(); env._Environment__clones["fixed"]["state"] += 1
+        rejected("altered_clone_cutoff_detected", lambda: env.observe(selection), "clone_cutoff_changed")
+        env = clean(); env._Environment__clones["adaptive"] = env._Environment__clones["fixed"]
+        rejected("shared_mutable_clone_detected", lambda: env.observe(selection), "shared_arm_state")
+        env = clean(); env._Environment__clones["fixed"]["state"] += 1
+        check("other_clone_and_original_unaffected", env._Environment__clones["adaptive"]["state"] == env._Environment__cutoff
+              and env.original_digest() == env._Environment__original_digest)
+        for key in ("true_target", "world_id", "private_state", "candidate_ids", "terminal_output"):
+            bad_view = copy.deepcopy(views[0]); bad_view[key] = 0
+            rejected("forbidden_view_field_" + key, lambda v=bad_view: guard_view(v), "view_fields")
+        bad_view = copy.deepcopy(views[0]); bad_view["history"][0][1] = True
+        rejected("bool_not_bit", lambda: guard_view(bad_view), "history_symbols")
+
+        # Negative wire cases pass through the actual sandboxed worker, not only
+        # through controller-side validators. No environment call is made here.
+        for fault in ("private_view_field", "extra_response_field", "wrong_response_identity", "nonbinary_response"):
+            actor = sandbox.Actor()
+            r.USAGE["actor_processes"] += 1
+            try:
+                view = copy.deepcopy(views[0])
+                if fault == "private_view_field": view["true_target"] = 0
+                actor.send({"arm": "fixed", "view": view})
+                if fault == "private_view_field":
+                    rejected("worker_rejects_" + fault, actor.receive, "view_fields")
+                else:
+                    selected = actor.receive()
+                    receipt = {"schema": "one-step-observation-v1", "trial_id": view["trial_id"],
+                               "arm": "fixed", "view_sha256": digest(view), "query_id": selected["query_id"], "output": 0}
+                    if fault == "extra_response_field": receipt["terminal_output"] = 1
+                    if fault == "wrong_response_identity": receipt["trial_id"] = "s4999"
+                    if fault == "nonbinary_response": receipt["output"] = True
+                    actor.send(receipt)
+                    rejected("worker_rejects_" + fault, actor.receive, "actor_rejected")
+            finally:
+                actor.close()
+                r.USAGE["forced_actor_cleanup"] += actor.forced_cleanup
+            check("rejected_worker_exits_" + fault, actor.p.returncode == 2 and not actor.forced_cleanup)
+
+        empty_view = r.make_view("s4900", [[0, 0]] * 7 + [[0, 1]])
+        actor = sandbox.Actor(); r.USAGE["actor_processes"] += 1
+        try:
+            actor.send({"arm": "adaptive", "view": empty_view})
+            rejected("empty_compatible_class_no_certificate", actor.receive, "empty_initial_support")
+        finally:
+            actor.close(); r.USAGE["forced_actor_cleanup"] += actor.forced_cleanup
+        check("empty_class_worker_exits", actor.p.returncode == 2 and not actor.forced_cleanup)
+
+        # The OS boundary is checked without the Python audit hook to distinguish layers.
+        secret = destination / "PRIVATE-SENTINEL.txt"
+        secret.write_text("synthetic-no-world-data\n")
+        forbidden_write = destination / "must-not-exist.txt"
+        canary = HERE / "actor" / "qa-private-symlink"
+        need_no_symlink = not canary.exists() and not canary.is_symlink()
+        check("symlink_probe_new_name", need_no_symlink)
+        canary.symlink_to(secret.resolve())
+        try:
+            code = 'import json,socket,subprocess\nresults={}\n'
+            probes = {
+                "private_file": 'open(' + repr(str(secret.resolve())) + ').read()',
+                "private_symlink": 'open(' + repr(str(canary)) + ').read()',
+                "file_write": 'open(' + repr(str(forbidden_write.resolve())) + ',"w").write("bad")',
+                "network": 'socket.socket().connect(("127.0.0.1",9))',
+                "spawn": 'subprocess.run(["/usr/bin/true"],check=True)'}
+            for name, expression in probes.items():
+                code += '\ntry:\n ' + expression + '\n results[' + repr(name) + ']=False\nexcept PermissionError:\n results[' + repr(name) + ']=True\n'
+            code += '\nprint(json.dumps(results))\n'
+            probe = subprocess.run(sandbox.command(code=code), capture_output=True, text=True, timeout=10, cwd="/", env=sandbox.ENV)
+            sandbox_probe_processes += 1
+            r.write_new(destination / "OS-ACCESS-PROBE.json", {"exit_code": probe.returncode, "stdout": probe.stdout, "stderr": probe.stderr})
+            check("OS_access_probe_exited", probe.returncode == 0 and not probe.stderr)
+            outcomes = json.loads(probe.stdout)
+            for name in probes:
+                check("OS_denied_" + name, outcomes[name] is True)
+            check("OS_write_left_no_file", not forbidden_write.exists())
+        finally:
+            canary.unlink()
+        check("symlink_probe_cleanup", not canary.is_symlink())
+
+        # Complete-plan commitment, separate wrong-certificate and tamper scenarios.
+        ledger = r.Ledger(destination / "healthy", views, digest(fixture_rows))
+        rejected("truth_before_any_commit_denied", lambda: environments[views[0]["trial_id"]].reveal_after_commit(ledger, None), "truth_before_complete_commitment")
+        ledger.commit(pairs[0])
+        rejected("partial_plan_seal_denied", ledger.seal, "all_planned_pairs_required")
+        rejected("duplicate_pair_denied", lambda: ledger.commit(pairs[0]), "commit_trial_identity")
+        partial = ledger.incomplete()
+        check("technical_missing_retains_planned_denominator", partial["planned_N"] == len(pairs) and
+              partial["missing_pairs"] == len(pairs) - 1 and partial["decision"]["status"] == "technical_incomplete"
+              and partial["truth_reads"] == 0)
+        for pair in pairs[1:]: ledger.commit(pair)
+        ledger.seal()
+        rejected("normal_API_edit_after_seal_denied", lambda: ledger.commit(pairs[0]), "commit_after_seal_forbidden")
+        healthy = r.readout(ledger, environments)
+        check("healthy_truth_audit_no_wrong_certificate", healthy["wrong_certificates"] == 0 and healthy["issued_certificates"] > 0)
+        check("truth_reads_after_all_pairs", next(e["index"] for e in ledger.events if e["event"] == "truth_read") >
+              next(e["index"] for e in ledger.events if e["event"] == "all_pairs_sealed"))
+        check("complete_2N_observation_accounting", healthy["shared_environment_work"]["extra_observations"] == 2 * len(pairs)
+              and healthy["unknown_work_records"] == 0)
+
+        # Deliberately corrupt a certificate BEFORE a new, valid hash seal.
+        bad_pair = copy.deepcopy(next(p for p in pairs if p["arms"]["adaptive"]["result"]["certificate"] and
+                                      p["arms"]["adaptive"]["result"]["query_id"] == "q1"))
+        result = bad_pair["arms"]["adaptive"]["result"]
+        result["prediction"] = (result["prediction"] + 1) % 4
+        result["target_values"] = [result["prediction"]]
+        t = bad_pair["view"]["trial_id"]
+        fault_ledger = r.Ledger(destination / "wrong-certificate", [bad_pair["view"]], digest(["deliberate_certificate_fault"]))
+        fault_ledger.commit(bad_pair); fault_ledger.seal()
+        bad_readout = r.readout(fault_ledger, {t: copy.deepcopy(before_truth[t])})
+        check("valid_hash_wrong_certificate_hold", bad_readout["wrong_certificates"] == 1 and bad_readout["wrong_pairs"] == 1
+              and bad_readout["decision"]["status"] == "invalid_certificate_hold" and not bad_readout["decision"]["inferential_claim"])
+
+        tamper = r.Ledger(destination / "tamper", [pairs[0]["view"]], digest(["post_seal_fault"]))
+        tamper.commit(pairs[0]); tamper.seal()
+        path = tamper.directory / (pairs[0]["view"]["trial_id"] + ".json")
+        path.chmod(0o600); path.write_bytes(path.read_bytes() + b" ")
+        rejected("post_seal_change_is_integrity_fault", tamper.authorize_truth, "sealed_row_hash_mismatch")
+        check("post_seal_fault_no_truth_reads", not tamper._truth_ids)
+
+        for field, mutate, error in [
+            ("missing_meter", lambda p: p["arms"]["fixed"]["result"]["work"].pop("history_steps"), "work_fields"),
+            ("over_budget_meter", lambda p: p["arms"]["adaptive"]["result"]["work"].update(history_checks=46657), "one_full_history_pass"),
+            ("missing_time", lambda p: p["arms"]["fixed"]["result"]["timing"].pop("actor_cpu_seconds"), "timing_missing"),
+            ("extra_observation", lambda p: p["environment_work"]["extra_observations"].update(fixed=2), "environment_work"),
+            ("early_truth_meter", lambda p: p["environment_work"].update(truth_steps=4), "early_truth_violation"),
+            ("unreaped_child", lambda p: p["arms"]["fixed"]["process"].update(exited=False), "process_not_cleanly")]:
+            bad = copy.deepcopy(pairs[0]); mutate(bad)
+            rejected(field + "_rejected", lambda p=bad: r.validate_pair(p, p["view"]), error)
+        check("marginal_work_is_signed_difference", all(healthy["marginal_work"][k] ==
+              healthy["work"]["adaptive"][k] - healthy["work"]["fixed"][k] for k in healthy["marginal_work"]))
+        check("net_zero_ratio_null", r.statistics.extra_work_per_net_certificate(10, 2, 2) is None)
+        check("net_negative_ratio_null", r.statistics.extra_work_per_net_certificate(10, 1, 2) is None)
+        check("saving_stays_signed", r.statistics.extra_work_per_net_certificate(-10, 3, 1) == -5)
+
+        # All-abstention set: zero wrong / zero issued is not a successful audit.
+        abstaining = next(p for p in pairs if all(not p["arms"][arm]["result"]["certificate"] for arm in r.ARMS))
+        abstain_ledger = r.Ledger(destination / "no-certificates", [abstaining["view"]], digest(["abstaining_control"]))
+        abstain_ledger.commit(abstaining); abstain_ledger.seal()
+        t = abstaining["view"]["trial_id"]
+        abstain = r.readout(abstain_ledger, {t: copy.deepcopy(before_truth[t])})
+        check("empty_certificate_denominator_not_success", abstain["issued_certificates"] == 0 and
+              abstain["certificate_audit"] == "not_assessed_no_certificates" and
+              all(v is None for v in abstain["marginal_work_per_net_certificate"].values()))
+        check("empty_query_disagreement_denominator_null", all(row["rate"] is None for arm in abstain["branch_hit_rates"].values()
+              for key, row in arm.items() if row["denominator"] == 0))
+        check("empty_rate_denominator_actually_exercised", any(row["denominator"] == 0 for arm in abstain["branch_hit_rates"].values() for row in arm.values()))
+
+        r.write_new(destination / "SCIENTIFIC-PROJECTION.json", {"pairs": replay_science,
+                     "readout": r.reproduce_scientific_readout(healthy)})
+        check("all_created_actor_processes_exited", r.USAGE["forced_actor_cleanup"] == 0)
+        check("run_sources_unchanged", all(r.sha(HERE / name) == h for name, h in hashes.items()))
+        result = {"status": "passed", "kind": "synthetic_controls", "checks": checks,
+                  "check_count": len(checks), "fixture_pairs": len(pairs), "arm_order_replays": len(pairs),
+                  "usage": dict(r.USAGE), "separate_oracle_work": reference_work,
+                  "sandbox_probe_processes": sandbox_probe_processes,
+                  "wall_seconds": time.monotonic() - wall, "controller_cpu_seconds": time.process_time() - cpu,
+                  "population_draws": 0, "main_environment_observations": 0, "provider_calls": 0,
+                  "all_children_exited": True, "source_hashes": hashes,
+                  "scientific_projection_sha256": r.sha(destination / "SCIENTIFIC-PROJECTION.json"),
+                  "same_host_independent_lab": False}
+        r.write_new(destination / "CHECKS.json", result)
+        print(json.dumps({k: result[k] for k in ("status", "check_count", "fixture_pairs", "usage", "population_draws")}))
+        return result
+    except Exception as exc:
+        r.write_new(destination / "FAILURE.json", {"status": "failed", "error_type": type(exc).__name__,
+                    "error": str(exc), "passed_checks": checks, "usage": dict(r.USAGE),
+                    "sandbox_probe_processes": sandbox_probe_processes, "source_hashes": hashes})
+        raise
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        raise SystemExit("usage: controls.py NEW_PRIVATE_OUTPUT_DIRECTORY")
+    run(sys.argv[1])

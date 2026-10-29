@@ -1,0 +1,35 @@
+"""Privileged evaluators. This module is never copied into participant calculations."""
+from copy import deepcopy
+from local import HERE,read,sha,digest
+from continuous import physics as W
+from continuous import snapshot_core as C
+from tasks import valid_action
+import route
+
+def continuous_episode(config,history):
+    e=W.Episode(config)
+    for a in history['actions']:e.step(a)
+    if e.history()!=history:raise ValueError('continuous history identity')
+    return e
+
+def grade(case_id,response):
+    cases=read(HERE/'CASES.private.json');case=next(x for x in cases if x['case_id']==case_id)
+    packet=read(HERE/case['delivery_path'])
+    if sha(HERE/case['delivery_path'])!=case['delivery_sha256']:raise ValueError('packet changed')
+    if type(response) is not dict or set(response)!={'action'} or not valid_action(case['family'],response['action']):raise ValueError('illegal final action')
+    return grade_case(case,packet,response)
+
+def grade_case(case,packet,response):
+    counter=[0]
+    def step(e,a):counter[0]+=1;return e.step(a)
+    if case['family']=='continuous':
+        C.bind_method(W);e=continuous_episode(case['configuration'],packet['history'])
+        before=C.assess(e,W,step);step(e,response['action']);after=C.assess(e,W,step)
+    else:
+        w=case['configuration'];s=route.replay(w,packet['history']);n=packet['physical_step']
+        before=route.assess(w,s,n);s=route.transition(w,s,response['action']);after=route.assess(w,s,n+1)
+        counter[0]=1+len(before['witness'])+len(after['witness'])
+    return {'case_id':case['case_id'],'response':deepcopy(response),'packet_sha256':case['delivery_sha256'],
+        'grading_lock_sha256':sha(HERE/'GRADING-LOCK.json') if (HERE/'GRADING-LOCK.json').exists() else None,
+        'before':before,'after':after,'diagnostic_score':C.score_action(before,after),
+        'local_physics_steps':counter[0],'mechanism_learning':False}
