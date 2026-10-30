@@ -1,43 +1,51 @@
 # Research Under Uncertainty
 
-How can we evaluate the evidence behind an AI research agent's next decision? This project studies experimental decisions, the records supplied to justify them, and the limits of what those records establish.
+**What Decision Records Establish About Model Choices Under Uncertainty — v2.0.18**, submitted to TMLR on 30 October 2026, submission **13906**. [Submission record](https://openreview.net/forum?id=Lu6hxicGcr). The recorded status is submitted; an editorial decision is not claimed.
 
-This release provides the current **decision-record study, v2.0.9**, with source tables and offline checking code. It is a research artifact; journal submission, acceptance and independent laboratory replication are not claimed. The proposed broader benchmark remains future work.
+The study develops three practical evaluation checks: create cases where candidate rules can disagree, separate action agreement from task labels, and measure the added value of a decision record for predicting a later choice. It combines a worked counterexample, a 48-assignment follow-up and a prospective choice-prediction pilot.
 
-[Download the complete public package](https://github.com/latentatlas/research-under-uncertainty/releases/tag/ruu-reader-v2.0.9). The scientific reader is under `releases/ruu-reader-v2.0.9/`; the other files provide the overview and historical context.
+## Read and inspect
 
-## Start here
+- [Exact submitted paper](submission/paper/manuscript.pdf).
+- [Exact submitted supplementary files](submission/README.md) and [downloadable supplementary ZIP](https://github.com/latentatlas/research-under-uncertainty/releases/download/ruu-tmlr-v2.0.18/RUU-TMLR-v2.0.18-supplement.zip).
+- [Claim-to-source map](browse/paper-package/CLAIM-MAP.json), [manuscript source](browse/paper-package/paper/body.tex), and [appendix source](browse/paper-package/paper/appendix.tex).
+- [Verification and reproduction guide](docs/REPRODUCIBILITY.md), including expected results and the limits of each command.
+- [What changed from the previous Git release](docs/TMLR-ALIGNMENT.md) and [submission file identities](SUBMISSION.json).
 
-1. [Three-minute work sample: question, findings and limits](docs/WORK-SAMPLE.md).
-2. [Current study and exact verification instructions](releases/ruu-reader-v2.0.9/README.md).
-3. [Main paper](releases/ruu-reader-v2.0.9/paper/manuscript.pdf).
-4. [Claim-to-source map](releases/ruu-reader-v2.0.9/CLAIM-MAP.json).
-5. [Proposed next study, clearly separated from completed work](docs/NEXT-STUDY.md).
+`submission/` contains the same 25 files as the submitted ZIP, without edits. Its readable UTF-8 storage restores **1,424 original files**: 949 in `paper-package/` and 475 in `prospective/`. [browse/](browse/README.md) provides 83 byte-identical manuscript and checker files for direct inspection on GitHub. The complete executable reader, data, protocols and source records are restored from `submission/`.
 
-## Check the distributed evidence
+## Run the checks
 
-With CPython 3.12 and its standard library, from the repository root:
+Requirements: **CPython 3.12 and its standard library**. No account, API key, package installation or network access is needed after download. From this repository's root:
 
 ```sh
-cd releases/ruu-reader-v2.0.9
-python3.12 -I -B -S verify_all.py --followup-only
-python3.12 -I -B -S verify_all.py
+python3.12 -I -B -S verify_submission.py
+python3.12 -I -B -S submission/verify.py
+python3.12 -I -B -S submission/archive_tests.py
 ```
 
-The first command validates the exact tree, reconstructs the follow-up record checks and regenerates its descriptive tables. The second also repeats the older numerical work and the separate finite-class observation-selection calculation. It can take several minutes. Neither command needs an API key, account, paid inference or network access. Keep logs and generated files outside the exact reader directory.
+The first checks the submitted file identities, all restored hashes and every browsing copy. The second runs **13 existing-evidence checks**, including the disclosed numerical cases; each must pass. The third runs **15 storage corruption controls**. A nonzero exit means verification failed. Keep any saved outputs outside the exact `submission/` directory.
 
-These commands recalculate results from distributed inputs. They do not collect new model responses, reproduce a provider's historical model weights, execute participant-generated programs or establish independent experimental replication. Not every original model response or usage receipt is redistributed. The reader README states the remaining numerical and provenance limits.
+To retain the full source tree for inspection, use a new destination outside this repository:
 
-## What the current study shows
+```sh
+python3.12 -I -B -S submission/verify.py --extract-to ../ruu-evidence
+```
 
-The follow-up has 48 assigned trials: 46 completed and two technical losses retained in the accounting. In the required-record/model-proposal condition, each of two profiles has eight valid records matching the proposal. Both supported selection rules choose the same action in all sixteen records. Correspondence alone therefore does not establish that the record caused the proposal or faithfully describes internal reasoning.
+The [reproduction guide](docs/REPRODUCIBILITY.md) explains source paths, focused checks, negative controls, and manuscript rebuilding. These commands recompute the distributed evidence and repeat specified numerical calculations on the current host. They add no model responses and do not execute archived participant programs or live collectors.
 
-All 15 completed external-selector proposals already agree with the selector. There is no observed opportunity in that condition to demonstrate the benefit of overriding a conflicting proposal. These are four purposeful historical contexts with repeats, not a population sample or a general model ranking. The main label concerns conditional continuation feasibility, not full task success.
+## Main observations
 
-## Earlier public snapshots
+In the A2 example, the same plan dominates all five criteria, so agreement among the five selectors cannot identify a unique rule. A1 provides a distinguishing case. In the follow-up, 46 of 48 assigned trials completed; all 16 B records match the unforced proposal, with 14 single-row tables. All 15 completed C proposals already agree with the external selector, leaving corrective benefit on conflicting proposals unmeasured.
 
-The [18 October summary](docs/PROJECT-BRIEF.md), [methods](docs/METHODS.md), [results](docs/RESULTS.md), [evidence boundaries](docs/EVIDENCE-AND-LIMITS.md) and [fresh-input preregistration](docs/FRESH12-PREREGISTRATION.md) remain historical documents. They describe different study stages and are not silently updated by the current reader release. In particular, the full September process-pilot evidence is not redistributed by this package. Do not sum different panels as interchangeable independent episodes.
+In the prospective pilot, Astra has 6/8 correct predictions with the record and 7/8 without; Sol has 3/8 and 3/8. Each profile has four purposefully selected histories and two linked targets per history. The original 15-target segment and the separately completed final Sol target remain separately documented. Seven of eight numeric tables contain one row; the treatment includes the accompanying prose. These observations concern choice prediction and retain the manuscript's sampling and protocol limits.
 
-Research direction is by Huseyin Buldurgan, with substantial AI assistance in design discussion, implementation, analysis and writing. [Existing contribution record](docs/CONTRIBUTIONS.md). The current paper contains its own AI-assistance disclosure.
+## Versions, provenance and licenses
 
-[Publication scope and previous exposure](docs/PUBLICATION-HISTORY.md) · [Revision notes](RELEASE-NOTES.md) · [Repository license](LICENSE.txt) · [Reader-specific licenses](releases/ruu-reader-v2.0.9/LICENSES.md). The reader's included third-party license notices remain applicable.
+Use the fixed [ruu-tmlr-v2.0.18 tag](https://github.com/latentatlas/research-under-uncertainty/tree/ruu-tmlr-v2.0.18) for this submission. The previous [v2.0.9 reader](https://github.com/latentatlas/research-under-uncertainty/tree/ruu-reader-v2.0.9) and [portfolio snapshot](https://github.com/latentatlas/research-under-uncertainty/tree/portfolio-v0.1) remain intact in their tags and Git history. GitHub's automatically generated source ZIP is a repository snapshot; the separately named supplement asset is the exact TMLR ZIP.
+
+The [submission binding](SUBMISSION.json) records the PDF and ZIP SHA256 values and the author's byte comparison with downloads from OpenReview. The [public verification record](VERIFICATION.json) reports checks of this distribution. Neither record is a provider-signed receipt or an independent laboratory replication.
+
+Research direction is by Huseyin Buldurgan, with substantial AI assistance in design discussion, implementation, analysis and writing. The submitted manuscript retains its anonymous-review text and disclosure unchanged. [Contribution record](docs/CONTRIBUTIONS.md). Original research code is MIT; original manuscript, research records and documentation retain CC BY 4.0, with the included third-party notices: [submission licenses](submission/LICENSES.md). Historical internal version headings in those notices do not indicate a different submitted PDF.
+
+The older [project brief](docs/PROJECT-BRIEF.md), [results summary](docs/RESULTS.md) and [proposed next study](docs/NEXT-STUDY.md) are dated historical context. The proposed benchmark is separate from the completed studies in this submission. [Publication history](docs/PUBLICATION-HISTORY.md) · [Release notes](RELEASE-NOTES.md).

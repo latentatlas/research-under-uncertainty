@@ -1,0 +1,744 @@
+\section{Question and contribution}
+Our Research Under Uncertainty (RUU) program studies how models form assumptions, choose
+experiments and revise predictions when an environment's mechanism is unknown.
+Decision records offer a way to examine those activities. Before using them
+as evidence, however, we need to know which relationships they measure.
+This paper asks: \textbf{when does a record that matches a model's action
+identify a selection rule, and when does it help predict a later choice?}
+
+We study externally supplied tables and descriptions in two simulated task
+families. An executable record combines an action-scoring representation
+with a deterministic rule for selecting an action. For an incompletely
+specified record, the analyst must supply the remaining choices; we call
+this a \emph{selector completion}. Combining one record's representation
+with another record's rule is a \emph{crossing}. For example, applying
+column means and column maxima to the same table can select different
+actions. Our initial component diagnostic used such crossings to examine
+which part of a record supported a successful choice.
+
+\paragraph{A concrete identification problem.}
+In the pilot's original representation A2, one plan is best on all five
+examined criteria. Total cost and trajectory peak therefore reproduce the
+same model action. In a second representation A1, held fixed for comparison,
+the criteria separate: total cost selects a plan with a preservation witness,
+while trajectory peak selects a different plan with a conditional loss
+certificate. Agreement on A2 leaves these completions indistinguishable,
+although they give different crossed diagnoses
+(Section~\ref{sec:selector-sensitivity}). This example supplies a practical
+check: \emph{does the validation situation give candidate selectors an
+opportunity to disagree?} When it does not, the diagnosis must remain
+conditional on the independently specified selection contract.
+
+\paragraph{Correspondence and prediction are separately measurable.}
+A follow-up separates requiring a record from externally selecting its
+action. Each profile supplies eight records matching its own executed
+proposal. Fourteen of these sixteen numeric tables have one row, so both
+supported rules necessarily agree; their agreement in the remaining two
+multirow tables is observed. We pair these counts with an action-copy control
+and a scan over the supported rules (Section~\ref{sec:followup}). This makes
+both correspondence and its opportunity for rule discrimination visible.
+
+A prospective pilot then tests added prediction on new choices. Records are
+frozen before two target branches per source, and paired observers receive
+the same information with or without the record. The observed net accuracy
+differences are $-1/8$ for Astra and $0/8$ for Sol across four purposeful
+histories per profile (Section~\ref{sec:prospective}). The pilot measures
+transfer from a source that reports an action and record to a target that
+reports an action alone; it evaluates the numeric table and accompanying
+prose together.
+
+\paragraph{Contribution to evaluation practice.}
+The evaluation decision at issue is accepting an analyst-completed selector
+because it reproduces the source action. The archived A2 case exposes the
+problem: one plan is best on all five criteria, so every tested completion
+passes that check, yet the same completions produce different choices and
+conditional task diagnoses on A1. Researchers using such records should
+therefore retain the compatible selector set and test a situation where its
+members can disagree before attributing a diagnosis to a particular rule.
+
+The follow-up and prospective panels make two further reporting decisions
+concrete: separate a record's match to an unforced proposal from the task
+label, and measure added prediction on new choices after freezing the record.
+An action change can preserve its P or L label
+(Table~\ref{tab:followup-rule-examples}); an aggregate prediction difference
+can combine opposite observed contrasts across tasks
+(Section~\ref{sec:prospective}). These cases give researchers specific checks
+to add to a record evaluation. The common-menu recovery identity and
+single-row rule agreement explain what the contract already guarantees
+(Appendix~\ref{app:structural-control}); the archived cases and model decisions
+show where the distinctions matter in practice. Table~\ref{tab:study-map}
+maps each panel to its question, and Section~\ref{sec:related} relates these
+external-record measurements to explanation evaluation.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.14\linewidth}>{\raggedright\arraybackslash}p{0.23\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.29\linewidth}@{}}\toprule
+Study & Question & Intervention or check & Supported claim\\\midrule
+Pilot (8 trials) & Does native agreement identify a selector? & Five analyst completions of archived records; component crossings & Concrete non-identifiability under these completions\\
+Transfer (48 trials) & Are free-form records crossing-ready? & Optional records across two task families & Applicability is limited; zero eligible pairs is not success\\
+Common menu (32 trials) & What does the fixed numeric contract add? & Optional records versus required records with external selection & Structural recoverability; record requirement and execution remain combined\\
+Follow-up (48 assignments) & Can record and proposal match without forced execution? & A optional/model, B required/model, C required/selector & Profile-specific correspondence, record structure and conditional labels; no conflicting C proposal observed\\
+Prospective choice prediction (16 targets) & Does a frozen record add prediction value? & Paired observers with/without record; same public evidence and profile & No positive net accuracy gain observed; four histories/profile, two linked targets/history\\\bottomrule
+\end{tabular}
+\caption{Study map. Counts refer to distinct panels, not pooled replications.
+The follow-up has 46 completed assignments and two retained technical losses.
+The prospective pilot has 15 original targets plus one separately completed
+target; its original interrupted request remains recorded.
+The separate finite-class companion is not needed for the main argument.}
+\label{tab:study-map}
+\end{table}
+
+\section{Task, record, execution and evaluation}
+\label{sec:measurement}
+\paragraph{Task.}
+The actor receives an action/observation history, a remaining objective and a
+finite menu, without the hidden mechanism. In the continuous task it chooses
+a bounded two-dimensional control to preserve the possibility of reaching
+and maintaining a target region under a path constraint. In the route task
+it chooses a legal discrete action under remaining route constraints.
+The common-menu and prospective panels offer 13 continuous controls or
+three route actions, and allow actors up to three analyses of the observed
+history. Both families supply the past actions and observed states, the
+remaining objective and constraints; the hidden transition mechanism is
+withheld. The prospective panel's concrete source--target changes appear in
+Table~\ref{tab:prospective-branches}.
+
+\paragraph{Record.}
+The actor can submit a numeric table of candidate failure forecasts and a
+declared rule. Columns identify menu actions; rows contain values in $[0,1]$.
+Uniform mean minimizes the column mean; worst case minimizes the column
+maximum; ties use the lowest index. The executable contract specifies action selection; forecast calibration
+and the semantic adequacy of rows require separate evaluation.
+Table~\ref{tab:real-record} shows one complete numeric table from the follow-up,
+before any formal crossing notation is needed.
+
+\input{table-real-record.tex}
+
+\paragraph{Execution.}
+The follow-up separates record requirement from action source
+(Table~\ref{tab:arms-early}). In B the model proposal is executed even if a
+valid record would select a different action. In C the external selector
+determines execution, while the proposal remains observable. Thus B's
+record--proposal agreement is observed; C's record--execution agreement is
+guaranteed. Exact instructions and schema are in the bundle.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lp{0.22\linewidth}p{0.23\linewidth}p{0.34\linewidth}}\toprule
+Arm & Record requirement & Executed action & What agreement can establish\\\midrule
+A & Optional & Model proposal & Correspondence, if a valid record exists\\
+B & Required valid record & Model proposal & Observed record--proposal correspondence\\
+C & Required valid record & Declared record selector & Execution match by construction; proposal match remains observable\\\bottomrule
+\end{tabular}
+\caption{Follow-up conditions. A valid record need not match the proposal to
+be accepted in B. A missing record leaves correspondence undefined.}
+\label{tab:arms-early}
+\end{table}
+
+\paragraph{Evaluation.}
+The analyst attaches a task label to the executed menu action: preservation
+(P), loss (L), or unresolved (U), using the bound feasibility evaluation.
+That label is separate from whether a record is valid, matches the proposal,
+or changes action under rule substitution. The model does not receive the
+privileged evaluator during collection.
+
+\subsection{Why matching needs a control}
+For any proposed index $a$ in an $n$-action menu, construct one row
+$A_{1j}=0$ when $j=a$, and $A_{1j}=1$ otherwise. Both supported rules select
+$a$. This \emph{action-copy negative control} requires only the menu size
+and proposed index, with no history, mechanism or task label. Conditional on
+the proposal it supplies no independent information about how that proposal
+was produced. It nevertheless satisfies validity and correspondence checks.
+Consequently those checks alone cannot establish an informative explanation.
+The construction tests the sufficiency of those checks. How the participant
+produced its record and whether its forecasts are informative remain empirical
+questions.
+
+A positive arithmetic control has two rows,
+$A=\left(\begin{smallmatrix}0&0.4\\0.7&0.4\end{smallmatrix}\right)$.
+Mean scores $(0.35,0.4)$ select action 0; worst-case scores $(0.7,0.4)$
+select action 1. The same reader therefore detects a rule contrast when the
+values support one. Neither constructed control has a physical task label
+or constitutes an additional model trial. The distributed check tests the
+copy construction at every proposal index for menu sizes 3 and 13, under
+each declared rule, and tests the positive control under both rules.
+
+\subsection{Two external comparisons}
+Let $A_i$ be record $i$'s table over a common finite menu and let $r_i$
+be its declared deterministic rule. The action $a_i=r_i(A_i)$ is one
+column of that menu. Here, $a_i$ denotes the record-selected action; the
+model-proposed and executed actions are separate quantities. The
+\emph{observed-rule crossing} has four entries
+$c_{ij}=r_j(A_i)$ for $i,j\in\{1,2\}$. The separate
+\emph{supported-rule-family table} evaluates each $A_i$ under both allowed
+rules: uniform mean and worst case, with lowest-index tie breaking.
+The family table may contain a rule that neither paired actor used. Its
+entries are deterministic evaluations of archived records, with task labels
+from the bound menu census; a live model counterfactual would require a new
+model decision.
+
+\subsection{Feasibility labels and access}
+P requires a successful admissible continuation witness after the action.
+L requires the specified loss certificate; absence of a witness alone is not
+L. U preserves unresolved numerical cases. Continuous-control labels are
+conditional on the disclosed floating-point and bounding premises in the
+supplement. The discrete route family's finite computation has a different
+verification contract. Both actors and analyst see the legal histories; only
+the analyst receives the hidden mechanisms and privileged evaluator during
+the original experiment. Reviewer disclosure now permits inspection of these
+mechanisms without retroactively changing what participants received.
+
+Record validity, correspondence and rule sensitivity can be checked without
+the physical label map. P/L/U comparisons add its assumptions. The exact
+arithmetic helper does not prove the uniform library bounds or attest the
+historical runtime; those premises remain open. These are distinct evidence
+levels when interpreting outcome differences.
+
+\section{Evidence sets and their denominators}
+The first three evidence sets below use crossing-pair denominators.
+The separate follow-up in Section~\ref{sec:followup} instead compares A/B/C
+conditions within eight matched triplets per profile; these condition pairs
+are not crossing pairs. Its 48 assignments include two technical losses.
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{p{0.28\linewidth}rrrr}
+\toprule
+Evidence set & Trials & Pairs & Eligible records & Eligible pairs\\
+\midrule
+Pilot (component study) & 8 & 4 & \multicolumn{2}{c}{2 selected component pairs}\\
+Prospective transfer & 48 & 24 & 1 & 0\\
+Optional record & 16 & 8 & 1 & 0\\
+Mandatory record + execution & 16 & 8 & 16 & 8\\
+\bottomrule
+\end{tabular}
+\caption{The three predecessor evidence sets. Pilot component eligibility is a different
+construction from the frozen prospective adapter and common-menu contract.
+Empty pair denominators leave the crossing effect unassessed.}
+\end{table}
+
+The pilot used four fixed histories with two repeats under the requested
+gpt-6-astra/max profile. Its component study
+focused on two boundary histories, pilot contexts B and D, after outcomes
+were available. These history names are unrelated to the follow-up arms A/B/C.
+The transfer panel used 48 live trials: two families, three instances per
+family, two histories per instance, the gpt-6-astra/max and
+gpt-6.1-sol/max profiles, and two repeats. Under its frozen adapter, a record had to
+support the prescribed operation without post hoc completion. Only one trial
+qualified, leaving zero of 24 pairs crossable. This measures the adapter's applicability to the available external
+records. With no eligible pair, the crossing effect is unassessed; internal
+representations are outside the adapter's observations. Native transfer labels were 42 P and 6 L. The adapter's mutually exclusive
+outcomes were: 24 route trials with no analysis attempt, 18 whose last successful
+analysis lacked a table, three whose rule did not reproduce the action, two
+with a menu-identity mismatch, and one supported record. These reasons
+distinguish absent evidence from an invalid submitted record.
+The other 24, continuous-task trials made 72 analysis attempts: 67 succeeded
+and five returned errors. The accounting distinguishes an unused analysis opportunity from a failed
+analysis call. It measures visible tool use, leaving internal reasoning
+outside the observation.
+
+The 32-trial panel crossed two task families, two purposefully selected
+histories per family, two model profiles (gpt-6-astra/max and gpt-6.1-sol/max),
+two repeats and two conditions. Each condition has 16 trials and eight pairs.
+A crossing pair comprises the two repeats at the same history and profile
+within one condition, not a pair of trials from different conditions.
+Both conditions used a common finite menu and structured final output.
+Appendix~\ref{app:common-menu-protocol} identifies the selected histories,
+execution contract, resource limits and recorded usage.
+The optional condition permitted an observational record; the mandatory
+condition required a record and let an external deterministic executor select
+the action. Mandatory record--action agreement is consequently a construction
+property, unlike a matching optional observational record. The combined
+intervention does not isolate a pure reporting effect.
+
+All 32 trials were evaluated: no unstarted slots, technical missingness or
+protocol-invalid trials remain. This does not mean the analysis interface was
+error-free: 48 attempts yielded 41 successes and seven code errors in seven
+trials (five optional, two mandatory). Five errors used attribute access on
+the dictionary history; two used the unavailable built-in \texttt{next}.
+The prompt described \texttt{history.states}/\texttt{history.actions}, although
+the worker passed a dictionary, and did not enumerate the built-ins.
+Each affected trial consumed all three analysis slots, one on the error and
+two successfully. Appendix~\ref{app:interface-audit} gives the trial-level
+accounting with all original trials and labels retained. The effect on
+subsequent actions and record structure is unassessed.
+Optional P/L/U counts were 13/3/0; mandatory
+counts were 10/5/1. Four purposefully chosen histories do not form a population
+sample of tasks or support a model ranking. Table~\ref{tab:label-contracts}
+separates the families' label contracts. The study inventory in
+Appendix~\ref{app:inventory} identifies excluded historical and development
+work; the later acquisition experiment has its own denominator.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{llrrrl}\toprule
+Condition & Family & P & L & U & Verification contract\\\midrule
+Optional & Continuous & 5 & 3 & 0 & Numerical, conditional\\
+Mandatory & Continuous & 2 & 5 & 1 & Numerical, conditional\\
+Optional & Route & 8 & 0 & 0 & Finite integer recurrence\\
+Mandatory & Route & 8 & 0 & 0 & Finite integer recurrence\\\bottomrule
+\end{tabular}
+\caption{Native outcomes in the common-menu panel, eight trials per row.
+Continuous P uses an admissible continuation witness; continuous L depends
+on the numerical and historical-runtime premises in Appendix F. U remains
+unresolved. Successful present-host replay does not close those premises.}
+\label{tab:label-contracts}
+\end{table}
+
+\section{Results: what agreement and crossing identify}
+\subsection{Pilot counterexample: native agreement does not identify the selector}
+\label{sec:selector-sensitivity}
+The missing choice can be seen in pilot context B. Its two archived model
+analyses supplied different candidate dynamics and planning ingredients;
+the native-loss representation A1 has eight candidates, while the
+native-preservation representation A2 has four. The researcher reconstruction
+computes one multi-step plan per candidate. To execute this component on
+either representation, an analyst must also specify \emph{which plan supplies
+the next action}. The declared completion R2* chooses the plan with the
+smallest total penalized cost. This last selection is an analyst choice
+(Appendix~\ref{app:components}), not identified by reproducing the native action.
+
+Here \emph{native-action-compatible} means only that the selected first action
+on A2 is within $10^{-6}$ of the recorded native action. It does not mean
+agreement with every semantic commitment of the model's narrative or recovery
+of its internal policy. We examine five selectors over the same fixed plans:
+total cost, maximum target-step norm, mean squared target-step norm, trajectory
+peak norm and final-step norm. These are explicit summaries of the plans'
+objective, target attainment or path behavior, making the analyst's choice
+inspectable. They obey the same action bounds and lowest-index tie breaking,
+but need not encode the same preferences; final-step norm alone, for example,
+is not the full multi-step task criterion. This is a finite retrospective
+sensitivity family, not an exhaustive set of faithful completions.
+
+\input{table-pilot-sensitivity.tex}
+
+All five select A2 plan 2, whose first action matches the native action to
+approximately $1.81\times10^{-9}$. Plan 2 has a strictly lower value than
+each of the other three plans on every one of the five criteria. A2 thus
+provides no opportunity to discriminate among these selectors: agreement
+there follows from a common best plan. Now hold the crossed A1 representation,
+history and computed plans fixed. Total cost selects A1 plan 2, with action
+norm $0.575465$ and a preservation witness. Trajectory peak instead selects
+A1 plan 3, with norm $0.042684$ and a conditional loss certificate
+(Table~\ref{tab:b-completions}). The reader command recomputes all twelve plans
+and five selections, re-evaluates their first actions with the bundled grader,
+and compares the complete archived witness/certificate records
+(Section~\ref{sec:reader-access}). It therefore checks the label change as well
+as the selector arithmetic. The numerical and historical-runtime premises
+in Appendix~\ref{app:runtime-proof} remain open.
+
+The resulting component diagnosis depends on which native-compatible
+selector the analyst supplies. To use native-action agreement as a validation
+test, report the candidate selectors and whether the validation cases
+actually separate their choices. An independently specified selection
+contract can restrict the alternatives. In this case, the common best plan
+on A2 leaves that choice open. The two A1 plans also differ in action
+magnitude, so this contrast evaluates the full selection change rather than
+isolating a horizon or direction effect.
+
+Under the originally declared completions, pilot context B had two P
+off-diagonals and context D two L off-diagonals. Each native pair already
+contained one P and one L. Those patterns describe completion-conditional
+component dependence, not new outcome categories or internal causal ground
+truth. The pilot's heterogeneous optimizers differ from the later common-menu
+contract; the latter's structural identity is not extended to this setting.
+
+\subsection{Common-menu applicability and recoverability}
+The mandatory condition made all eight pairs executable. It did not make
+their crossing tables informative by construction. Every pair used the same
+declared rule, so all 32 observed-rule cells were already determined by native
+actions and rule identity. Among the 16 mandatory records, 13 had one row,
+one contained duplicate rows alongside distinct rows, and 13 had only one
+distinct row. A duplicate-containing table can also contain distinct rows, so the
+duplicate and single-distinct-row counts measure different properties.
+
+Native actions plus the single-distinct-row check determine 29 of the
+32 supported-rule-family cells. The remaining sensitivity can be calculated on each record independently.
+Appendix~\ref{app:structural-control} states the fixed-contract identity and
+the complete recoverability table. These calculations measure recoverable
+cells; improved diagnostic accuracy requires an external diagnostic target.
+
+
+Fifteen of 16 mandatory records selected the same action under both supported
+rules. The remaining record changed action and its conditional continuous
+P/L category; the independent
+scan recovered this change. One pair involved U and remains unresolved rather
+than being converted into a resolved loss. The two 32-cell displays overlap;
+after within-pair deduplication they reference 30 unique numerical computations,
+not 64 new samples. Cross-action labels reuse the existing bound menu census.
+No new live model counterfactuals were collected for this retrospective analysis.
+
+\paragraph{Worked same-record contrast.}
+For the mandatory \texttt{probe-01} record from gpt-6-astra, repeat 1,
+the independent scan yields:
+\begin{center}
+\begin{tabular}{lrl}\toprule
+Rule applied to this record & Menu index & Bound task label\\\midrule
+Uniform mean & 7 & L (conditional continuous certificate)\\
+Worst case & 12 & P (continuation witness)\\\bottomrule
+\end{tabular}
+\end{center}
+Indices are zero-based. The recorded table, menu identity and label census
+are held fixed. No partner record is needed to expose this sensitivity;
+it concerns the declared external rule, not a demonstrated internal cause.
+The alternative action's label is a deterministic menu evaluation, not an
+additional live model decision. This is the sole rule-sensitive mandatory
+record, so it must not be presented as a prevalent population effect.
+This trial was also affected by the dictionary-access error.
+The archived table's rule sensitivity is reproducible; whether correcting
+the interface would have changed that table or the decision is unknown.
+
+The optional condition contains one submitted record, which is eligible,
+and 15 trials with no submitted record (\texttt{no\_record}). It has no
+eligible pairs. The fifteen absences and one eligible submission have different statuses.
+With no eligible pair, the optional crossing effect remains unassessed.
+The panel thus locates an applicability bottleneck in the optional condition
+and a redundancy bottleneck under mandatory recording with external selection.
+
+\section{Follow-up: required records with and without external execution}
+\label{sec:followup}
+The earlier mandatory condition combined a record requirement with an external
+executor. The follow-up adds a required-record condition that executes the
+model's proposal. Each matched triplet uses one history, repeat and
+model/max/Fast profile: A permits an optional record and executes the proposal;
+B requires a valid record and executes the proposal; C requires a valid record
+and executes its declared selector, retaining the proposal for observation.
+Every trial starts a fresh context. Four purposefully selected historical
+contexts, two profiles and two repeats give 48 planned assignments, eight
+triplets per profile. These repeats are not independent draws of new worlds.
+The allocation and six possible within-triplet orders were fixed before
+collection; earlier-panel trials are not reused as controls.
+Appendix~\ref{app:followup} gives the execution segments, interface and reader
+boundaries. No new population sample or live crossed decision was collected.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{llrrrrrrr}\toprule
+Profile & Arm & Done & Tech. & P/L/U & Valid & Match & One row & Same action\\\midrule
+Astra & A & 7 & 1 & 6/1/0 & 0 & -- & 0 & 0\\
+Astra & B & 8 & 0 & 8/0/0 & 8 & 8/8 & 8 & 8\\
+Astra & C & 7 & 1 & 5/2/0 & 7 & 7/7 & 6 & 6\\\midrule
+Sol & A & 8 & 0 & 7/1/0 & 0 & -- & 0 & 0\\
+Sol & B & 8 & 0 & 6/2/0 & 8 & 8/8 & 6 & 8\\
+Sol & C & 8 & 0 & 7/1/0 & 8 & 8/8 & 7 & 7\\\bottomrule
+\end{tabular}
+\caption{Follow-up, eight planned assignments per row; profiles are separate
+strata, not ranked. Done means a completed trial, not full task success.
+Valid counts usable records; Match is record-selected action versus model
+proposal among valid records. The empty A denominator is undefined.
+Same action counts records for which both supported rules select the same
+action. Sol C has one duplicate-containing record; all other rows have zero.
+There are no protocol losses, active or unstarted assignments.}
+\label{tab:followup-records}
+\end{table}
+
+\paragraph{Availability and correspondence.}
+In A, no valid record was available among Astra's seven or Sol's eight
+completed trials. This is absence of the specified external record, not
+absence of reasoning. In B, each profile supplied eight valid records and all
+eight matched its own proposal. Unlike C's executed-action agreement, this
+correspondence was not imposed by the executor. It does not establish that
+the record caused the proposal or faithfully represents internal reasoning.
+Table~\ref{tab:B-structure} separates the observed record structures from
+their mathematical consequences. Astra supplied eight single-row B records;
+Sol supplied six single-row and two multirow B records. For every single-row
+record, equality of mean and worst case is forced, so it is not an independent
+empirical success of rule agreement. Sol's multirow records contain three and
+four distinct rows; both also select the same action under the two rules.
+That equality is an observation about these values, not forced by having one
+distinct row. Their source orders are 44 and 47, respectively. No multirow
+conclusion is available for Astra's empty denominator.
+
+\input{table-b-structure.tex}
+
+The empirical result is the co-occurrence of proposal matching and these
+record structures without external selection. The action-copy control in
+Section~\ref{sec:measurement} establishes why matching alone leaves
+substantive use of the history unresolved. The actual records' predictive
+value requires its own measurement. Single-row and duplicate records satisfy
+the protocol and remain in the structural accounting. For evaluation practice, a correspondence rate should
+therefore be accompanied by the number of distinct rows, the actual choices
+under alternative supported rules, and the action-copy control. These checks
+separate an observed match from an opportunity to discriminate between rules;
+they do not replace a test of prediction on unseen decisions.
+
+\paragraph{Conditional outcomes and observed opportunities.}
+Table~\ref{tab:followup-pairs} reports the two predeclared contrasts using only
+observed nontechnical pairs. Astra has seven fully completed triplets and Sol
+eight. L outcomes remain in the comparison; technical failures are reported
+separately and are not converted into L. The directions do not support a
+common improvement claim across these profiles, nor an equivalence or
+no-effect conclusion. In Sol B, eight matching records coexist with two L
+labels, illustrating why correspondence and continuation feasibility require
+separate measurements. P certifies a conditional feasible continuation;
+the experiments do not measure completed-task success.
+
+\input{table-followup-transitions.tex}
+
+\paragraph{Where the outcome contrasts occur.}
+The family breakdown in Table~\ref{tab:followup-families} locates every
+observed P/L movement in the two continuous-control histories. All completed
+route decisions were P, although each route menu contained an L option;
+this pattern was not forced by having only P choices. The continuous menus
+have 13 actions and the route menus three, so these purposeful contexts are
+not a calibrated difficulty ladder. Appendix~\ref{app:followup-history}
+reports every profile/history/arm cell. In particular, Sol's C--B net gain
+of one P comprises two L-to-P and one P-to-L transitions. Net change alone
+does not describe those opposing movements, and the underlying continuous
+labels retain the numerical/runtime premises stated above.
+
+\input{table-followup-families.tex}
+
+\paragraph{A changed action need not change the task label.}
+The follow-up contains two rule-sensitive records, both in C
+(Table~\ref{tab:followup-rule-examples}). Mean and worst case select different
+menu indices, while the bound label remains P in one and L in the other.
+These are existing-record calculations, not new live counterfactual trials.
+Together with the older panel's single label-changing example, they make
+action sensitivity and task-label sensitivity separately inspectable.
+
+\input{table-followup-rule-examples.tex}
+
+Every completed C proposal already matched the record-selected action
+(Astra 7/7, Sol 8/8). No observed C trial therefore tests the benefit of
+overriding a conflicting proposal. The C--B contrast is not an isolated
+mechanical correction effect on the same fixed record. Labels and
+within-record rule diagnostics are tied to the existing menu contract;
+they are not additional live crossing observations or independent evidence
+about new task physics.
+
+\section{Prospective pilot: does a frozen record predict a new choice?}
+\label{sec:prospective}
+We test whether a source decision record improves prediction of later model
+choices beyond the public history and source action. Four new purposefully
+constructed histories in the two disclosed task families are used separately
+for Astra/max/Fast and Sol/max/Fast. Each source has two precommitted target
+branches: eight target choices per profile, grouped in four histories.
+The histories, records and target choices form a new panel. Each target
+extends its source history by one observed transition under a fixed exogenous
+action: continuous sources at step 6 branch to step 7 under $(0.6,0)$ or
+$(-0.6,0)$; route sources at step 4 branch to step 5 by advancing one or three
+nodes. These alternatives were set before source-model outputs and need not
+follow the source proposal. Table~\ref{tab:prospective-branches} and
+Appendix~\ref{app:prospective} give the construction and selection basis.
+
+\paragraph{Information and output protocols.}
+The source actor's final response contains an action, a numeric table with a
+declared rule, and four brief fields for assumptions, uncertainty, criterion
+and expected observation. The record is frozen before the source actor sees
+either target. Two fresh-context observers of the same requested profile
+predict the target actor's top-1 action with or without that record. Both
+receive the source action, source and target histories, menus, and the
+complete source and target instructions and output schemas. Only the record
+differs between observer inputs. Their order is preallocated, allowances are
+equal, and both predictions are locked before the fresh target actor runs.
+
+The target's final response contains an action alone. Source and target may
+both request up to three local analyses before their final response, and
+their proposals are unforced. The target receives the public evidence and
+source action, without the record or observer predictions. The comparison
+therefore measures the record's added value for predicting an action under
+this target protocol. Both observers predict the same target; the effect of
+changing the source--target output protocol is not separately identified.
+
+\input{table-prospective.tex}
+\input{table-prospective-paired.tex}
+
+\paragraph{Prediction results.}
+The combined panel yields 6/8 versus 7/8 correct predictions for Astra and
+3/8 versus 3/8 for Sol, with versus without the record. The mean of the four
+within-history paired differences is $-0.125$ for Astra and $0$ for Sol.
+Table~\ref{tab:prospective-paired} shows the joint outcomes: Sol's equal
+totals include one target correctly predicted only with the record and
+another correctly predicted only without it. Across these assignments,
+no positive net accuracy gain is observed. Each cell uses one generation
+per observer and target role; a discordant pair does not by itself identify
+a case-level causal benefit or harm.
+
+\paragraph{Where the prediction contrasts occur.}
+Table~\ref{tab:prospective-families} adds a post hoc descriptive breakdown.
+Sol's aggregate zero combines one additional correct prediction with the
+record on continuous tasks and one fewer on route tasks. Astra's one fewer
+correct prediction occurs in continuous control; both observers predict all
+four route targets correctly. Each family contains two purposeful histories
+with two linked targets each. The prespecified per-profile aggregate remains
+primary; these counts locate the observed contrasts without estimating a
+family-level causal effect. Table~\ref{tab:prospective-histories} gives all
+eight history/profile units.
+
+\input{table-prospective-families.tex}
+
+Copying the source action predicts 5/8 Astra and 0/8 Sol targets. The target
+changes action relative to the source in 3/8 and 8/8 cases, respectively.
+This baseline describes source--target action change; variability across
+repeated runs of an identical target input was not measured.
+
+\paragraph{Record structure and interpretation.}
+All four source records per profile match the unforced source proposal.
+Seven of the eight numeric tables contain a single row: four for Astra and
+three for Sol. Agreement of the two supported rules is forced in these seven
+tables and observed in the remaining two-distinct-row Sol table. No duplicate
+row occurs. The semantic informativeness of the accompanying prose was not
+independently evaluated. The treatment is the complete record, including its
+prose; table row counts alone cannot explain the prediction result.
+
+The reference controls verify protocol handling and prediction of supplied
+hand-authored policies (Appendix~\ref{app:prospective}). Sensitivity to an
+informative record in the scientific tasks remains a separate control target.
+The observed contrast combines record information, observer use, the
+source--target protocol change and one draw of each observer and target.
+It does not separate those explanations for the net result. Task-matched
+informative-record controls, a same-output-protocol comparison and repeated
+identical-input decisions would distinguish them in a further study.
+With four purposeful histories per profile and two linked targets per
+history, the present pilot characterizes these assignments.
+
+\paragraph{Execution segments.}
+The original run produced fifteen targets. After inspecting its partial
+results, we completed the remaining assigned Sol block in a separate segment
+with the same source, inputs, profile and allowances and four fresh reference
+checks. Table~\ref{tab:prospective} retains both panels. The completion adds
+one target to an existing history; no completed scientific decision was
+rerun. Appendix~\ref{app:prospective} retains the interrupted attempt, all
+assigned roles and usage. The two segments may differ in time or provider
+state; they form one descriptive pilot, not a confirmatory replication.
+
+\section{Position relative to existing work}
+\label{sec:related}
+\paragraph{Execution and component diagnosis.}
+\citet{lyu2023faithful} translate a problem into an intermediate representation
+and use a deterministic solver to obtain an answer, locating their faithfulness
+guarantee in the solution stage. Our C condition similarly binds execution
+to an external record. We examine the additional evaluation questions raised
+by constructing and comparing such records: selector-completion sensitivity,
+correspondence without enforced execution, and prediction of later choices.
+CAR estimates effects of interventions on agent steps through same-policy
+downstream replay \citep{shah2026car}; AgentRx uses constraint evidence and a
+judge for execution diagnosis \citep{barke2026agentrx}; and BLADE aligns evidence
+from action stages for inspection \citep{guo2026blade}. RUU's component
+diagnoses instead attach feasibility labels to actions selected from
+external records. The diagnosed object and the outcome measure therefore
+differ from stochastic-policy replay or failure attribution.
+
+\paragraph{Alternative explanations and discriminating tests.}
+\citet{jain2019attention} show that substantially different attention
+distributions can preserve model predictions. \citet{wiegreffe2019attention}
+argue that explanation claims depend on the model relationship being tested,
+and introduce baselines, variance calibration and diagnostic tests to assess
+attention's usefulness. Their debate distinguishes finding an alternative
+from evaluating the explanatory value of the original. Our counterexample
+concerns an analyst's external selector completion: the common best plan
+on A2 makes the original-action match nondiscriminating, while A1 separates
+the completed selectors. It identifies an ambiguity in that validation
+criterion, rather than testing attention or establishing that the original
+record is uninformative. This scope follows the broader requirement to
+evaluate explanations against the system they describe
+\citep{jacovi2020faithful}. Interventions on neural representations address
+internal causal relations directly \citep{geiger2021causal}; our intervention
+is on the external record and selection rule.
+
+\paragraph{Prediction-based explanation evaluation.}
+Leakage-Adjusted Simulatability (LAS) measures whether an explanation helps an
+observer predict a model output while controlling for direct output leakage
+\citep{hase2020las}. REV measures new label-relevant information beyond an
+input-and-label baseline using conditional V-information \citep{chen2023rev}.
+These approaches motivate assessing what an explanation adds to information
+already available. \citet{madsen2024self} evaluate self-explanation consistency
+through counterfactual, attribution and redaction tasks, while
+\citet{mayne2026positive} test added explanation value for predicting a
+reference model's answers on related inputs. They also use repeated
+reference-model outputs to assess the prediction ceiling imposed by target
+variability (their Section 4.3 and Appendix A.7); our single-generation pilot
+does not estimate that ceiling.
+
+Our prospective pilot applies the added-prediction question to records frozen
+before precommitted target branches. Both observers already receive the source
+action; neither sees the target choice before predicting it. The measured
+quantity is the paired top-1 accuracy difference on later choices across
+different source and target output protocols. LAS's leakage adjustment and
+REV's information metric are distinct estimands. The pilot supplies a
+source-auditable RUU case for this established evaluation question, alongside
+record-structure and source-action-copy controls.
+
+\paragraph{Connection to scientific discovery.}
+BoxingGym evaluates experiment selection through expected information gain
+and model discovery through predictions, including whether a scientist's
+explanation helps another agent predict without further experiments
+\citep{gandhi2025boxinggym}. RUU's present study concerns interpretation of
+decision records and prediction of model choices. Prediction of withheld
+environment observations and the utility of selected experiments are the
+next behavioral targets in our broader research program. Keeping these
+outcomes distinct connects the measurement lesson here to discovery
+evaluation without treating action correspondence as discovery success.
+
+\section{Interpretation and next research questions}
+The case study yields a practical sequence for evaluating decision records.
+First, establish which records support the proposed operation. The transfer
+panel's zero eligible pairs locate an applicability bottleneck. Second,
+specify the analyst's completion and test whether the validation cases
+separate plausible alternatives. The pilot's common best plan shows why a
+successful original-action match can leave this choice open. Third, report
+correspondence together with structural opportunities for rule discrimination.
+The unforced-proposal follow-up demonstrates their coexistence: all sixteen
+required records match, while fourteen have mathematically forced rule
+agreement. Finally, evaluate added prediction on new decisions. The prospective
+pilot supplies that separate measurement and observes no positive net accuracy
+gain in its assigned cases.
+
+These checks also determine the appropriate unit of evidence. Under the fixed
+numeric contract, a per-record rule scan exposes the sensitivity in the paired
+display (Appendix~\ref{app:structural-control}). Action changes and P/L/U label
+changes answer different questions, as the two rule-sensitive but
+label-preserving records illustrate. The proposed audit makes these
+distinctions inspectable; its effect on downstream diagnostic accuracy remains
+to be evaluated against independently established diagnoses.
+
+\paragraph{Scope of the evidence.}
+The histories are purposefully selected within two task families. Continuous
+P/L labels retain the numerical and historical-runtime premises in
+Appendix~\ref{app:runtime-proof}; P certifies a feasible continuation, not a
+completed task. All completed C proposals already agree with their selectors,
+so correcting a conflicting proposal has no observed denominator. The older
+panel's seven analysis errors, including its sole label-changing
+rule-sensitive record, have no isolated behavioral-effect estimate. Record
+correspondence and external substitutions address observed outputs; internal
+causal faithfulness requires a different intervention. In the prospective
+pilot, same-protocol targets, repeated identical-input targets, and a control
+that demonstrates use of informative records in the scientific tasks would
+help distinguish protocol transfer, target variability and observer sensitivity.
+
+\paragraph{Research under uncertainty.}
+Three questions guide the next stage: how a stated assumption relates to the
+next experiment choice; whether that experiment resolves more uncertainty
+than an equally resourced valid fixed plan; and whether a revised explanation
+improves predictions for cases withheld during its construction. Each question
+calls for its own scored behavioral outcome. The present prospective pilot
+measures model-choice prediction. Prediction of new world observations and
+the utility of adaptive experimentation will extend this program from
+interpreting decision records to evaluating scientific behavior.
+
+\section{Reader access and reproducibility}
+\label{sec:reader-access}
+The anonymous supplement supplies the manuscript sources, current-study
+mechanisms, visible interaction evidence and source-bound readers.
+Appendix~\ref{app:reader-access} lists the material and check boundaries for
+each evidence set. One archive contains both the main and prospective
+components in a lossless text representation; its reader restores their
+exact bytes, verifies their manifests and runs the evidence checks.
+From the extracted supplementary archive, run:
+\begin{verbatim}
+python3.12 -I -B -S verify.py
+\end{verbatim}
+The command recomputes the reported source-level results, checks the paired
+prediction outcomes and selector-discrimination example, and runs the
+existing numerical replays. No model account is needed. The README also
+provides permanent extraction and corruption-test commands. Source
+recalculation and present-host numerical replay establish reproducibility
+of the supplied evidence; historical/provider attestation and independent
+laboratory replication remain separate verification levels.
+
+\paragraph{Responsible interpretation.}
+The experiments use simulated environments and model outputs. The checks
+evaluate external decision records; assessing internal reasoning, intentions
+or deployment safety requires evidence for those distinct claims. The
+disclosed mechanisms support inspection of this fixed study. Future
+benchmark mechanisms have a separate disclosure policy.

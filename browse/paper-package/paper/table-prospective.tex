@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{llrrrrrl}\toprule
+Panel & Profile & Pairs & Record & No record & Copy & Changed & Difference\\\midrule
+Initial & Astra & 8/8 & 6/8 & 7/8 & 5/8 & 3/8 & -0.125\\
+Initial & Sol & 7/8 & 3/7 & 3/7 & 0/7 & 7/7 & $[-0.125,+0.125]$\\
+Combined & Astra & 8/8 & 6/8 & 7/8 & 5/8 & 3/8 & -0.125\\
+Combined & Sol & 8/8 & 3/8 & 3/8 & 0/8 & 8/8 & 0.000\\
+\bottomrule\end{tabular}
+\caption{Prospective top-1 action prediction. Pairs retains the eight assigned
+targets/profile; other fractions use available valid targets. Difference is
+the equally weighted mean over four history clusters, with two target slots
+each. The initial Sol interval is a missing-data identification bound over all
+eight assigned targets, not a confidence interval; its observed 3/7 versus
+3/7 comparison has difference zero. Copy uses the old source action; Changed
+compares the target action with that action. Profiles are not ranked.}
+\label{tab:prospective}
+\end{table}

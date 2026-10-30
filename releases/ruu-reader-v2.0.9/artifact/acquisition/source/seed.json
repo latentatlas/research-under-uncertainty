@@ -1,1 +1,0 @@
-{"created_utc":"2026-10-27T05:04:00.867309+00:00","entropy_source":"os.urandom(32), once; no candidate seed search","mapping":"SHA256 domain+seed+uint64be counter; eight uint32be words/block; rejection before modulo","schema":"seed-v1","seed_hex":"13689dea8dc8d4975a3a42ed81b3be4588d6439018232cdd912c0130bb2fb34d"}

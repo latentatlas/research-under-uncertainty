@@ -1,0 +1,871 @@
+\section{Disclosed task, mechanism and delivered information}
+\label{app:task}
+Represent the two-dimensional state and action by complex numbers $z_t$ and $u_t$. A step is indexed by its pre-action state: $u_0$ produces $z_1$. The initial conditions are $z_0=1$, $\phi_0=4.147589101011308$ and $u_{-1}=0$. The evaluated world obeys
+\begin{align}
+ d(z)&=(1.06+0.015|z|^2)z+(0.12-0.08i),\\
+ z_{t+1}&=d(z_t)+e^{i\phi_t}u_t,\qquad |u_t|\leq 0.6,\\
+ \phi_{t+1}&=\phi_t+\omega+\kappa\,\operatorname{Re}(u_{t-1})\operatorname{Im}(u_{t-1}),\qquad\omega=0.1.
+\end{align}
+The lag in the phase update is part of the mechanism: the update uses $u_{t-1}$, not the action just chosen. The original family allowed $\kappa\in\{0.3,3,6,12,18\}$. Only the two settings below occur in the fixed-history pilot. They are parameter settings, not a validated difficulty ordering.
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Paper alias & Archival case identifier & Snapshot after step & $\kappa$\\
+\midrule
+A & case-01 & 4 & 12\\
+B & boundary-01 & 11 & 12\\
+C & case-03 & 4 & 18\\
+D & boundary-02 & 9 & 18\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+An episode ends on escape ($|z_t|>4$) or after 32 actions. Success requires completion and $|z_t|\leq0.05+10^{-10}$ at \emph{all} $t\in\{28,29,30,31,32\}$. Merely avoiding escape is insufficient. Action validation rejects nonfinite coordinates or norms above $0.6+10^{-9}$; a smaller tolerance overshoot is normalized to $0.6$. State observations are rounded to twelve decimal places, whereas the simulator retains binary floating-point state. Stored actions retain their applied precision. The exact numeric history of every selected case is included in \texttt{legacy-replay/data/cases.json}; it is not regenerated from a caption or rounded manuscript table.
+
+The participant receives the objective, horizon, action limit, escape threshold, full permitted action--state history and remaining analysis allowance. It does not receive these equations, $\phi_t$, $\omega$, $\kappa$, the evaluator's continuation or its loss diagnosis. The opaque identifiers in delivered inputs do not disclose the boundary/comparison labels. The frozen selector and schemas are inspectable in the reader artifact; the full provider logs are not redistributed. Disclosure to reviewers does not alter the historical participant information boundary.
+
+\section{Witness and loss-bound justification}
+\label{app:bounds}
+\paragraph{Positive witness.}
+For every pre-action snapshot and every resulting state, one fixed privileged controller attempts a continuation. At each step it chooses
+\begin{equation}
+ u=\operatorname{clip}_{0.6}\!\left[-d(z)e^{-i\phi}\right],\qquad
+ \operatorname{clip}_{r}(v)=
+ \begin{cases}
+   v, & \lVert v\rVert\leq r,\\[3pt]
+   \displaystyle\frac{r v}{\lVert v\rVert}, & \lVert v\rVert>r.
+ \end{cases}
+\end{equation}
+Here $\lVert v\rVert$ is the Euclidean norm, equal to the modulus for a complex scalar.
+The original transition, action validation, escape check and scheduled target test score the entire continuation. A successful admissible continuation establishes existence for the implemented task. A failed continuation does not establish impossibility. This controller knows the hidden phase and mechanism; its success is not evidence of blind action identification or participant learning. Every pilot pre-action state passed this positive baseline.
+
+\paragraph{Sufficient negative bound for the ideal recurrence.}
+Write \(x = (\operatorname{Re} z, \operatorname{Im} z)\) and $c=(0.12,-0.08)$. Fix a vector $q$ with $\|q\|_2\leq1$. Suppose $q^Tx\geq p>0$. Since $\|x\|_2\geq q^Tx\geq p$, and the scalar multiplier $1.06+0.015\|x\|_2^2$ is positive, the next-state projection satisfies
+\begin{align}
+q^Tx'&=(1.06+0.015\|x\|_2^2)q^Tx+q^Tc+q^TR(\phi)u\\
+&\geq (1.06+0.015p^2)p+q^Tc-0.6.
+\end{align}
+The last term follows from Cauchy--Schwarz and the admissible action radius. The function $g(p)=(1.06+0.015p^2)p$ is increasing on the positive domain. Consequently, iterating this lower bound while it remains positive gives a bound for \emph{every} allowed future control sequence, irrespective of the future phases. A bound exceeding 4 before the horizon implies unavoidable escape; a bound exceeding the target tolerance at a required target step excludes successful completion. A target violation already present in the recorded prefix also suffices, because future actions cannot change a past required state.
+
+\paragraph{Implementation and numerical scope.}
+The evaluator chooses $q$ by truncating each coordinate of $x/\|x\|$ toward zero to four decimal places, and checks its norm. It initializes $p_0=q^Tx$ from the stored full-precision state. The implemented recurrence is
+\begin{equation}
+p_{j+1}=\left\lfloor (1.06+0.015p_j^2)p_j+q^Tc-0.6-10^{-9}\right\rfloor_{10^{-12}},
+\end{equation}
+where $\lfloor\cdot\rfloor_{10^{-12}}$ rounds downward to that grid. Coefficients and initial state are converted from their actual binary-float values to exact rational numbers. Loss is reported only for a positive induction sequence crossing $4.000001$ within the remaining horizon, or crossing $0.05+10^{-10}$ at a required target step. A separate 110-digit decimal implementation checks the direction, every bound, the positivity domain, threshold and horizon. The code also checks that the transition definition and task constants match the bound's assumptions.
+
+\paragraph{Archived arithmetic audit.}
+A subsequent record-only audit covers the pilot, distinct component
+grades and the continuous subset of the older 48-trial transfer panel. All 50 distinct
+stored directions, including directions for which no loss was certified,
+have exact squared norm at most one; the minimum value of
+$1-\|q\|_2^2$ is $5.75\times10^{-6}$. There are ten distinct certified
+projection records (eleven occurrences). Rational recomputation reproduces
+the archived binary64 bounds exactly. Recomputing these recurrences with per-step
+subtractions $10^{-9}$, $2\times10^{-9}$ and $10^{-8}$ preserves every
+certificate kind and first certification step. Even at the enlarged
+slacks, the smallest final lower-bound gap above the applicable runtime
+threshold exceeds $0.0371$. No simulator transition or model request is
+performed by this audit, and no historical certificate is rewritten.
+
+The action validator rejects computed norms above $0.6+10^{-9}$ and
+rescales a smaller computed overshoot by $a\,0.6/|a|$. It therefore does
+not simply apply every action up to the rejection tolerance unchanged.
+For the 1,201 distinct applied actions in the inspected continuous
+trajectory records, exact squared-norm checks give a maximum norm of
+approximately $0.60000000000000002694$. This finite record check does not
+bound all possible future actions or transcendental-function errors.
+
+\paragraph{Runtime-specific conditional budget.}
+A separate local audit inspects the pinned interpreter and the currently
+loaded ARM64 math image. Its compiled complex multiplication uses fused
+multiply-add instructions; its complex exponential calls
+\texttt{exp} and \texttt{\_\_sincos\_stret}. The norm uses platform
+\texttt{hypot}, and the square still uses platform \texttt{pow}.
+Thus a source-level list of separate sine/cosine calls does not fully
+describe this executable.
+
+Appendix~\ref{app:runtime-proof} derives a norm bound for the captured
+\texttt{hypot} instruction sequence under ordinary IEEE binary64
+round-to-nearest semantics with gradual underflow. It then reduces the
+remaining library accuracy requirements to an absolute square error
+$\epsilon_{\rm pow}$ and a norm excess $\delta_{\rm rot}$ for the
+computed complex rotation. Accuracy relative to the true angle is not
+needed for this projection bound. Taking each of these two bounds as
+$2^{-30}$ yields total one-step error below $6.288\times10^{-10}$,
+which fits the archived $10^{-9}$ subtraction. The local checker verifies
+the scalar inequalities with exact rational arithmetic.
+
+This is a sufficient conditional bound, not an attestation that the two
+library bounds hold uniformly. Finite current-process probes satisfy them
+but do not prove them. In addition, the two inspected historical runtime
+inventories and activation records do not pin the loaded math-image
+identity or floating-point control register. Today's image capture cannot
+retroactively fill that gap. The ten archived projection certificates
+therefore retain their stated conditional numerical status. The route
+family's exact integer transitions and finite-horizon dynamic program do
+not use this projection premise.
+
+The classifier returns preserved only with a successful witness, lost only with a sufficient negative certificate, and unresolved otherwise. Simultaneous positive and negative evidence is treated as an error. This is an incomplete classifier, not a complete viability kernel or a map of a continuous safe cone. A numerical failure in candidate optimization is a different unresolved category and is not fed to this classifier as physical loss.
+
+\section{Computational interventions and reproducible selectors}
+\label{app:components}
+The candidate coefficients and original analysis outputs are fixed data. No candidate is refitted after a component is crossed. Let $f_m+B_m u$ denote candidate $m$'s predicted next state at the selected snapshot. Candidate construction, feature families, phase extrapolation and the exact numeric coefficients are inspectable in \texttt{legacy-replay/data/component\_inputs.json}. The replay implements these fixed operations; it does not execute the archived participant programs.
+
+\paragraph{One-step worst-case rule.}
+For $G$ equally spaced angles and radius $r$, set $u_j=r(\cos(2\pi j/G),\sin(2\pi j/G))$ and choose the first grid index minimizing $\max_m\|f_m+B_m u_j\|_2$. Snapshot B uses $G = 720$ and $r = 0.6$; D uses $G = 1440$ and $r = 0.599999999$. The four finer-grid checks use $G=2880$. This is optimization on a finite circle, not a guarantee of global optimization over the full action disk or of task completion.
+
+\paragraph{Past-error weighted rule.}
+Each fitted parent has weight $w_m=1/(10^{-4}+e_m^2)$, where $e_m$ is its recorded leave-one-out residual RMS. In the expanded D component, six scenarios inherit equal shares $w_m/6$ of each parent's weight. With $v=\sum_m w_m B_m^Tf_m$, the selected action is $u=-0.6v/\|v\|$. The matrices here are scalar gains times rotations, so the quadratic term in $\sum_mw_m\|f_m+B_mu\|^2$ is constant on the radius-$0.6$ circle. Thus this direction minimizes that fixed-radius surrogate for these matrices. It is not a general theorem for arbitrary linear-control matrices, a calibrated posterior, or a worst-case task-safety guarantee. D's second representation comprises 11 parent fits expanded by two phase modes and three phase offsets $\{-0.12,\,0,\,0.12\}$; the complete construction is in the code and numeric inputs.
+
+\paragraph{Multi-step plans and the researcher completion.}
+For each of B's candidates, the individual planner optimizes the remaining $N=32-n$ controls with projection to the action disk. Its surrogate objective is
+\begin{equation}
+ J_m=\sum_{i=1}^{N}\left[w_{n+i}\|\hat x_{n+i}\|^2+\lambda\big(\max\{0,\|\hat x_{n+i}\|^2-14.44\}\big)^2+10^{-5}\|u_{n+i-1}\|^2\right],
+\end{equation}
+where $w_t=1$ for $t\geq28$ and $10^{-4}$ otherwise, and $\lambda=10$. The deterministic initialization, projected accelerated-gradient updates, backtracking limits and restart schedule are included in \texttt{components.py}; individual plans use 1,000 iterations. The declared selector R2* chooses the individual plan with the lowest computed cost and takes its first action. This final selection rule was completed by the researchers. Agreement with the original choice is a reconstruction check, not proof that it was the model's latent policy. At least one crossed action has magnitude approximately $0.5755$, so this contrast does not isolate direction or horizon while holding magnitude fixed.
+
+The two auxiliary joint plans use a shared first action, separate candidate-specific later actions, the mean of the candidate costs, and 1,400 iterations. One is numerically unresolved. The one-at-a-time D deletions remove each of 66 scenarios or each of 11 six-scenario parent groups; all other settings stay fixed and no refitting occurs. No-rescue results cover only these interventions, not joint deletion, changed fitting or arbitrary alternative uncertainty models.
+
+The 91 planned cells comprise 8 primary crossings, 4 finer-grid checks, 2 joint-plan auxiliaries and 77 omissions. Ninety were computed and one auxiliary remained numerically unresolved. Repeated actions are deduplicated before privileged grading, giving 13 distinct grades. There is no additional model sample in this count. The full records, rather than the rounded values in figures, define action identity.
+
+\subsection{Five retrospective completions at pilot context B}
+\label{app:b-completions}
+This separate sensitivity analysis holds the eight individual plans from
+B's native-loss pool A1 and four from its native-preservation pool A2 fixed.
+It changes only which plan
+supplies the first action. For a plan's predicted states $\hat x_t$, the
+five minimized criteria are: the total penalized cost $J_m$ above;
+$\max_{28\leq t\leq32}\|\hat x_t\|$;
+$\tfrac15\sum_{t=28}^{32}\|\hat x_t\|^2$;
+$\max_{n\leq t\leq32}\|\hat x_t\|$, including the common starting state;
+and $\|\hat x_{32}\|$. All ties use the lowest existing plan index.
+The last criterion covers only the final target step; it is not the full
+task-success condition. The finite selector list was fixed before its
+additional grading, with the original outcomes already known.
+
+Table~\ref{tab:b-completions} reports these five selectors in the main text.
+
+
+Thus native-action reproduction alone does not identify the crossed
+completion. The reversal also changes the chosen plan and action magnitude;
+it does not isolate a horizon-only or direction-only effect. The saved
+selector indices, exact actions, metrics and labels are in
+\texttt{artifact/source/pilot-sensitivity.private.json}. The original
+action lock and full twelve grade records, including the fixed-controller
+continuation trajectories and projection certificate, are supplied alongside
+it as \texttt{pilot-sensitivity-actions-lock.json} and
+\texttt{pilot-sensitivity-grades.json}. Their original hashes are checked
+before replay. The standard reader uses recomputed plan actions as grader
+inputs, binds the case, history, world, action and certificate state, and
+compares the complete replayed grade with the archive. Discrete fields and
+identities must match exactly; floating trace values and plan metrics use
+$|a-b|\leq10^{-8}(1+|b|)$, while native-action compatibility uses $10^{-6}$.
+Each projection certificate also passes the separate 110-digit arithmetic
+check; this does not prove the uniform library bounds or historical runtime
+premises in Appendix~\ref{app:runtime-proof}. The reader reports its twelve
+verification grade calls separately from the original collection counters.
+This finite
+sensitivity result does not cover new optimizers, mixtures or arbitrary
+alternative policies.
+
+\section{Protocol, record boundaries and cost accounting}
+\label{app:protocol}
+The fixed trial order was A1, D1, C1, B1, C2, B2, A2, D2, where the suffix denotes repeat. Each trial begins in a fresh local context with an opaque snapshot identifier; both repeats of a case receive exactly the same initial payload bytes. Each subsequent payload contains the same physical history and that trial's own submitted analysis code and returned results. Therefore the third or fourth requests are not equal-input repetitions of the first request.
+
+The wire schema permits one analysis request or one final two-coordinate action. Analysis code must define \texttt{act(history)} and can use the allowed mathematical facilities; no network, filesystem, process creation or hidden simulator interface is provided. The protocol and policy source state the exact permitted syntax and names. Local analysis has 30-second CPU/wall limits, a sampled 1 GiB RSS stop and a 100,000-character output limit. Sampled RSS is not a hard allocation ceiling. Each trial permits at most three analysis requests and one final action, for at most four model requests in total. Trial wall time is 3,780 seconds; request time is bounded by the smaller of 900 seconds and remaining trial time minus a 120-second record/grading margin. No retry, neutral request, replacement or outcome-dependent stopping is permitted.
+
+The model identifier and effort are configuration records, not attested server weights. Local receipts record one agent message per call, no unexpected tool events and cleanup of initially empty call directories. These checks do not establish independent sampling seeds or provider-side isolation. Full provider transcripts remain in the source archive; this bundle distributes selected numerical inputs and final record projections. Hidden chain-of-thought is not observed or claimed as evidence.
+
+The recorded 588,051 input and 129,677 output tokens total 717,728. The 92,160 cached-input tokens are already included in input. Reasoning-output tokens are likewise a subset of output. There were 28 receipted requests and zero unreceipted requests in this pilot. Provider receipts are the source of these counts; analyst use and money are unmeasured. The historical technical null's unresolved reservation is not a zero-use observation and is not included in the pilot total.
+
+\section{Prospective tasks, reference histories and adapter}
+\label{app:transfer}
+Exact configurations and twelve packets are in
+\texttt{legacy-replay/data/transfer/}; the numeric replay inputs under
+\texttt{legacy-replay/data/transfer/} are checked against these records.
+
+\paragraph{Continuous reference histories.}
+The recurrence and task target are those in Appendix A, with three new
+initial phase/frequency configurations and couplings 3, 6 and 12.
+Phases and frequencies derive deterministically from SHA-256 of the
+literal seed \texttt{transfer-validation-20261025-v1} and instance
+ordinal. A prescribed privileged ten-step path tracks waypoints with
+radii $1.1,1.2,1.3,1.4,1.5,1.6,1.75,1.9,2.05,2.2$ and deterministic
+changing angles. Snapshots are after steps 6 and 10. Pre-collection
+checks require legal histories and a positive continuation, without
+resampling. This selection does not establish calibrated boundary
+distances or natural participant behavior.
+
+\paragraph{Route--resource dynamics and certificates.}
+The state is node $n\in\{0,\ldots,18\}$ and remaining integer fuel $f$.
+Action $j\in\{0,1,2\}$ is encoded as $[j,0]$ and advances to
+$n'=\min(18,n+j+1)$. The hidden stationary positive edge cost is
+\begin{equation}
+c(n,j)=b_j+((n+o_j)\bmod p_j),\qquad f'=f-c(n,j).
+\end{equation}
+Success means reaching node 18 within twelve actions without negative
+fuel. The three fixed $(b,o,p)$ configurations and initial fuel values
+are in \texttt{CASES.private.json}. Unlike continuous control, every
+legal route action is in the menu. The participant knows the graph,
+objective, horizon and observed costs through its action--state history,
+but not the edge-cost formula or private coefficients.
+
+Let $V_h(n)$ be the minimum fuel needed to reach the goal in at most
+$h$ further actions. Set $V_0(18)=0$, $V_0(n<18)=+\infty$, and
+\begin{equation}
+V_h(18)=0,\qquad
+V_h(n)=\min_{j\in\{0,1,2\}}
+\{c(n,j)+V_{h-1}(\min(18,n+j+1))\}.
+\end{equation}
+The code represents infinity by \texttt{None}. With positive costs,
+$f\geq V_h(n)$ provides a minimum-cost admissible continuation;
+$f<V_h(n)$, negative fuel or an unreachable goal certifies loss.
+Every value-table cell is checked by a separately implemented recursive
+recurrence. Positive witnesses are replayed. Initial fuel is the exact
+minimum completion cost plus one; the lexicographically first
+minimum-cost path supplies snapshots after steps 2 and 4. Baseline
+feasibility does not prove that the hidden cost law is identifiable from
+the observed short prefix.
+
+\paragraph{Exact optional table contract.}
+The diagnostic continuous menu has twelve equally spaced directions at
+radius $0.6$, rounded to twelve decimals, plus zero. For a returned
+table with losses $L_{mj}$ and weights $w_m$, the weighted rule chooses
+the first menu index minimizing $\sum_m w_mL_{mj}/\sum_mw_m$; the
+worst-case rule minimizes $\max_m L_{mj}$ with the same tie break.
+Weights belong to the candidate pool. The adapter accepts only the
+exact keys \texttt{actions}, \texttt{candidate\_losses},
+\texttt{weights}, and \texttt{rule}, the exact delivered menu, 1--128
+candidate rows and finite entries of absolute magnitude at most
+$10^{100}$. Weights are finite, nonnegative and bounded by $10^{100}$,
+with positive total. Final-action reproduction uses maximum coordinate
+error $\leq10^{-8}$. The last successful analysis is selected before
+examining outcome category. A successful earlier table cannot rescue
+a missing or unfaithful final table.
+
+The replay changes only imports/data paths, preserves frozen numeric
+functions, and omits dispatch code. Original function text and
+source/export digests are included. It reads bound archived analysis
+values; participant programs remain unexecuted text. It reproduces the
+eligibility test without inferring or regenerating tables.
+\input{runtime-proof.tex}
+
+\section{The 32-trial common-menu protocol and panel usage}
+\label{app:common-menu-protocol}
+
+\paragraph{Selected histories and menus.}
+Table~\ref{tab:common-menu-histories} identifies the four purposeful
+histories using the earlier transfer panel's source IDs. The two
+continuous histories are at physical step 10; the two route histories
+are at step 2. Each appears with both profiles, both repeats and both
+conditions. These are selected reference histories, not a random sample
+of histories or eight newly sampled worlds.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lllrrr}\toprule
+Delivered ID & Source ID & Family & Instance & Cutoff & Menu size\\\midrule
+probe-01 & snapshot-03 & Continuous & 1 & 10 & 13\\
+probe-02 & snapshot-07 & Continuous & 2 & 10 & 13\\
+probe-03 & snapshot-02 & Route & 1 & 2 & 3\\
+probe-04 & snapshot-06 & Route & 2 & 2 & 3\\\bottomrule
+\end{tabular}
+\caption{Fixed histories for the 32-trial panel. Source histories and
+menu identities are hash-bound in the archived allocation.}
+\label{tab:common-menu-histories}
+\end{table}
+
+Both conditions receive identical history and task/menu bytes for a
+given probe; the condition instruction differs. The continuous menu
+is the twelve radius-$0.6$ directions at angles $2\pi j/12$,
+$j=0,\ldots,11$, rounded to twelve decimals, followed by zero.
+The route menu is $[(0,0),(1,0),(2,0)]$ in that order. Only the indexed
+menu action is executed. The original physical clock, remaining
+horizon and task objective are unchanged. The participant receives
+visible history, public task/menu and its own analysis outputs, without
+hidden dynamics or future observations. Trial order was fixed before
+the run and is distributed in \texttt{artifact/data/crossing.json}.
+
+\paragraph{Common output scaffold and condition-specific execution.}
+The shared structured-output scaffold wraps a \texttt{decision} object
+that can request analysis or return an action ID, a record, or both.
+It does not itself enforce condition-specific fields, record identity,
+dimensions, loss range or action agreement; the local contract does.
+A record has exactly six fields: \texttt{schema}, \texttt{case\_id},
+\texttt{menu\_sha256}, \texttt{loss\_definition\_id},
+\texttt{candidate\_losses} and \texttt{rule}. It contains 1--128 rows,
+one numeric loss in $[0,1]$ per menu action, and no weights. Each row
+uses the same declared meaning: an uncalibrated forecast of failing the
+original full task after that next action and the best continuation the
+participant can plan. The two rules minimize the uniform row mean or
+row maximum. Decimal numeric tokens are evaluated as exact rationals;
+ties select the lowest menu index. Single and duplicate rows are legal,
+and duplicates retain multiplicity. Rows are not verified world models.
+
+In the optional condition, a legal \texttt{action\_id} is required and
+an accompanying record is optional. Record failure or disagreement is
+logged without replacing that action. In the mandatory condition, only
+the record is allowed; its declared rule deterministically selects the
+executed action. An invalid record produces no action and no retry.
+Thus mandatory agreement is by construction, while optional agreement
+is an observational check. This six-field contract differs from the
+48-trial panel's weighted, four-field last-analysis adapter in Appendix E;
+their eligibility counts are not measurements of the same interface.
+
+\paragraph{Budgets and recorded use.}
+For the 32-trial panel, each fresh trial permits up to three optional
+local analyses and one final decision: at most four model requests,
+3,780 seconds per trial and 900 seconds per request. Analysis has a
+30-second CPU/wall limit, sampled 1 GiB RSS stop and 100,000-character
+JSON output cap. It yields no new physical observation. No retry,
+repair prompt, neutral request or outcome-dependent extension is
+allowed; the panel ceiling is 128 model requests. The completed panel
+used 48 analysis requests and 32 final decisions. Its single selected
+action per trial was graded; crossed labels reuse the bound menu census,
+not additional live observations.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lrrrrr}\toprule
+Panel & Requests & Input & Output & Cached input & Unknown calls\\\midrule
+48-trial transfer & 120 & 2,325,280 & 484,134 & 372,352 & 0\\
+32-trial common menu & 80 & 1,733,978 & 422,952 & 263,168 & 0\\\bottomrule
+\end{tabular}
+\caption{Separate participant-model usage ledgers. Cached input is already
+included in input, and reasoning tokens, when reported, are part of output.
+Neither category is added a second time. Pilot usage is in Appendix D.}
+\label{tab:panel-usage}
+\end{table}
+
+Table~\ref{tab:panel-usage} reports archived receipt-derived counts, not
+analyst usage or provider charges; these latter quantities were not
+measured. Synthetic transport and privileged local computation are outside
+the table. The 32-trial plan reserves 1,050,000 input plus 128,000 output
+tokens for each request lacking usage, separately from measured totals.
+Its final unknown-call count is zero, so no such reserve remains in that
+panel's final accounting; this policy is not a provider billing cap.
+The source-bound scalar projection is
+\texttt{artifact/data/protocol-summary.json}. It provides provenance and
+protocol identities without redistributing the full provider logs.
+
+
+\paragraph{Exact requests and executable reader path.}
+\texttt{artifact/protocol/} contains both condition instructions, the shared
+wire schema, the four initial packets and all 80 request payloads, including
+each trial's accumulated analysis records. Its checker renders every full
+prompt and verifies the archived prompt and payload hashes. For example,
+\begin{verbatim}
+python3.12 -I -B -S artifact/protocol/check.py --show-call 1
+\end{verbatim}
+prints the first request. The historical collection entry point is supplied
+as inspection-only text; provider transport credentials and full provider
+responses are not redistributed. Configured profile names are not independent
+attestation of server weights.
+
+\texttt{artifact/menu\_replay.py} binds each public packet to its transfer
+history and menu, then recomputes the 26 continuous and six route menu labels.
+The original record comparison and this numerical replay are separate checks.
+Continuous loss labels retain the open uniform-library and historical-runtime
+premises in Appendix F; present-host agreement does not discharge them.
+
+\section{Study inventory and historical boundaries}
+\label{app:inventory}
+The eight-trial pilot, 48-trial prospective transfer panel, 32-trial
+common-menu panel, separate 48-assignment follow-up and new 16-target
+prospective choice-prediction pilot are five evidence sets in the main paper. The two 48-slot studies are distinct. Their counts are
+never pooled. The follow-up has 46 completed trials and two technical losses,
+not 48 completed scientific trials. The two 1,600-draw development samples and the
+5,000-draw main acquisition study appear only in the companion; the earlier
+prediction criteria failed and are retained there. The acquisition result
+is not an additional live LLM or crossing experiment.
+
+Older archive labels describe different work: \emph{H4} denotes an unfinished
+collection whose 84 remaining assignments stayed paused and whose crossing
+status is unassessed due to missing evidence. The \emph{historical technical
+null} denotes an earlier infrastructure-limited record, not a successful
+zero-use scientific trial; its unresolved usage reservation stays outside
+the pilot accounting. These records supply no extra evaluable trials here.
+The archive's v1.8/v1.9 labels identify preserved predecessor research
+versions, not additional studies or independent replications. Current paper
+revision numbers track presentation and reader-access changes. This revision
+additionally incorporates the prospective choice-prediction pilot, with its
+original interrupted segment and separately completed last target block.
+The earlier follow-up, predecessor scientific inputs and denominators, and
+the primary acquisition procedure remain unchanged. The world-prediction
+research design is unrun and contributes no result to this manuscript.
+
+\section{Analysis-interface errors and consumed slots}
+\label{app:interface-audit}
+The historical shared instruction describes \texttt{history.states} and
+\texttt{history.actions}; the evaluator actually supplies a Python dictionary.
+Five analysis calls failed on \texttt{history.states}. Two other calls failed
+because \texttt{next} is absent from the restricted built-ins; the historical
+instruction refers to the existing interface without listing those built-ins.
+These are observed interface-use errors, not missing final decisions. The
+seven affected trials are listed below. Each made three analysis attempts:
+one failed and two succeeded. Errors consumed an attempt and were visible
+to the next request. They did not trigger replacement trials or extra slots.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{lllll}\toprule
+History & Profile & Condition & Repeat & Error\\\midrule
+probe-01 & gpt-6-astra & Mandatory & 1 & Dictionary attribute\\
+probe-01 & gpt-6-astra & Optional & 2 & Dictionary attribute\\
+probe-01 & gpt-6.1-sol & Mandatory & 2 & Dictionary attribute\\
+probe-01 & gpt-6.1-sol & Optional & 1 & Unavailable \texttt{next}\\
+probe-01 & gpt-6.1-sol & Optional & 2 & Unavailable \texttt{next}\\
+probe-02 & gpt-6-astra & Optional & 1 & Dictionary attribute\\
+probe-02 & gpt-6.1-sol & Optional & 2 & Dictionary attribute\\\bottomrule
+\end{tabular}
+\caption{All seven affected common-menu trials. All are continuous-task
+trials; both profiles requested max reasoning effort. The first row is the
+sole rule-sensitive mandatory record. These are descriptive associations,
+not estimates of the errors' effects on actions or records.}
+\end{table}
+
+The 32 common-menu trials produced 48 analyses: 41 successful and seven
+erroneous. In the separate transfer panel, all 24 route trials made zero
+analysis attempts, while the 24 continuous trials made 72 attempts: 67
+successful and five erroneous. These denominators are not pooled. The
+frozen adapter still supports only one transfer record and no complete pair.
+
+\texttt{artifact/interface\_audit.py} reconstructs all 32 trial rows from the
+last cumulative analysis list in each trial's archived requests, checks every
+earlier list as a prefix, and reconciles attempt counts with the final trial
+result and remaining-slot field. It also accounts for the 48 transfer trials.
+No archived submitted program is executed. This procedure avoids counting
+the same error again each time it appears in a later prompt.
+
+The reconstructed tables and their crossing identities remain checkable.
+However, the observed scarcity and row structure occurred under this
+imperfect interface. A corrected description could change analysis use,
+record structure or actions; no such behavioral effect has been measured.
+Local checks of dictionary access and built-in availability cannot answer
+that causal question. A prospective comparison must preserve old records
+and compare the two interface descriptions under a separately specified
+allocation and budget. Mandatory reporting and external execution would
+still be a combined intervention in either interface arm.
+
+\paragraph{Pilot sensitivity reader boundary.}
+\texttt{artifact/pilot\_sensitivity.py} regenerates all twelve single-candidate
+plans and their five selection metrics from the disclosed component inputs,
+then reconstructs the five selected indices and native-action compatibility.
+It now re-evaluates all twelve first actions and compares the full archived
+witness/certificate records as described in Appendix~\ref{app:b-completions}.
+This extends the reader through the conditional task labels. The numerical
+and historical-runtime premises of the grade evidence remain open.
+
+
+\section{Follow-up contract, accounting and verification boundary}
+\label{app:followup}
+The follow-up profiles are gpt-6-astra/max/Fast and gpt-6.1-sol/max/Fast.
+Each has 24 original assignments, eight per arm and eight matched triplets.
+The same four historical contexts are used, with two repeats per profile;
+neither repeats nor individual requests are new independent task samples.
+A and B execute a legal proposal. A may omit its record; an invalid optional
+record does not invalidate an otherwise legal proposal. B and C require a
+valid record and legal proposal; a protocol-invalid final produces no action.
+C executes the declared record selector and retains the proposal. The common
+schema checks case/menu identity, dimensions, finite values and legal actions.
+Single rows, duplicates and same-action rules are allowed. The shared
+analysis interface uses dictionary access and states its available operations,
+addressing the earlier interface mismatch; this is not a randomized old/new
+interface comparison, so its causal effect is unmeasured.
+
+Each trial permits at most three optional analyses and one final decision,
+four model requests, 900 seconds per request and 3,780 seconds per trial.
+Errors consume a slot; model responses are not repaired and failed
+assignments are not replaced. The closed results record 36 analyses for
+Astra and 36 for Sol, with zero recorded analysis errors in each. These counts
+do not turn the historical interface comparison into a controlled experiment.
+Decisions were bound before privileged label lookup. Follow-up labels reuse
+the same identity-bound finite menu census, retaining the continuous numerical
+and historical-runtime premises of the earlier paper. No new physics or
+live crossed model decision was generated for this analysis.
+
+\paragraph{Three execution segments and missingness.}
+The original 48-position allocation was retained across three separately
+authorized execution segments. Positions 1--12 completed; 13 and 14 ended
+with HTTP 429 technical losses in the first and second segments. The third
+segment completed positions 15--48 without repeating either failed position.
+Both technical losses are Astra, in A and C of the same matched triplet.
+Thus Astra has 22 completed, two technical and zero protocol losses; Sol has
+24 completed and zero technical or protocol losses. All 48 assignments started
+and have result records; none remains active or unstarted. Completion of the
+34-position last segment does not mean all 48 assignments scientifically
+completed. Missing pairs are excluded only from observed-pair descriptions,
+with their denominators visible; no missing-at-random claim is made.
+The final segment's 88 request receipts contain no terminal 429 diagnostic.
+That observation does not identify the earlier limiter or establish a
+permanent resolution; credit exhaustion is not inferred.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lrrrrr}\toprule
+Profile & Requests & Known/unknown & Input & Cached input & Output\\\midrule
+Astra & 60 & 58/2 & 1,428,745 & 311,168 & 305,022\\
+Sol & 60 & 60/0 & 1,418,971 & 263,424 & 294,997\\\bottomrule
+\end{tabular}
+\caption{Follow-up accounting only. Token counts cover known usage.
+Cached input is included in input; reasoning output is included in output.
+Neither subset is added again. Requests are not independent trials.}
+\label{tab:followup-usage}
+\end{table}
+
+Using the frozen tariffs, measured credit equivalents are 1,336.90190 for
+Astra and 264.37032 for Sol. Astra's two unknown requests retain a separate
+1,690 credit-equivalent reserve, based on 1,050,000 input plus 128,000 output
+tokens per request. These are local accounting quantities, not a provider
+invoice or provider token ceiling. The original 7,000 local admission bound
+was not increased. Measured usage and unknown reserves remain separate;
+cache splits are measured for known receipts, while any cold-price treatment
+of an unknown split would be an assumption, not measured zero cache.
+
+\paragraph{Schema denominators.}
+The retained field \texttt{partial\_triplets} counts planned blocks missing
+an A, B or C assignment; its zero value does not assert scientific completion.
+The reader separately reports fully completed triplets (Astra 7, Sol 8),
+scientifically incomplete triplets (Astra 1, Sol 0), and triplets containing
+technical losses (Astra 1, Sol 0). The retained field
+\texttt{cache\_split\_unknown\_requests} counts unknown cache splits only
+among requests with known token usage: its assessed denominators are
+58 for Astra and 60 for Sol. Astra's two usage-unknown requests are excluded
+from that count and retain their full separate reserves. Thus zero unknown
+cache splits is neither zero cached input nor known usage for every request.
+The machine-readable \texttt{artifact/followup/SCHEMA.json} defines these
+populations and exclusions explicitly.
+
+\paragraph{Reader inputs and remaining scope.}
+The package contains 46 exact minimal finals, including 31 original numeric
+tables and declared rules, plus the common/A/B/C instructions and wire schema.
+The reader checks trial, profile, block, case and menu identities; reparses
+decimal tokens as exact rationals; recomputes rule selections and row diagnostics;
+and reconciles decisions, commit hashes and aggregates. It checks A/B against
+the proposals and C against the record selector. All 46 completed labels are
+re-read from the bound \texttt{artifact/data/crossing.json}; none changed.
+Section~\ref{sec:reader-access} gives the source paths and executable entry point. No participant
+analysis or task physics is run by this source-table check.
+
+The visible follow-up chain is in \texttt{artifact/followup/interactions/}.
+Its index binds each call to its trial and segment. Exact prompts and response
+files retain their bytes; analysis request files contain the submitted code
+and public history, and tool-output files contain the archived JSON result.
+All visible agent-message text is supplied in order; the last message is the
+selected terminal response. Earlier visible messages are not forwarded as
+chat history: only the selected analysis program and its result enter the
+next request's \texttt{analysis\_records}. The reader verifies this distinction
+from the cumulative prompts. This is 120 calls, not 177 calls or 177 trials.
+
+Intent and receipt projections omit paths and account/thread identifiers.
+Raw provider streams, including hidden reasoning, remain local; their source
+hashes establish a binding but do not let readers reconstruct omitted fields.
+Fifty-three collector and dependency files across the three segments are
+inspection-only \texttt{.py.txt} files, with source and distributed hashes and
+explicit path-redaction status. They document collection without providing
+a runnable redispatch command. The reader's corruption controls reject
+missing calls, changed identities, wrong conditions, broken code/result/history
+links and altered finals. These are tests of the supplied evidence chain,
+not new scientific trials or execution of participant programs.
+
+Full operational archives remain local. Hashes do not establish independent
+laboratory replication or immutable provider-model/tier identity. The proposed population,
+live query-selection and representation-transfer studies were not run;
+the finite-acquisition companion retains its separate, unchanged sample and claims.
+
+
+\subsection{History-level outcome accounting}
+\label{app:followup-history}
+Table~\ref{tab:followup-histories} retains the four purposeful histories and
+their two repeats within each profile. It describes these assignments only;
+neither the cells nor their repeated contexts are independent new worlds.
+The reader derives this table and the main-text family, transition and
+rule-sensitivity tables from the bound minimal finals, allocation and menu
+census. Technical assignments retain no scientific label. All completed
+follow-up labels are P or L; there are no U or protocol outcomes.
+\input{table-followup-histories.tex}
+
+\section{Supporting fixed-contract control}
+\label{app:structural-control}
+
+The comparison holds the archived tables, rule definitions, menu and task-label
+map fixed. It removes operations rather than withholding information from a
+baseline. We evaluate (i) native actions and rule equality, (ii) native actions
+and the single-distinct-row condition, and (iii) independent per-record
+evaluation of each supported rule. The last baseline never needs a partner's
+table. Only after producing its results do we compare them with paired cells.
+
+\paragraph{Proposition (per-record sufficiency under a fixed contract).}
+For fixed tables $A_i$, a common menu, and a fixed family $\mathcal R$ of
+deterministic rules with specified tie breaking, the collection
+$\{(i,r,r(A_i)):r\in\mathcal R\}$ determines every supported-rule-family
+cell and every observed-rule cell whose rule belongs to $\mathcal R$.
+\emph{Proof.} Each cell is one of those evaluations; no partner table is an
+argument of $r(A_i)$. A fixed action-label map also determines its label.
+This statement does not establish the validity of that map or identify
+an actor's internal computation.
+
+Two weaker checks need fewer rule evaluations. If $r_1=r_2$, then
+$c_{i1}=c_{i2}=a_i$. If a table has a single distinct row, mean and worst case
+select the same column. Duplicate-containing tables with other distinct
+rows do not satisfy this condition. The full-scan equality is thus a
+compositional identity of the contract. The
+empirical question is how often the weaker checks suffice and what contrasts
+remain; agreement with the full scan is not an independent discovery of the
+identity. We measure recoverable cells, not a wall-clock speedup or causal
+attribution accuracy.
+
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{p{0.52\linewidth}rr}
+\toprule
+Baseline information & Observed cells & Family cells\\
+\midrule
+Native actions + identical observed rules & 32/32 & ---\\
+Native actions + one-distinct-row check & --- & 29/32\\
+Independent two-rule scan per record & 32/32 & 32/32\\
+Additional cells from full table after scan & 0 & 0\\
+\bottomrule
+\end{tabular}
+\caption{Mandatory condition only. Counts describe recoverable displayed
+cells, not independent observations or accuracy on external diagnoses.}
+\end{table}
+
+
+\section{Prospective choice-prediction protocol and source access}
+\label{app:prospective}
+\paragraph{History construction and target branches.}
+The preparation fixed two instances per disclosed task family with seed
+2026103001, before model outputs. The purpose was a small feasibility panel
+with fresh histories and legal continuation opportunities, rather than a
+population sample or a balanced difficulty comparison. In continuous
+control, a privileged preparation controller generated six transitions by
+choosing the menu action with the smallest next-state norm. In route tasks,
+the fixed action prefix was $(0,0),(1,0),(2,0),(0,0)$; initial fuel was set to
+retain a known feasible continuation at the source and both prescribed
+branches, with a three-unit margin. Those preparation controllers are not
+participant-model behavior. All twelve source/target packets passed the
+precollection continuation check; the continuous preparation would stop on a
+failed witness rather than resample. The four histories differ from the
+earlier published histories. The original construction code and generation
+record are supplied for inspection in \texttt{artifact/prospective-design/};
+the reader does not execute them.
+
+\input{table-prospective-branches.tex}
+
+The model actors receive the generated public histories, not the privileged
+preparation state or continuation witnesses. Each target contains the full
+source prefix and one additional action--observation transition. The target
+branches and source-proposed action are separate quantities.
+
+\paragraph{Allocation and information boundaries.}
+The pilot fixes four new purposeful histories in the two existing disclosed
+families, two profiles, one source per history/profile and two precommitted
+target branches per source: eight sources, 32 observers and 16 targets.
+Eight initial references make 64 assigned roles. Each target branch is a
+precommitted branch from the source history; it need not follow the model's
+source-proposed action. Both observers receive that fact. Every role uses a
+fresh context; the source never receives future target snapshots. The source's
+private analysis transcript is not replayed to observers or target, although
+its information can be summarized in the record. The four prose fields and
+numeric table are passed only to the with-record observer. The target receives
+neither record nor observer responses. Exact role instructions, schemas,
+packets, allocation, prompts and selected terminal responses are supplied.
+
+The source final schema requires the action, numeric table, declared rule
+and four prose fields; the target final schema requires the action alone.
+Both observer arms receive both schemas and complete actor instructions.
+This evaluates prediction across these output protocols; a same-protocol
+target arm and an isolated protocol-change effect are outside the allocation.
+Source and target actors may request up to three local analyses, followed by
+a final choice; observers make one request without an analysis tool. Both
+observer arms have the same requested model/max/Fast profile and 900-second
+request allowance. Actor allowance is 3,780 seconds, each local analysis
+30 seconds. These allowances do not require equal realized token use, and
+the added record increases input length. Requested profiles and fresh local
+contexts are recorded; immutable remote model identity is not attested.
+
+\paragraph{Reference gate and completion.}
+Two hand-authored policy cases are evaluated with and without a record for
+each profile. The initial gate requires eight valid transport/protocol results
+and all four with-record predictions correct. Astra's with/without accuracy
+is 2/2 and 2/2; Sol's is 2/2 and 1/2. Without-record accuracy is descriptive,
+not a gate. The later Sol completion repeats these four references: all valid,
+with-record 2/2 and without-record 1/2. Only then are the two remaining
+predictions locked and the target requested. Reference success does not
+establish scientific prediction benefit or durable provider availability.
+
+The original segment has 61 completed, one interrupted and two unstarted
+roles. The new segment has seven completed roles, including four new controls
+and the three remaining scientific roles. Their union covers all 64 original
+assignments, but the 68 completed segment roles are not 68 independent samples.
+The interrupted original request is neither deleted nor marked successful.
+Completion was decided after partial-result inspection and adds no new
+history. It restores the planned target denominator without transforming this
+pilot into a confirmatory sample. The original partial panel remains visible.
+
+\paragraph{Scoring and structural diagnostics.}
+For each valid target, an observer scores one iff its action ID equals the
+target's menu-bound ID. Invalid observer protocol would score zero; unavailable
+source or target leaves the paired difference in $[-1,1]$. The primary
+descriptive quantity averages the two target differences within each history,
+then the four histories, separately by profile. There are no protocol losses
+in the completed original or completion results. We report assigned, started,
+completed, interrupted and unstarted roles separately. Empty denominators
+would be unavailable, never success. There is no pooled primary estimate,
+population significance test or model ordering.
+
+The reader derives source validity, declared selection, both supported-rule
+choices, row count, distinct-row count and proposal match directly from the
+eight exact finals. It checks all menu/action identities. All eight source
+records match; seven are single-row and one Sol record has two distinct rows.
+All eight select the same action under both rules, forced in the seven
+single-row cases and observed in the remaining one. No row duplication occurs.
+The source-action copy baseline is legal for every target. The numeric table
+plus prose is one treatment. The semantic informativeness of the prose was
+not independently evaluated, and the seven single-row tables do not establish
+that the prose is uninformative. Table~\ref{tab:prospective-paired} reports
+joint correctness for the combined panel; equal marginal counts can include
+different correctly predicted targets. Identical-input target variability
+and task-specific informative-record sensitivity were not separately measured.
+The family and history breakdowns in
+Tables~\ref{tab:prospective-families} and~\ref{tab:prospective-histories} were
+added after inspecting the combined results. They preserve every assigned
+history and target and leave the prespecified aggregate unchanged.
+
+\input{table-prospective-histories.tex}
+
+\paragraph{Usage and reserves.}
+The initial segment has 96 requests: 95 measured and one unknown Sol request.
+Astra's 47 measured requests used 747,683 input and 282,909 output tokens,
+including 150,016 cached input tokens; Sol's 48 measured requests used 854,673
+input and 345,366 output tokens, including 84,480 cached input tokens.
+The new segment uses seven Sol requests: four controls, two observers and one
+target, with 88,601 input and 34,066 output tokens, including 32,000 cached
+input tokens. Cache is a subset of input, and reasoning is a subset of output;
+neither is counted again. The new segment contains no analysis request.
+
+Frozen local credit equivalents are 1,013.60680 for initial Astra,
+250.12470 for initial Sol, and 22.85310 for the Sol completion. The original
+unknown request still reserves 1,050,000 input plus 128,000 output tokens,
+equivalent to 169 credits. Across segments: 103 issued requests, 102 measured,
+one unknown; measured equivalents 1,286.58460, reserve-inclusive 1,455.58460.
+The initial 10,000 local bound remains; the separately approved completion
+bound is 1,690 with at most ten new requests. Neither is a provider invoice
+cap. Analyst use and older follow-up reserves are outside this accounting.
+All 102 measured receipts have known cache splits; this does not make the
+unresolved request's usage known. No 429 appears in these receipts; the
+original interruption's cause remains undetermined.
+
+\paragraph{Prospective evidence and check limits.}
+The prospective evidence retains its own exact manifest within the single
+supplementary archive. It includes
+103 exact prompts and their schemas, 102 selected terminal responses,
+34 analysis program/result pairs, eight source records, and projected request
+receipts and journal chronology. Analysis code is readable data; the reader
+never executes it or a physical simulator. The main package binds the
+supplement's manifest. Its source reader reconstructs prompts, re-parses
+source tables, checks source--prediction--target order, and recomputes initial
+and combined panels and usage. The implementation shares the collector's
+parser and scalar readout; negative controls challenge its evidence links.
+Local source hashes and projected timestamps are not independent provider
+attestation. Raw account identifiers, hidden reasoning and provider-added
+context are not supplied. The reader audits the supplied evidence, not
+unobserved internal computation or general-world prediction.
+
+
+\section{Evidence access and operational accounting}
+\label{app:reader-access}
+Table~\ref{tab:evidence-access} specifies access separately for each evidence
+set. The bundle contains LaTeX sources, disclosed current-study mechanisms,
+older numerical replay and the follow-up source reader. The older panel's
+80 payloads reconstruct prompt hashes; archived participant programs are
+never executed. The unchanged companion is optional supporting material. Its catalog,
+ordered draw, 5,000 histories, queries, certificates and replay are in a
+separate companion bundle; they are not needed for the main-paper checks. Existing-input replay is not new data collection or
+historical process attestation.
+
+For the follow-up, the standard-library reader parses exact numeric lexemes
+from 46 minimal finals, including 31 tables. It derives validity, both rule
+choices and row diagnostics, compares archived decisions, verifies menu and
+profile identities, and checks 46 labels by lookup in the bound census.
+A separate interaction reader now reconstructs all 120 archived application
+prompts from the condition instructions, four fixed public packets and the
+exact cumulative analysis prefix. It links 118 terminal response files,
+all 177 visible agent messages and 72 analysis input/output pairs to the
+same allocations and finals. Two failed requests retain no response and
+unknown usage. Collector sources are supplied as inspection-only text;
+participant programs and collector code are never executed by these checks.
+Intent and receipt files are explicit field projections with original source
+hashes. This permits an audit of the supplied application-visible chain,
+not independent attestation of historical execution, provider-added context
+or hidden reasoning. Original streams with machine/account identifiers remain
+local. The earlier revision added numerical re-evaluation of the existing
+pilot sensitivity actions. The paper also reports the
+prospective choice-prediction pilot and its separately recorded completion.
+The prospective supplement contains all eight exact source records, 32
+scientific predictions, 16 target finals and 12 reference finals; 103 exact
+prompts, 102 terminal response files and 34 analysis code/result pairs support
+reconstruction of the visible inputs. The unresolved request has a prompt and
+an unknown-usage reserve. Its reader checks action/menu identities and
+chronology and recomputes both result panels without executing submitted
+programs or physics. It shares the collector's record parser and scalar
+calculation, so this is reproducibility, not an independent implementation.
+The prospective component is bound by hash to the main component. Both are restored from the single supplementary archive.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.36\linewidth}>{\raggedright\arraybackslash}p{0.36\linewidth}}\toprule
+Evidence & Supplied material & Boundary of the check\\\midrule
+Prospective supplement & Eight exact source records; 103 prompts, 102 terminal responses, 34 analysis pairs; allocation, menus, instructions and projected receipts & Recompute original/combined predictions and record structure; retain interrupted attempt; projected chronology is not provider attestation\\
+Follow-up sources & 46 minimal finals, including 31 numeric tables and rules;
+allocation, common/A/B/C instructions, schema, menu and bound labels & Recompute
+final decisions and labels by lookup; no provider or historical-runtime attestation\\
+Follow-up interaction & 120 prompts, 118 terminal responses, 177 visible messages, 72 analysis input/output pairs; inspection-only collector sources &
+Reconstruct cumulative application prompts and bind finals; projected receipts do not independently authenticate historical execution or provider context\\
+Older common-menu panel & All 80 request payloads, prompt renderer, instructions,
+histories and label-replay inputs & Reconstruct archived prompts and hashes;
+participant programs are inspected as data, never executed\\
+Pilot selector sensitivity & Twelve original action grades with full witnesses
+and certificates, action lock, fixed plan inputs and reader & Recompute plans,
+selectors and conditional labels; compare bound evidence for every action\\
+Mechanisms and labels & Disclosed current-study mechanisms and older numerical
+replay sources & Conditional continuous premises remain open;
+replay is not independent historical or laboratory attestation\\\bottomrule
+\end{tabular}
+\caption{Reader access by evidence set. Final-table recomputation, visible
+interaction consistency and historical attestation are separate capabilities.
+No hidden model reasoning is included.}
+\label{tab:evidence-access}
+\end{table}
+
+
+The single supplementary archive stores repeated UTF-8 lines once in readable
+JSON shards, with an indexed path-to-line mapping and the original file
+hashes. PDF files remain directly readable. The extraction utility rejects
+unexpected paths, invalid line references and altered bytes before restoring
+the two complete components. Component manifests and the main-to-prospective
+binding are then verified by the evidence reader. This representation changes
+storage only; it preserves all source files and both execution segments.
+\noindent\begin{minipage}{\linewidth}
+To obtain the original directory layout for direct inspection, run:
+\begin{verbatim}
+python3.12 -I -B -S verify.py --extract-to ../ruu-evidence
+\end{verbatim}
+\end{minipage}
+
+\noindent\begin{minipage}{\linewidth}
+From
+\texttt{../ruu-evidence/paper-package}, the component reader is:
+\begin{verbatim}
+python3.12 -I -B -S verify_all.py --prospective-dir ../prospective
+\end{verbatim}
+\end{minipage}
+
+The additional scalar check derives the A2 strict-dominance comparisons,
+the four-cell paired table, and the family and history breakdowns directly
+from the supplied numeric source and terminal responses. It also checks
+the fixed source--target prefixes and branch actions. It does not execute
+participant programs or the history generator.

@@ -1,3 +1,11 @@
+# Submitted-study reader — 30 October 2026
+
+TMLR submission 13906 contains v2.0.18. This release makes that exact submitted evidence available in the existing public repository, with an explicit file identity map and direct browsing copies. The author's current instruction authorizes this alignment of the public Git materials. The [submission record](https://openreview.net/forum?id=Lu6hxicGcr) and [binding](../SUBMISSION.json) distinguish submission from any later editorial outcome.
+
+The full old reader remains at the [v2.0.9 tag](https://github.com/latentatlas/research-under-uncertainty/tree/ruu-reader-v2.0.9). Current-study disclosure includes only the submitted evidence and reviewed navigation. Future benchmark mechanisms and unrelated private research remain outside this distribution. The historical entries below retain their date-specific scope.
+
+---
+
 # Current reader release — 29 October 2026
 
 This release adds a specifically reviewed current-study reader under `releases/ruu-reader-v2.0.9/`. Its disclosure includes the selected scientific inputs required by its offline checks; it is broader than the 18 October aggregate-only summary described below. This does not reopen the private archive, restore withdrawn Git objects, or authorize release of a future benchmark's hidden mechanisms. The author authorized public release of this reviewed reader and its repository guides on 29 October 2026. This authorization is specific to the current study; future benchmark mechanisms remain outside it.

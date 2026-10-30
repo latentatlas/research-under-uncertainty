@@ -1,1 +1,0 @@
-Condition A_optional_model: a record is optional. Your legal proposed action_id is executed. If you provide a record, it is recorded and checked for agreement, but it does not replace your proposed action. An absent or invalid optional record does not cancel an otherwise legal action. A malformed final JSON or illegal action produces no action.

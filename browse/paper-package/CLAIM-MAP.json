@@ -1,0 +1,467 @@
+{
+  "claims": {
+    "C1": {
+      "claim": "In the older 32-trial panel, optional applicability and mandatory external construction are different",
+      "limits": [
+        "Older mandatory executed-action agreement is by construction; new follow-up B correspondence is separately observed",
+        "empty optional pair denominator unassessed",
+        "Behavior observed under an imperfect analysis interface; causal interface effect unassessed"
+      ],
+      "paths": [
+        "artifact/data/crossing.json",
+        "artifact/check.py"
+      ]
+    },
+    "C11": {
+      "claim": "Separate follow-up: 48 original assignments, 46 completed, 2 technical, 0 protocol/active/unstarted; Astra 22+2, Sol 24+0",
+      "limits": [
+        "Three execution segments, not one uninterrupted run",
+        "Failed positions 13/14 retained, not replaced or recoded as L",
+        "Four purposeful contexts, repeats not independent worlds"
+      ],
+      "paths": [
+        "artifact/followup/check.py",
+        "artifact/followup/trials.json",
+        "artifact/followup/reference.json",
+        "artifact/followup/accounting.json",
+        "artifact/followup/SOURCE-BINDINGS.json",
+        "paper/body.tex",
+        "paper/appendix.tex",
+        "artifact/followup/source_check.py",
+        "artifact/followup/final-index.json",
+        "artifact/followup/SCHEMA.json",
+        "artifact/data/crossing.json"
+      ]
+    },
+    "C12": {
+      "claim": "Required-record/model-proposal B: each profile 8 valid and 8 proposal-matching records; both supported rules choose the same action on all 8",
+      "limits": [
+        "Correspondence is observed, not proof that the record caused the proposal",
+        "No verified semantic hypothesis or internal faithfulness claim",
+        "Source-table derivation is available; it does not verify hypothesis semantics or independently attest historical execution",
+        "Astra 8 and Sol 6 single-row equalities are forced; only Sol has a multirow denominator (2/2 same action, with 3 and 4 distinct rows)."
+      ],
+      "paths": [
+        "artifact/followup/check.py",
+        "artifact/followup/trials.json",
+        "artifact/followup/reference.json",
+        "artifact/followup/accounting.json",
+        "artifact/followup/SOURCE-BINDINGS.json",
+        "paper/body.tex",
+        "paper/appendix.tex",
+        "artifact/followup/source_check.py",
+        "artifact/followup/final-index.json",
+        "artifact/followup/SCHEMA.json",
+        "artifact/data/crossing.json",
+        "artifact/followup/contribution_checks.py",
+        "artifact/followup/contribution-checks.json",
+        "paper/table-b-structure.tex"
+      ]
+    },
+    "C13": {
+      "claim": "Descriptive paired P changes: Astra B-A +1/7 and C-B -2/7; Sol B-A -1/8 and C-B +1/8",
+      "limits": [
+        "No pooled primary estimate, population interval, equivalence or model ranking",
+        "P is conditional continuation feasibility, not full task success",
+        "Continuous numerical/runtime premises retained; labels from old bound menu census",
+        "C-B is total disclosed-regime contrast, not fixed-record mechanical correction"
+      ],
+      "paths": [
+        "artifact/followup/check.py",
+        "artifact/followup/trials.json",
+        "artifact/followup/reference.json",
+        "artifact/followup/accounting.json",
+        "artifact/followup/SOURCE-BINDINGS.json",
+        "paper/body.tex",
+        "paper/appendix.tex",
+        "artifact/followup/source_check.py",
+        "artifact/followup/final-index.json",
+        "artifact/followup/SCHEMA.json",
+        "artifact/data/crossing.json"
+      ]
+    },
+    "C14": {
+      "claim": "All completed C proposals already matched record selection: Astra 7/7, Sol 8/8; observed override opportunities zero",
+      "limits": [
+        "Executed-action agreement is by construction",
+        "No measured benefit of overriding a conflicting proposal",
+        "No new live crossing samples"
+      ],
+      "paths": [
+        "artifact/followup/check.py",
+        "artifact/followup/trials.json",
+        "artifact/followup/reference.json",
+        "artifact/followup/accounting.json",
+        "artifact/followup/SOURCE-BINDINGS.json",
+        "paper/body.tex",
+        "paper/appendix.tex",
+        "artifact/followup/source_check.py",
+        "artifact/followup/final-index.json",
+        "artifact/followup/SCHEMA.json",
+        "artifact/data/crossing.json"
+      ]
+    },
+    "C15": {
+      "claim": "Known follow-up usage and retained unknown reserve are separate; cached input/reasoning output are subsets",
+      "limits": [
+        "Frozen-tariff local credit equivalents, not provider bill or ceiling",
+        "Two unknown Astra requests retain 2,100,000 input and 256,000 output reservation",
+        "First successful access does not attest immutable server weights/tier or permanent 429 resolution"
+      ],
+      "paths": [
+        "artifact/followup/check.py",
+        "artifact/followup/trials.json",
+        "artifact/followup/reference.json",
+        "artifact/followup/accounting.json",
+        "artifact/followup/SOURCE-BINDINGS.json",
+        "paper/body.tex",
+        "paper/appendix.tex",
+        "artifact/followup/source_check.py",
+        "artifact/followup/final-index.json",
+        "artifact/followup/SCHEMA.json",
+        "artifact/data/crossing.json"
+      ]
+    },
+    "C16": {
+      "claim": "Follow-up family outcomes: Astra continuous 9P/3L, route 10P and 2 technical; Sol continuous 8P/4L, route 12P.",
+      "limits": [
+        "Purposeful histories, repeats and separate profiles; no calibrated difficulty or population comparison",
+        "Both route menus include an L action",
+        "Existing label census; continuous premises retained"
+      ],
+      "paths": [
+        "artifact/followup/breakdown.py",
+        "artifact/followup/breakdown.json",
+        "paper/table-followup-families.tex",
+        "paper/table-followup-histories.tex"
+      ]
+    },
+    "C17": {
+      "claim": "Directional pairs: Astra B-A 1 gain/0 loss/6 same/1 missing and C-B 0/2/5/1; Sol B-A 0/1/7/0 and C-B 2/1/5/0.",
+      "limits": [
+        "Same includes P-to-P and L-to-L",
+        "Net changes descriptive only; C-B is a total condition contrast"
+      ],
+      "paths": [
+        "artifact/followup/breakdown.py",
+        "artifact/followup/breakdown.json",
+        "paper/table-followup-transitions.tex"
+      ]
+    },
+    "C18": {
+      "claim": "Two follow-up C records change supported-rule action but keep the bound task label, one P-to-P and one L-to-L.",
+      "limits": [
+        "Existing-record calculations, not new live crossings",
+        "No measured benefit of correcting a conflicting proposal"
+      ],
+      "paths": [
+        "artifact/followup/breakdown.py",
+        "artifact/followup/breakdown.json",
+        "paper/table-followup-rule-examples.tex"
+      ]
+    },
+    "C19": {
+      "claim": "Record-level measurements distinguish availability, correspondence, sensitivity and added cells; no independent behavioral or discovery-utility gain is established.",
+      "limits": [
+        "The crossing proposal is our pilot proposal, not asserted widespread practice",
+        "No independent diagnosis accuracy, world-observation prediction or experiment-choice advantage measured; new-choice prediction assessed only in a purposeful pilot without positive observed increment.",
+        "Literature scopes explicit; no exhaustive novelty or head-to-head claim"
+      ],
+      "paths": [
+        "paper/body.tex",
+        "paper/references.bib",
+        "RELATED-WORK-SCOPE.md"
+      ]
+    },
+    "C2": {
+      "claim": "Observed 32/32; weak family 29/32; scan 32/32; 0 extra cells",
+      "limits": [
+        "common-menu structural identity",
+        "not runtime or causal diagnostic superiority",
+        "Action sensitivity is reproducible; continuous P/L labels retain numerical/runtime premises",
+        "The sole rule-sensitive mandatory record incurred an analysis error"
+      ],
+      "paths": [
+        "artifact/crossing_check.py",
+        "artifact/data/crossing-reference.json"
+      ]
+    },
+    "C3": {
+      "claim": "Pilot native-action-compatible selector counterexample: twelve fixed plans/actions and five selectors, with full archived witness/certificate binding and present-host conditional regrading",
+      "limits": [
+        "Native-action-compatible means original A2 action within 1e-6, not semantic or internal-policy equivalence.",
+        "Finite retrospective selector family; no arbitrary-policy or internal-faithfulness inference.",
+        "Existing bundled grader, same-host replay; not independent implementation or historical attestation.",
+        "Continuous labels remain conditional on numerical/runtime premises."
+      ],
+      "paths": [
+        "legacy-replay/data/references.json",
+        "artifact/source/pilot-sensitivity.private.json",
+        "legacy-replay/replay.py",
+        "artifact/pilot_sensitivity.py",
+        "artifact/source/pilot-sensitivity-grades.json",
+        "artifact/source/pilot-sensitivity-actions-lock.json",
+        "artifact/source/pilot-sensitivity-bindings.json",
+        "artifact/pilot_sensitivity_tests.py",
+        "paper/table-pilot-sensitivity.tex",
+        "paper/body.tex"
+      ]
+    },
+    "C4": {
+      "claim": "48 transfer trials: 1 supported record, 0 supported pairs",
+      "limits": [
+        "crossing effect unassessed",
+        "24 route trials made no analysis attempt; 24 continuous trials made 72 attempts, 67 ok and 5 errors"
+      ],
+      "paths": [
+        "legacy-replay/replay.py",
+        "artifact/source/transfer-interventions.json",
+        "artifact/interface_audit.py"
+      ]
+    },
+    "C6": {
+      "claim": "Conditional continuous numerical premise",
+      "limits": [
+        "uniform library accuracy and historical math image binding remain open"
+      ],
+      "paths": [
+        "paper/runtime-proof.tex",
+        "artifact/numeric_constants.py"
+      ]
+    },
+    "C8": {
+      "claim": "32 menu labels and all 80 request prompt/payload hashes reproduce",
+      "limits": [
+        "Continuous numerical/runtime premises remain open",
+        "No live provider regeneration or attestation",
+        "One host-specific path anonymized in inspection-only helper"
+      ],
+      "paths": [
+        "artifact/menu_replay.py",
+        "artifact/protocol/check.py",
+        "artifact/protocol/wire-schema.json",
+        "artifact/protocol/SOURCE-BINDINGS.json"
+      ]
+    },
+    "C9": {
+      "claim": "Common-menu 48 analyses: 41 ok, 7 errors in 7 trials, one of three slots each; 5 optional and 2 mandatory",
+      "limits": [
+        "No archived participant code executed",
+        "Final decisions still evaluated; no trial exclusion or relabeling",
+        "Effect of a corrected interface on actions/record structure unassessed"
+      ],
+      "paths": [
+        "artifact/interface_audit.py",
+        "artifact/protocol/check.py",
+        "artifact/data/crossing.json"
+      ]
+    },
+    "C20": {
+      "claim": "An action-copy record matches any proposed menu index under both supported rules; a two-row arithmetic positive control separates them.",
+      "limits": [
+        "Constructed counterexample to sufficiency, not a live trial or evidence of the participants' record-generation process.",
+        "No task label, forecast calibration or predictive-utility claim."
+      ],
+      "paths": [
+        "artifact/followup/contribution_checks.py",
+        "artifact/followup/contribution-checks.json",
+        "paper/body.tex"
+      ]
+    },
+    "C21": {
+      "claim": "Early real-record example exactly reproduces B trial 3: one row 0.35/0.30/0.25, proposal and both rules action 2, bound route label P.",
+      "limits": [
+        "One illustrative archived record; not an estimate of prevalence, semantic adequacy or causal use."
+      ],
+      "paths": [
+        "artifact/followup/finals/trial-003.json",
+        "artifact/followup/contribution_checks.py",
+        "paper/table-real-record.tex"
+      ]
+    },
+    "C22": {
+      "claim": "Final-source recomputation and the archived application-visible follow-up interaction chain are supplied, with distinct verification limits.",
+      "paths": [
+        "artifact/followup/source_check.py",
+        "artifact/followup/interaction_check.py",
+        "artifact/followup/INTERACTION-ACCESS.md",
+        "paper/body.tex",
+        "paper/appendix.tex"
+      ],
+      "limits": [
+        "No hidden reasoning or provider-added context",
+        "Projected receipt fields and supplied hashes do not independently attest historical execution",
+        "No program or physics execution by the follow-up-only reader"
+      ]
+    },
+    "C23": {
+      "claim": "The supplied follow-up visible application chain reconciles 120 requests, 118 terminal responses, 177 visible agent messages and 72 analysis input/output pairs, linked to 46 exact finals.",
+      "paths": [
+        "artifact/followup/interaction_check.py",
+        "artifact/followup/interaction_tests.py",
+        "artifact/followup/interactions/INDEX.json",
+        "artifact/followup/INTERACTION-ACCESS.md"
+      ],
+      "limits": [
+        "No archived program/collector execution; no new model or physics requests",
+        "Receipt and message field projections are not independent historical authentication",
+        "Hidden reasoning and provider-added context excluded",
+        "Same archived trials; not additional observations"
+      ]
+    },
+    "C24": {
+      "claim": "Prospective combined prediction: Astra 6/8 vs 7/8, Sol 3/8 vs 3/8; no positive observed net accuracy gain.",
+      "limits": [
+        "Four purposeful histories/profile, two dependent targets/history; no population null, model ranking or independent replication.",
+        "Initial15targets and separately completed final target remain distinct; completion followed partial-result inspection.",
+        "Source final includes action and record; target final action alone. Protocol-change effect not separately measured.",
+        "One generation per role; no isolated case-level causal benefit/harm."
+      ],
+      "paths": [
+        "PROSPECTIVE-BINDING.json",
+        "paper/table-prospective.tex",
+        "paper/body.tex",
+        "paper/appendix.tex"
+      ],
+      "separate_supplement_paths": [
+        "check.py",
+        "INDEX.json",
+        "REFERENCE.json",
+        "SOURCE-BINDINGS.json"
+      ]
+    },
+    "C25": {
+      "claim": "All eight prospective source records match; seven single-row forced rule agreements and one two-distinct-row observed agreement; zero duplicate rows.",
+      "limits": [
+        "New record elicitation, not old-record predictiveness.",
+        "Whole table-plus-prose treatment; matching does not establish internal faithfulness.",
+        "Single-row count refers to numeric tables; accompanying prose semantic informativeness not independently evaluated."
+      ],
+      "paths": [
+        "PROSPECTIVE-BINDING.json",
+        "paper/table-prospective.tex",
+        "paper/body.tex",
+        "paper/appendix.tex"
+      ],
+      "separate_supplement_paths": [
+        "check.py",
+        "INDEX.json",
+        "REFERENCE.json",
+        "SOURCE-BINDINGS.json"
+      ]
+    },
+    "C26": {
+      "claim": "Separate source reader reconstructs103requests/102terminalresponses/34analysispairs and both panels; original unknown169reserve retained.",
+      "limits": [
+        "Shared collector parser/readout; not independent implementation or provider attestation.",
+        "No model, submitted program or world simulation executed by prospective reader."
+      ],
+      "paths": [
+        "PROSPECTIVE-BINDING.json",
+        "paper/table-prospective.tex",
+        "paper/body.tex",
+        "paper/appendix.tex"
+      ],
+      "separate_supplement_paths": [
+        "check.py",
+        "INDEX.json",
+        "REFERENCE.json",
+        "SOURCE-BINDINGS.json"
+      ]
+    },
+    "C27": {
+      "claim": "In A2, plan index 2 is strictly best on all five inspected criteria against all three alternatives (15 inequalities); native-action agreement cannot discriminate among these selectors.",
+      "paths": [
+        "artifact/interpretation_checks.py",
+        "artifact/source/pilot-sensitivity.private.json",
+        "paper/body.tex"
+      ],
+      "limits": [
+        "Finite retrospective selector family; does not identify internal policy.",
+        "A1 conditional task labels retain the existing numerical/runtime premises."
+      ]
+    },
+    "C28": {
+      "claim": "Combined paired prediction cells: Astra both/with-only/without-only/neither = 5/1/2/0; Sol = 2/1/1/4.",
+      "paths": [
+        "artifact/interpretation_checks.py",
+        "PROSPECTIVE-BINDING.json",
+        "paper/table-prospective-paired.tex"
+      ],
+      "limits": [
+        "Four histories/profile, two linked targets; cells are observed single-generation outcomes, not causal help/harm."
+      ]
+    },
+    "C29": {
+      "claim": "Source and target final schemas differ: action+record vs action only; both observers receive both actor contracts and the same target.",
+      "paths": [
+        "artifact/interpretation_checks.py",
+        "PROSPECTIVE-BINDING.json",
+        "paper/body.tex",
+        "paper/appendix.tex"
+      ],
+      "limits": [
+        "Same-protocol transfer and isolated protocol effects unmeasured.",
+        "Same-input target variability and scientific-task informative-record sensitivity unmeasured."
+      ]
+    }
+  },
+  "date": "2026-10-30",
+  "version": "v2.0.18",
+  "contribution_priority_v2_0_12": [
+    "Concrete completion non-identifiability counterexample",
+    "Separate B correspondence finding with forced versus observed decomposition",
+    "Secondary task-label coarsening caution; no equal-weight novelty claim"
+  ],
+  "separate_companion_claim_ids": [
+    "C10",
+    "C5",
+    "C7"
+  ],
+  "redaction_v2_0_13": {
+    "claims_changed": false,
+    "scope": "Two prose clarifications only; scientific results and limitations unchanged."
+  },
+  "counterexample_revision_v2_0_14": {
+    "original_scientific_results_changed": false,
+    "reader_change": "Bind original action lock and full archived grades; numerical re-evaluation now part of standard command.",
+    "presentation": "Main-text worked example, explicit weak compatibility definition, practical B audit lesson."
+  },
+  "prospective_revision_v2_0_15": {
+    "scope": "New prospective pilot and separate frozen completion; old sealed package retained.",
+    "original_targets": 15,
+    "combined_targets": 16,
+    "source_units": 8,
+    "histories_per_profile": 4,
+    "record_richness_not_postselected": true,
+    "world_prediction_not_measured": true
+  },
+  "review_revision_v2_0_16": {
+    "scope": "Existing-evidence and presentation revision; joint counts directly derived; no new scientific sample.",
+    "presentation": "Lead with contribution and state concrete scope next to each result; remove redundant disclaimer lists.",
+    "source_data_changed": false
+  },
+  "editorial_revision_v2_0_17": {
+    "changes": [
+      "Define Research Under Uncertainty (RUU) as the research program at first use.",
+      "Render the extraction command verbatim and verify all four PDF commands."
+    ],
+    "scientific_claims_and_data_changed": false
+  },
+  "reporting_revision_v2_0_18": {
+    "analysis_timing": "post hoc descriptive family/history breakdown",
+    "primary_metric_changed": false,
+    "new_scientific_samples": 0,
+    "paths": [
+      "paper/table-prospective-families.tex",
+      "paper/table-prospective-histories.tex",
+      "paper/table-prospective-branches.tex",
+      "artifact/interpretation_checks.py",
+      "artifact/prospective-design/SOURCE-PROVENANCE.json"
+    ],
+    "limits": [
+      "Two purposeful histories and four linked targets per family/profile.",
+      "Task-matched informative-record controls, identical-input repetitions and isolated output-protocol effects remain unmeasured."
+    ]
+  }
+}

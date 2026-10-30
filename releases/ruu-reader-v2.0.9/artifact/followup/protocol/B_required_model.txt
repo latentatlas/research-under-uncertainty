@@ -1,1 +1,0 @@
-Condition B_required_model: a valid record and a legal proposed action_id are both required. Your proposed action_id is executed, whether or not it agrees with your record's rule. The record is recorded and checked for agreement. An absent or invalid record, a malformed final JSON, or an illegal proposed action produces no action.

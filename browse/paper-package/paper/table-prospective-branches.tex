@@ -1,0 +1,14 @@
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{llcl}\toprule
+Histories & Family & Source $\to$ target step & Two separate branch actions\\\midrule
+h01, h02 & Continuous & $6\to7$ & $(0.6,0)$; $(-0.6,0)$\\
+h03, h04 & Route & $4\to5$ & $(0,0)$; $(2,0)$: advance 1; 3 nodes\\
+\bottomrule\end{tabular}
+\caption{Fixed source--target construction. Step counts completed transitions.
+Each target preserves the entire source history and adds one transition and
+its observation under the indicated exogenous action. The two branches are
+alternatives from the same source, not consecutive transitions. Branch actions
+were fixed before source-model outputs and need not equal the source proposal.}
+\label{tab:prospective-branches}
+\end{table}

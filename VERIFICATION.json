@@ -1,0 +1,100 @@
+{
+  "schema": "ruu-public-verification-v1",
+  "date": "2026-10-30",
+  "revision": "v2.0.18",
+  "stage": "Local candidate checked before publication",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "submission_identity": {
+    "browsing_copies": 83,
+    "evidence_checks_run": false,
+    "expanded_files": 1424,
+    "model_calls": 0,
+    "passed": true,
+    "revision": "v2.0.18",
+    "submission_number": 13906,
+    "submitted_files": 25,
+    "submitted_zip_checked": true
+  },
+  "existing_evidence": {
+    "passed": true,
+    "check_count": 13,
+    "checks": {
+      "artifact/check.py": true,
+      "artifact/followup/breakdown.py": true,
+      "artifact/followup/check.py": true,
+      "artifact/followup/contribution_checks.py": true,
+      "artifact/followup/interaction_check.py": true,
+      "artifact/interface_audit.py": true,
+      "artifact/menu_replay.py": true,
+      "artifact/numeric_constants.py": true,
+      "artifact/pilot_sensitivity.py": true,
+      "artifact/protocol/check.py": true,
+      "interpretation": true,
+      "legacy-replay": true,
+      "prospective": true
+    },
+    "evaluated_targets": 16,
+    "paired_correctness": {
+      "gpt-6-astra": {
+        "both_correct": 5,
+        "both_wrong": 0,
+        "only_with_record": 1,
+        "only_without_record": 2
+      },
+      "gpt-6.1-sol": {
+        "both_correct": 2,
+        "both_wrong": 4,
+        "only_with_record": 1,
+        "only_without_record": 1
+      }
+    }
+  },
+  "archive_controls": {
+    "passed": true,
+    "count": 15,
+    "roundtrip_files": 1424
+  },
+  "binding_controls": {
+    "passed": true,
+    "count": 4,
+    "controls": [
+      {
+        "case": "submission/paper/manuscript.pdf",
+        "rejected": true
+      },
+      {
+        "case": "browse/paper-package/paper/body.tex",
+        "rejected": true
+      },
+      {
+        "case": "extra-submitted-file",
+        "rejected": true
+      },
+      {
+        "case": "wrong-ZIP",
+        "rejected": true
+      }
+    ]
+  },
+  "navigation": {
+    "passed": true,
+    "checked_local_links": 46
+  },
+  "manuscript": {
+    "submitted_PDF_byte_identity": true,
+    "source_dependency_paths_checked": true,
+    "new_typeset_build_tested": false,
+    "reason": "LaTeX tools were not available on the check host command path."
+  },
+  "scientific_scope": {
+    "new_model_calls": 0,
+    "new_scientific_samples": 0,
+    "participant_programs_executed": 0,
+    "independent_laboratory_replication": false
+  },
+  "note": "An author-side execution record. Readers can rerun every evidence and binding command. Historical-runtime and provider identity attestation are not claimed."
+}

@@ -1,1 +1,0 @@
-Condition C_required_executor: a valid record and a legal proposed action_id are both required. The action selected by your record's declared rule is executed, whether or not it agrees with your proposed action_id. Your proposed action is recorded and checked for agreement. An absent or invalid record, a malformed final JSON, or an illegal proposed action produces no action.

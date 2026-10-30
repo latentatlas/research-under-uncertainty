@@ -1,0 +1,44 @@
+\documentclass[10pt]{article}
+\usepackage{tmlr}
+\usepackage{amsmath,amssymb,booktabs,longtable,array,calc}
+\usepackage{graphicx,xcolor,tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{hyperref,url}
+\newcommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\hypersetup{hidelinks}
+
+\title{What Decision Records Establish About\\Model Choices Under Uncertainty}
+\author{Anonymous authors}
+\begin{document}
+\raggedbottom
+\maketitle
+\begingroup\renewcommand{\thefootnote}{}\footnotetext{AI assistance: An LLM-based assistant contributed to experimental design, implementation, analysis, literature review, and manuscript drafting and revision. AI tools are not authors.}\endgroup
+\begin{abstract}
+Decision records can be evaluated by whether they match an action,
+identify an executable selection rule, or help predict a later choice.
+We distinguish these questions through a case study of model decisions
+under uncertainty. In a concrete counterexample, five ways of completing
+an incompletely specified selector reproduce the same original action:
+one plan is best on all five criteria. Applied to another fixed
+representation, those selectors yield different preservation/loss labels
+under the study's conditional feasibility evaluation. Original-action
+agreement therefore leaves the resulting component diagnosis ambiguous.
+In a separate follow-up, required records match all sixteen model proposals
+executed without external selection. The two supported rules agree in all
+sixteen records, with fourteen agreements forced by a single row and two
+observed in multirow tables. Finally, a prospective pilot freezes eight new
+records before sixteen target choices across two execution segments.
+Prediction with versus without the record is 6/8 versus 7/8 for Astra and
+3/8 versus 3/8 for Sol: no positive net accuracy gain is observed across
+four purposeful histories per profile. The study provides concrete controls
+for evaluating decision records: test whether candidate rules can disagree,
+separate action correspondence from task labels, and assess added prediction
+on later choices. These measurements concern external records in two task
+families; population effects require broader sampling.
+\end{abstract}
+\input{body.tex}
+\bibliography{references}
+\bibliographystyle{tmlr}
+\clearpage\appendix
+\input{appendix.tex}
+\end{document}

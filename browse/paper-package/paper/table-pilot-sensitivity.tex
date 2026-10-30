@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lccr}\toprule
+Criterion minimized & Native A2: plan/label & Crossed A1: plan/label & Action norm\\\midrule
+Total penalized cost (R2*) & 2/P & 2/P & 0.575465\\
+Maximum target-step norm & 2/P & 2/P & 0.575465\\
+Mean squared target-step norm & 2/P & 2/P & 0.575465\\
+Trajectory peak norm & 2/P & 3/L & 0.042684\\
+Final-step norm & 2/P & 5/P & 0.579114\\
+\bottomrule\end{tabular}
+\caption{Pilot context B: five selectors applied to the same fixed plan pools.
+Indices are zero-based. All five select native A2 plan 2 and reproduce the
+original action within $10^{-6}$. The first three select the same crossed
+A1 plan; the minimum-peak selector instead selects plan 3, giving L rather
+than P. Norms refer to crossed actions. Labels retain the conditional
+continuous evaluation premises. These five selectors are not independent
+replications or a probability sample of completions.}
+\label{tab:b-completions}
+\end{table}
